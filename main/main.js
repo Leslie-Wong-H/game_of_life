@@ -120,18 +120,20 @@ function gameOfLife(matrix) {
 
     }       
 
-    
+    // console.log(copyMatrix);
 
     
         
         
-    // for (i = 0; i < matrixRow; i++)
-    // {
-    //     for (j = 0; j < matrixColumn; j++)
-    //     {
-    //         matrix[i][j] = copyMatrix[i][j];
-    //     }
-    // }
+    for (i = 0; i < matrixRow; i++)
+    {
+        for (j = 0; j < matrixColumn; j++)
+        {
+            matrix[i][j] = copyMatrix[i][j];
+        }
+    }
+
+    // console.log(m
 
 }
 
