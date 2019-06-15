@@ -68,12 +68,13 @@ function nextState(x, y) {
 
 //计算细胞周围的存活细胞数量
 function aliveAround(x, y) {
-    return this.grid[this.mapX(x - 1)][this.mapY(y - 1)].state +
-        this.grid[this.mapX(x - 1)][y].state +
-        this.grid[this.mapX(x - 1)][this.mapY(y + 1)].state +
-        this.grid[x][this.mapY(y - 1)].state +
-        this.grid[x][this.mapY(y + 1)].state +
-        this.grid[this.mapX(x + 1)][this.mapY(y - 1)].state +
-        this.grid[this.mapX(x + 1)][y].state +
-        this.grid[this.mapX(x + 1)][this.mapY(y + 1)].state;
+    return this.grid[this.X(x - 1)][this.Y(y - 1)].state +
+        this.grid[this.X(x - 1)][y].state +
+        this.grid[this.X(x - 1)][this.Y(y + 1)].state +
+        this.grid[x][this.Y(y - 1)].state +
+        this.grid[x][this.Y(y + 1)].state +
+        this.grid[this.X(x + 1)][this.Y(y - 1)].state +
+        this.grid[this.X(x + 1)][y].state +
+        this.grid[this.X(x + 1)][this.Y(y + 1)].state;
 };
+
