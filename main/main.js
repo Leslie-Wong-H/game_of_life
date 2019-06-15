@@ -1,5 +1,4 @@
-// module.exports = function
-function gameOfLife(matrix) {
+module.exports = function main(matrix) {
     var i = 0, j = 0;
     var nLive = 0;
     var nAliveCnt = 0;
@@ -133,24 +132,9 @@ function gameOfLife(matrix) {
         }
     }
 
-    // console.log(m
-
+    
 }
 
-var matrix = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
-
-gameOfLife(matrix);
 
 
 
