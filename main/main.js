@@ -79,7 +79,17 @@ function gameOfLife(matrix) {
                 
             }
             
-        }        
+        }       
+        
+        for (var k = 0; k < matrixRow; k++) {
+            for (var p = 0; p < matrixColumn; p++) {
+                
+                matrix[k][p] = copyMatrix[k][p];
+            }
+        }
+
+        console.log(matrxi);
+
 
         
     }
@@ -109,5 +119,6 @@ var matrix = [
 ]; 
 
 gameOfLife(matrix);
+
 
 
