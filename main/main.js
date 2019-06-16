@@ -1,7 +1,7 @@
-// module.exports = function
 function gameOfLife(matrix) {
     var i = 0,
         j = 0;
+
     var nLive = 0;
     var nAliveCnt = 0;
     // var nContinue = 0;
@@ -21,9 +21,6 @@ function gameOfLife(matrix) {
         }
     }
 
-
-    var temp = 0;
-    var anotherTemp = 0;
 
     for (i = 0; i < matrixRow; i++)
     {
@@ -134,26 +131,7 @@ function gameOfLife(matrix) {
         }
     }
 
-    // console.log(m
 
-}
-
-var matrix = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
-
-gameOfLife(matrix);
-
-// lifeTimer = setInterval(gameOfLife(), 300);
 
 
 
