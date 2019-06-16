@@ -42,12 +42,7 @@ var board = JXG.JSXGraph.initBoard('box', {
 
 
 function main() {
-    
-
-
     init();
-
-
 
     var i = 0,
         j = 0;
