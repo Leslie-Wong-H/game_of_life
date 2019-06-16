@@ -40,6 +40,7 @@ var board = JXG.JSXGraph.initBoard('box', {
         grid: true
     });
 
+
 function main() {
     
 
