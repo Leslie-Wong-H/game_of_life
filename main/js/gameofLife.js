@@ -2,19 +2,26 @@ var matrix = [];
 var start = document.getElementsByClassName('start')[0];
 var stop = document.getElementsByClassName('stop')[0];
 var startBl = true;
+var timer;
 
 bindEvent();
-function bindEvent(){
-    start.onclick = function() {
+
+function bindEvent() {
+    start.onclick = function () {
         if (startBl) {
+            // clearBoard();
+            matrix = [];
+            copyMatrix = [];
+            plotMatrix = [];
             main();
             startBl = false;
         }
     }
 
-    stop.onclick = function() {
+    stop.onclick = function () {
         startBl = true;
-        plotMatrix = "";
+        
+        clearInterval(timer);
     }
 }
 
@@ -35,10 +42,10 @@ function init() {
 }
 
 var board = JXG.JSXGraph.initBoard('box', {
-        boundingbox: [0, 0, -20, -20],
-        axis: true,
-        grid: true
-    });
+    boundingbox: [0, 0, -20, -20],
+    axis: true,
+    grid: true
+});
 
 
 function main() {
@@ -223,9 +230,22 @@ function main() {
 
 
     };
-
-    setInterval(nextGeneration, 500);
+    timer = setInterval(function () {
+        nextGeneration()
+    }, 500);
 
 }
 
+function clearBoard() {
+    clearInterval(nextGeneration);
+    board.suspendUpdate();
+        for (i = 0; i < matrixRow; i++) {
+            for (j = 0; j < matrixColumn; j++) {
+                matrix[i][j] = copyMatrix[i][j];
+                    board.removeObject(plotMatrix[i][j]);
+                    plotMatrix[i][j] = '';
+                
 
+            }
+        }
+}
