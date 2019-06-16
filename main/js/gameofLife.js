@@ -208,7 +208,7 @@ function main() {
 
     };
 
-    setInterval(nextGeneration, 3000);
+    setInterval(nextGeneration, 1000);
 
 }
 
