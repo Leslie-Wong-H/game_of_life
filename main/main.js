@@ -130,8 +130,7 @@ function gameOfLife(matrix) {
             matrix[i][j] = copyMatrix[i][j];
         }
     }
-
-
+}
 
 
 

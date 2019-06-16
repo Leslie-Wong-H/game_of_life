@@ -1,34 +1,34 @@
+var matrix = [];
+
+function init() {
+    for (let i = 0; i < 20; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < 20; j++) {
+
+            if (Math.random() * 100 <= 20) {
+                matrix[i][j] = 1
+            } else {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+}
+
 
 function main() {
-    var board = JXG.JSXGraph.initBoard('box', { boundingbox: [0, 0, -20, -20], axis: true, grid: true });
+    var board = JXG.JSXGraph.initBoard('box', {
+        boundingbox: [0, 0, -20, -20],
+        axis: true,
+        grid: true
+    });
+
+
+    init();
 
 
 
-    matrix = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    ];
-
-
-    var i = 0, j = 0;
+    var i = 0,
+        j = 0;
     var nLive = 0;
     var nAliveCnt = 0;
 
@@ -67,7 +67,9 @@ function main() {
     for (i = 0; i < matrixRow; i++) {
         for (j = 0; j < matrixColumn; j++) {
             if (matrix[i][j] == 1) {
-                plotMatrix[i][j] = board.create('point', [-j, -i], { size: 16 });
+                plotMatrix[i][j] = board.create('point', [-j, -i], {
+                    size: 16
+                });
             }
 
         }
@@ -75,8 +77,12 @@ function main() {
 
     //显示初始存活细胞数目
     // var strLiveNumber = str(nLive);
-    numberDisplayStack.push(board.create('text', [-11, -1, 'Live Cells Number:'], { fontSize: 30 }));
-    numberDisplayStack.push(board.create('text', [-18, -1, nLive], { fontSize: 28 }));
+    numberDisplayStack.push(board.create('text', [-11, -1, 'Live Cells Number:'], {
+        fontSize: 30
+    }));
+    numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
+        fontSize: 28
+    }));
 
 
 
@@ -151,8 +157,7 @@ function main() {
                 if (matrix[i][j] == 1) {
                     if ((nAliveCnt == 2) || (nAliveCnt == 3)) {
                         copyMatrix[i][j] = 1;
-                    }
-                    else {
+                    } else {
                         copyMatrix[i][j] = 0;
                         nLive--;
                     }
@@ -181,9 +186,10 @@ function main() {
                     if (plotMatrix[i][j] != '') {
                         board.removeObject(plotMatrix[i][j]);
                     }
-                    plotMatrix[i][j] = board.create('point', [-j, -i], { size: 16 });
-                }
-                else {
+                    plotMatrix[i][j] = board.create('point', [-j, -i], {
+                        size: 16
+                    });
+                } else {
                     board.removeObject(plotMatrix[i][j]);
                     plotMatrix[i][j] = '';
                 }
@@ -191,7 +197,9 @@ function main() {
             }
         }
 
-        numberDisplayStack.push(board.create('text', [-18, -1, nLive], { fontSize: 28 }));
+        numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
+            fontSize: 28
+        }));
 
         board.unsuspendUpdate();
 
