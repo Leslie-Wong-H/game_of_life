@@ -1,4 +1,24 @@
 var matrix = [];
+var start = document.getElementsByClassName('start')[0];
+var stop = document.getElementsByClassName('stop')[0];
+var startBl = true;
+
+bindEvent();
+function bindEvent(){
+    start.onclick = function() {
+        if (startBl) {
+            main();
+            startBl = false;
+        }
+    }
+
+    stop.onclick = function() {
+        startBl = true;
+        plotMatrix = "";
+    }
+}
+
+
 
 function init() {
     for (let i = 0; i < 20; i++) {
@@ -14,13 +34,14 @@ function init() {
     }
 }
 
-
-function main() {
-    var board = JXG.JSXGraph.initBoard('box', {
+var board = JXG.JSXGraph.initBoard('box', {
         boundingbox: [0, 0, -20, -20],
         axis: true,
         grid: true
     });
+
+function main() {
+    
 
 
     init();
@@ -177,7 +198,6 @@ function main() {
         }
 
         //将下一代细胞分布情况从克隆二维数组赋值回原始二维数组,并绘图
-
         board.suspendUpdate();
         for (i = 0; i < matrixRow; i++) {
             for (j = 0; j < matrixColumn; j++) {
@@ -208,7 +228,8 @@ function main() {
 
     };
 
-    setInterval(nextGeneration, 1000);
+    setInterval(nextGeneration, 500);
 
 }
+
 

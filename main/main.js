@@ -119,10 +119,6 @@ function gameOfLife(matrix) {
     }       
 
     // console.log(copyMatrix);
-
-    
-        
-        
     for (i = 0; i < matrixRow; i++)
     {
         for (j = 0; j < matrixColumn; j++)
@@ -131,6 +127,5 @@ function gameOfLife(matrix) {
         }
     }
 }
-
 
 
