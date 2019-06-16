@@ -14,13 +14,13 @@ function init() {
     }
 }
 
+var board = JXG.JSXGraph.initBoard('box', {
+    boundingbox: [0, 0, -20, -20],
+    axis: true,
+    grid: true
+});
 
 function main() {
-    var board = JXG.JSXGraph.initBoard('box', {
-        boundingbox: [0, 0, -20, -20],
-        axis: true,
-        grid: true
-    });
 
 
     init();
