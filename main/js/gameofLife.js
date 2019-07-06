@@ -14,6 +14,7 @@ var stop = document.getElementsByClassName('stop')[0];
 var startBl = true;
 var timer;
 var timeInterval = 500;
+var originalNumber = 0;
 
 bindEvent();
 
@@ -45,7 +46,8 @@ function init() {
         for (let j = 0; j < 20; j++) {
 
             if (Math.random() * 100 <= 20) {
-                matrix[i][j] = 1
+                matrix[i][j] = 1;
+                originalNumber++;
             } else {
                 matrix[i][j] = 0;
             }
@@ -68,13 +70,20 @@ function main() {
 
     var i = 0,
         j = 0;
-    var nLive = 0;
-    var nAliveCnt = 0;
+    var nLive = originalNumber;
+    var evolutionCount = 0;
+    // var nAliveCnt = 0;
+
+    
+    // 显示初始活细胞数量
+    document.getElementById("originalNumber").innerHTML = originalNumber;
+    // 剩余生命初始化
+    document.getElementById("remainLifes").innerHTML = nLive;
 
     var matrixRow = matrix.length;
     var matrixColumn = matrix[0].length;
 
-    var numberDisplayStack = [];
+    // var numberDisplayStack = [];
 
 
     //克隆二维数组
@@ -131,8 +140,6 @@ function main() {
 
         // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
         // numberDisplayStack.pop();
-
-
 
 
 
@@ -235,16 +242,24 @@ function main() {
             }
         }
 
+        
+        board.unsuspendUpdate();
+        
+        
+        
+        // 更新剩余生命和进化次数
+        evolutionCount++;
+        document.getElementById("remainLifes").innerHTML = nLive;
         // numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
         //     fontSize: 28
         // }));
-
-        board.unsuspendUpdate();
-
+        document.getElementById("evolutionTimes").innerHTML = evolutionCount;
 
 
 
     };
+
+    
     timer = setInterval(function () {
         nextGeneration()
     }, timeInterval);
