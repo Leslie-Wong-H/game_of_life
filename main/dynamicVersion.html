@@ -9,9 +9,9 @@
     <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script> -->
     <link rel="stylesheet" type="text/css" href="css/jsxgraph.css">
     <script type="text/javascript" src="js/jsxgraphcore.js"></script>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+    <!-- <script src="js/jquery-3.1.0.min.js"></script> -->
+    <!-- <script src="js/bootstrap.js"></script> -->
 
 </head>
 
@@ -22,9 +22,12 @@
             <!-- <img src="images/start.jpg" class="contLinkimg" style="position: absolute; top: 100px; right: 20px; height: 100px; width: 100px; background-size: 100% 100%;" > -->
         </a>
         <div
-            style="margin:20px auto;padding-bottom:10px;border-bottom:1px solid #c1c1c1;text-align:center;width:500px">
+            style="margin:20px auto;padding-bottom:10px;border-bottom:1px solid #c1c1c1;text-align:center;width:800px">
             <input type="button" value="开始" style="width:70px; margin-right: 20px;" class="start" >
-            
+            <!-- 初始数量：<input type="text" value="20" id="lifeSize" style="width:40px;margin-right:20px;"> -->
+            初始数量：<span id="originalNumber" style="display:inline-block;width:40px;">0</span>
+            剩余生命：<span id="remainLifes" style="display:inline-block;width:40px;">0</span>
+            进化次数：<span id="evolutionTimes" style="display:inline-block;width:40px;">0</span>
             <input type="button" value="停止" style="width: 70px;" class="stop">
         </div>
         
