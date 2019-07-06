@@ -6,6 +6,8 @@ var timer;
 
 bindEvent();
 
+// 绑定开始和停止按钮的点击事件
+
 function bindEvent() {
     start.onclick = function () {
         if (startBl) {
@@ -26,6 +28,7 @@ function bindEvent() {
 }
 
 
+//生成随机矩阵
 
 function init() {
     for (let i = 0; i < 20; i++) {
@@ -40,6 +43,9 @@ function init() {
         }
     }
 }
+
+
+// 初始化20*20画板
 
 var board = JXG.JSXGraph.initBoard('box', {
     boundingbox: [0, 0, -20, -20],
