@@ -1,8 +1,19 @@
+/**
+ * 生命游戏后台逻辑
+ * @author LeslieWong & Caiyijia https://github.com/caiyijia/ThoughtWorksOpenPair
+ * 实现核心逻辑
+ * 动画库：JSXGraph
+ * 鼠标点击自定义初始状态
+ * 选择预设初始状态
+ * 控制动画速度
+ */
+
 var matrix = [];
 var start = document.getElementsByClassName('start')[0];
 var stop = document.getElementsByClassName('stop')[0];
 var startBl = true;
 var timer;
+var timeInterval = 500;
 
 bindEvent();
 
@@ -13,8 +24,6 @@ function bindEvent() {
         if (startBl) {
             // clearBoard();
             matrix = [];
-            copyMatrix = [];
-            plotMatrix = [];
             main();
             startBl = false;
         }
@@ -49,7 +58,7 @@ function init() {
 
 var board = JXG.JSXGraph.initBoard('box', {
     boundingbox: [0, 0, -20, -20],
-    axis: true,
+    axis: false,
     grid: true
 });
 
@@ -105,14 +114,14 @@ function main() {
         }
     }
 
-    //显示初始存活细胞数目
-    // var strLiveNumber = str(nLive);
-    numberDisplayStack.push(board.create('text', [-11, -1, 'Live Cells Number:'], {
-        fontSize: 30
-    }));
-    numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
-        fontSize: 28
-    }));
+    // //显示初始存活细胞数目
+    // // var strLiveNumber = str(nLive);
+    // numberDisplayStack.push(board.create('text', [-11, -1, 'Live Cells Number:'], {
+    //     fontSize: 30
+    // }));
+    // numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
+    //     fontSize: 28
+    // }));
 
 
 
@@ -120,8 +129,8 @@ function main() {
 
     nextGeneration = function () {
 
-        board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
-        numberDisplayStack.pop();
+        // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
+        // numberDisplayStack.pop();
 
 
 
@@ -226,9 +235,9 @@ function main() {
             }
         }
 
-        numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
-            fontSize: 28
-        }));
+        // numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
+        //     fontSize: 28
+        // }));
 
         board.unsuspendUpdate();
 
@@ -238,7 +247,7 @@ function main() {
     };
     timer = setInterval(function () {
         nextGeneration()
-    }, 500);
+    }, timeInterval);
 
 }
 
