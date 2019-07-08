@@ -9,8 +9,12 @@
  */
 
 var matrix = [];
+var copyMatrix = [];
+var plotMatrix = [];
+var matrixRow, matrixColumn;
 var start = document.getElementsByClassName('start')[0];
 var stop = document.getElementsByClassName('stop')[0];
+var reset = document.getElementsByClassName("reset")[0];
 var startBl = true;
 var timer;
 var timeInterval = 500;
@@ -34,6 +38,10 @@ function bindEvent() {
         startBl = true;
         
         clearInterval(timer);
+    }
+
+    reset.onclick = function () {
+        clearBoard();
     }
 }
 
@@ -80,15 +88,15 @@ function main() {
     // 剩余生命初始化
     document.getElementById("remainLifes").innerHTML = nLive;
 
-    var matrixRow = matrix.length;
-    var matrixColumn = matrix[0].length;
+    matrixRow = matrix.length;
+    matrixColumn = matrix[0].length;
 
     // var numberDisplayStack = [];
 
 
 
     //克隆二维数组
-    var copyMatrix = new Array();
+    copyMatrix = new Array();
     for (i = 0; i < matrixRow; i++) {
         copyMatrix[i] = new Array();
 
@@ -101,7 +109,7 @@ function main() {
     }
 
     //生成绘图记录二维数组
-    var plotMatrix = new Array();
+    plotMatrix = new Array();
     for (i = 0; i < matrixRow; i++) {
         plotMatrix[i] = new Array();
 
@@ -277,15 +285,17 @@ function main() {
 
 
 function clearBoard() {
-    clearInterval(nextGeneration);
+    startBl = true;
+    clearInterval(timer);
     board.suspendUpdate();
-        for (i = 0; i < matrixRow; i++) {
-            for (j = 0; j < matrixColumn; j++) {
-                matrix[i][j] = copyMatrix[i][j];
-                    board.removeObject(plotMatrix[i][j]);
-                    plotMatrix[i][j] = '';
-                
+    for (let i = 0; i < matrixRow; i++) {
+        for (let j = 0; j < matrixColumn; j++) {
+            matrix[i][j] = 0;
+            board.removeObject(plotMatrix[i][j]);
+            plotMatrix[i][j] = '';
+            
 
-            }
         }
+    }
+    board.unsuspendUpdate();
 }
