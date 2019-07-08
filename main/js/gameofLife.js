@@ -72,7 +72,7 @@ function main() {
         j = 0;
     var nLive = originalNumber;
     var evolutionCount = 0;
-    // var nAliveCnt = 0;
+    var nAliveCnt = 0;
 
     
     // 显示初始活细胞数量
@@ -86,15 +86,16 @@ function main() {
     // var numberDisplayStack = [];
 
 
+
     //克隆二维数组
     var copyMatrix = new Array();
     for (i = 0; i < matrixRow; i++) {
         copyMatrix[i] = new Array();
 
         for (j = 0; j < matrixColumn; j++) {
-            if (matrix[i][j] == 1) {
-                nLive = nLive + 1;
-            }
+            // if (matrix[i][j] == 1) {
+            //     nLive = nLive + 1;
+            // }
             copyMatrix[i][j] = matrix[i][j];
         }
     }
@@ -241,10 +242,7 @@ function main() {
 
             }
         }
-
-        
         board.unsuspendUpdate();
-        
         
         
         // 更新剩余生命和进化次数
@@ -253,18 +251,30 @@ function main() {
         // numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
         //     fontSize: 28
         // }));
-        document.getElementById("evolutionTimes").innerHTML = evolutionCount;
+        if (nLive != 0) {
+            document.getElementById("evolutionTimes").innerHTML = evolutionCount;
+        }
+        else {
+            startBl = true;
+            clearInterval(timer);
+        }
 
 
 
     };
 
-    
+
     timer = setInterval(function () {
         nextGeneration()
     }, timeInterval);
 
 }
+
+// function changeTimeInterval() {
+
+// }
+
+
 
 function clearBoard() {
     clearInterval(nextGeneration);
