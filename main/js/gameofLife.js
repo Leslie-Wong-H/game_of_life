@@ -298,4 +298,9 @@ function clearBoard() {
         }
     }
     board.unsuspendUpdate();
+    
+    // 初始生命、剩余生命、进化次数置零
+    document.getElementById("originalNumber").innerHTML = 0;
+    document.getElementById("remainLifes").innerHTML = 0;
+    document.getElementById("evolutionTimes").innerHTML = 0;
 }
