@@ -1,5 +1,3 @@
-# ThoughtWorksOpenPair
-
 # Game of Life 
 
 ## 游戏算法-生命游戏
