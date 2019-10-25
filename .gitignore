@@ -127,3 +127,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/windows,linux,macos,node
+.vscode/settings.json
+.gitignore

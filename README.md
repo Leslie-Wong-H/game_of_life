@@ -1,21 +1,20 @@
 # Game of Life 
+- English Document | [中文文档](https://github.com/Leslie-Wong-H/GameofLife/docs/README_zh-CN.md#requirements)
+## Algorithm Description 
 
-## 游戏算法-生命游戏
+The Game of Life is a cellular automation devised by the mathematician John Horton Conway from Cambridge University. It came to become well-known for the article published at  
+Scientific American in 1970. 
+Rules of the Game of Life: The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive of dead, (or populated and unpopulated, respectively). Every cell interacts with its eight neighbors, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
+1. For a box with a live cell: 
+    - There existing fewer than two live neighbors, the cell dies, due to loneliness.
+    - There existing more than three live neighbors, the cell dies, due to crowding.
+    - There existing two or three live neighbors, the cell lives on to the next generation.
+2. For an empty box or a box with a dead cell:
+    - There existing three neighbors, the box generates a new live cell, as if by reproduction. 
 
-生命游戏又称细胞自动机。反映了生命演化的规则。它由剑桥大学的数学家约翰·康威所提出，并且借由1970年发表在《科学美国人》上的文章而变得出名。
-生命游戏原理：生命生活在二维环境中，每个生命生活在一个方格中，每个细胞在下一个时刻的状态取决于周围8个细胞的活着或死了的状态。
+## Demand Description 
 
-1. 对于一个存在活细胞的方格：
-    - 周围有1个或无活细胞的话，由于孤独，细胞死亡；
-    - 周围有4个以上活细胞的话，由于拥挤， 细胞死亡；
-    - 周围存在2或3个活细胞的话，活细胞存活。
-2. 对于一个空方格或存在死亡细胞的方格：
-    - 周围有3个活细胞的话，方格有活细胞生成。
-
-## 需求描述
-
-1. 实现核心逻辑
-2. 用界面展示结果
-3. 可以预先指定初始状态
-4. 可以控制动画的速度
-
+1. Achieve the main logic described above
+2. Display the algorithm with a friendly interface
+3. Able to set the initial state in advance
+4. Able to take control of the animation rate
