@@ -1,9 +1,8 @@
 # Game of Life 
-- English Document | [中文文档](https://github.com/Leslie-Wong-H/GameofLife/docs/README_zh-CN.md#requirements)
+- English Document | [中文文档](https://github.com/Leslie-Wong-H/GameofLIfe/blob/master/docs/README_zh-CN.md)
 ## Algorithm Description 
 
-The Game of Life is a cellular automation devised by the mathematician John Horton Conway from Cambridge University. It came to become well-known for the article published at  
-Scientific American in 1970. 
+The Game of Life is a cellular automation devised by the mathematician John Horton Conway from Cambridge University. It came to become well-known for the article published at Scientific American in 1970. 
 
 Rules of the Game of Life: The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive of dead, (or populated and unpopulated, respectively). Every cell interacts with its eight neighbors, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
 1. For a box with a live cell: 
