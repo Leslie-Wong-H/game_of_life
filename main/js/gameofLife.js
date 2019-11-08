@@ -1,6 +1,6 @@
 /**
  * 生命游戏后台逻辑
- * @author LeslieWong & Caiyijia https://github.com/caiyijia/ThoughtWorksOpenPair
+ * @author LeslieWong & Caiyijia  https://github.com/Leslie-Wong-H/GameofLIfe
  * 实现核心逻辑
  * 动画库：JSXGraph
  * 鼠标点击自定义初始状态
@@ -68,6 +68,7 @@ function init() {
 
 var board = JXG.JSXGraph.initBoard('box', {
     boundingbox: [0, 0, -20, -20],
+    keepaspectratio: true,
     axis: false,
     grid: true,
     showCopyright: false
