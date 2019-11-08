@@ -69,7 +69,8 @@ function init() {
 var board = JXG.JSXGraph.initBoard('box', {
     boundingbox: [0, 0, -20, -20],
     axis: false,
-    grid: true
+    grid: true,
+    showCopyright: false
 });
 
 
