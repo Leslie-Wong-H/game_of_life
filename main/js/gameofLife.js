@@ -127,7 +127,9 @@ function main() {
         for (j = 0; j < matrixColumn; j++) {
             if (matrix[i][j] == 1) {
                 plotMatrix[i][j] = board.create('point', [-j, -i], {
-                    size: 16
+                    size: 16,
+                    name: '',
+                    fixed: true
                 });
             }
 
@@ -243,7 +245,9 @@ function main() {
                         board.removeObject(plotMatrix[i][j]);
                     }
                     plotMatrix[i][j] = board.create('point', [-j, -i], {
-                        size: 16
+                        size: 16,
+                        name: '',
+                        fixed: true
                     });
                 } else {
                     board.removeObject(plotMatrix[i][j]);
