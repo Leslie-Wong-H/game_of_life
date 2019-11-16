@@ -71,7 +71,12 @@ var board = JXG.JSXGraph.initBoard('box', {
     keepaspectratio: true,
     axis: false,
     grid: true,
-    showCopyright: false
+    showCopyright: false,
+    pan: {                  //panning interaction(i.e.moving the origin)
+        enabled: false,   // disallow panning
+        needTwoFingers: false, // panning could not be done with two fingers on touch devices
+        needShift: false, // mouse panning needs pressing of the shift key
+    }
 });
 
 
