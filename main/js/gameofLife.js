@@ -15,14 +15,17 @@ var matrixRow, matrixColumn;
 var start = document.getElementsByClassName('start')[0];
 var stop = document.getElementsByClassName('stop')[0];
 var reset = document.getElementsByClassName("reset")[0];
+var rate = document.getElementsByClassName("rate")[0];
+var rateLabel = document.getElementsByClassName("rateLabel")[0];
 var startBl = true;
 var timer;
 var timeInterval = 500;
+var rateCounter = 1;
 var originalNumber = 0;
 
 bindEvent();
 
-// 绑定开始和停止按钮的点击事件
+// 绑定开始、停止、重置、速度按钮的点击事件
 
 function bindEvent() {
     start.onclick = function () {
@@ -34,6 +37,8 @@ function bindEvent() {
         }
     }
 
+    //TO DO: Dynamically switch "start" to "pause"
+
     stop.onclick = function () {
         startBl = true;
         
@@ -42,6 +47,41 @@ function bindEvent() {
 
     reset.onclick = function () {
         clearBoard();
+    }
+
+    rate.onclick = function () {
+        rateCounter++;
+        if (rateCounter == 2) {
+            timeInterval = 10000;
+            rateLabel.innerText = "Slow";
+            (setInterval(function () {
+                rateLabel.innerText = "";
+            }, 1000))();
+
+            // (function () {
+            //     var x = "Hello!!";      // 我将调用自己
+            // })(); 
+            // timer = setInterval(function () {
+            //     nextGeneration()
+            // }, timeInterval);
+
+        }
+        else if (rateCounter == 3) {
+            timeInterval = 250;
+            rateLabel.innerText = "Fast";
+            (setInterval(function () {
+                rateLabel.innerText = "";
+            }, 1000))();
+            // lb.innerText = "Discount offer of 20% on all products";
+        }
+        else {
+            rateCounter = 1;
+            timeInterval = 500;
+            rateLabel.innerText = "Medium";
+            (setInterval(function () {
+                rateLabel.innerText = "";
+            }, 1000))();
+        }
     }
 }
 
