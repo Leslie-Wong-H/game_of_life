@@ -50,34 +50,35 @@ function bindEvent() {
   };
 
   rate.onclick = function() {
-    rateCounter++;
-    if (rateCounter == 2) {
+    console.log(rateCounter);
+    if (rateCounter == 1) {
       timeInterval = 10000;
       rateLabel.innerText = "Slow";
-      setInterval(function() {
+      setTimeout(function() {
         rateLabel.innerText = "";
-      }, 1000)();
-
+      }, 1000);
+      rateCounter++;
       // (function () {
       //     var x = "Hello!!";      // 我将调用自己
       // })();
       // timer = setInterval(function () {
       //     nextGeneration()
       // }, timeInterval);
-    } else if (rateCounter == 3) {
+    } else if (rateCounter == 2) {
       timeInterval = 250;
       rateLabel.innerText = "Fast";
-      setInterval(function() {
+      setTimeout(function() {
         rateLabel.innerText = "";
-      }, 1000)();
+      }, 1000);
+      rateCounter++;
       // lb.innerText = "Discount offer of 20% on all products";
-    } else {
-      rateCounter = 1;
+    } else if (rateCounter == 3) {
       timeInterval = 500;
       rateLabel.innerText = "Medium";
-      setInterval(function() {
+      setTimeout(function() {
         rateLabel.innerText = "";
-      }, 1000)();
+      }, 1000);
+      rateCounter = 1;
     }
   };
 }

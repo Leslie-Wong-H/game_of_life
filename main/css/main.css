@@ -186,3 +186,8 @@ body {
   margin-right: 20px;
   color: #bf0045;
 }
+
+.rateLabel {
+  color: #fd7e37;
+  position: absolute;
+}
