@@ -22,6 +22,9 @@ var timer;
 var timeInterval = 500;
 var rateCounter = 1;
 var originalNumber = 0;
+var nLive = originalNumber;
+var evolutionCount = 0;
+var nAliveCnt = 0;
 
 bindEvent();
 
@@ -50,10 +53,14 @@ function bindEvent() {
   };
 
   rate.onclick = function() {
-    console.log(rateCounter);
+    // console.log(rateCounter);
     if (rateCounter == 1) {
-      timeInterval = 10000;
       rateLabel.innerText = "Slow";
+      timeInterval = 1000;
+      clearInterval(timer);
+      timer = setInterval(function() {
+        nextGeneration();
+      }, timeInterval);
       setTimeout(function() {
         rateLabel.innerText = "";
       }, 1000);
@@ -65,16 +72,24 @@ function bindEvent() {
       //     nextGeneration()
       // }, timeInterval);
     } else if (rateCounter == 2) {
-      timeInterval = 250;
       rateLabel.innerText = "Fast";
+      timeInterval = 250;
+      clearInterval(timer);
+      timer = setInterval(function() {
+        nextGeneration();
+      }, timeInterval);
       setTimeout(function() {
         rateLabel.innerText = "";
       }, 1000);
       rateCounter++;
       // lb.innerText = "Discount offer of 20% on all products";
     } else if (rateCounter == 3) {
-      timeInterval = 500;
       rateLabel.innerText = "Medium";
+      timeInterval = 500;
+      clearInterval(timer);
+      timer = setInterval(function() {
+        nextGeneration();
+      }, timeInterval);
       setTimeout(function() {
         rateLabel.innerText = "";
       }, 1000);
@@ -121,9 +136,9 @@ function main() {
 
   var i = 0,
     j = 0;
-  var nLive = originalNumber;
-  var evolutionCount = 0;
-  var nAliveCnt = 0;
+  nLive = originalNumber;
+  // var evolutionCount = 0;
+  // var nAliveCnt = 0;
 
   // 显示初始活细胞数量
   document.getElementById("originalNumber").innerHTML = originalNumber;
@@ -182,126 +197,126 @@ function main() {
 
   // setInterval(function(){JXG.JSXGraph.freeBoard(board)},2000);
 
-  nextGeneration = function() {
-    // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
-    // numberDisplayStack.pop();
-
-    // 判断下一代细胞分布
-    for (i = 0; i < matrixRow; i++) {
-      for (j = 0; j < matrixColumn; j++) {
-        //周围细胞数置零
-        nAliveCnt = 0;
-
-        //判断细胞周围九宫格
-
-        //判断左上角细胞状态
-        if (i - 1 >= 0 && j - 1 >= 0 && matrix[i - 1][j - 1] == 1) {
-          nAliveCnt++;
-        }
-
-        //判断上方细胞状态
-        if (i - 1 >= 0 && matrix[i - 1][j] == 1) {
-          nAliveCnt++;
-        }
-
-        //判断右上角细胞状态
-        if (i - 1 >= 0 && j + 1 < matrixColumn && matrix[i - 1][j + 1] == 1) {
-          nAliveCnt++;
-        }
-
-        //判断左细胞状态
-        if (j - 1 >= 0 && matrix[i][j - 1] == 1) {
-          nAliveCnt++;
-        }
-
-        //判断右细胞状态
-
-        if (j + 1 < matrixColumn && matrix[i][j + 1] == 1) {
-          nAliveCnt++;
-        }
-
-        //判断左下角细胞状态
-        if (i + 1 < matrixRow && j - 1 >= 0 && matrix[i + 1][j - 1] == 1)
-          if (matrix[i + 1][j - 1] == 1) {
-            nAliveCnt++;
-          }
-
-        // 判断下方细胞状态
-        if (i + 1 < matrixRow && matrix[i + 1][j] == 1) {
-          nAliveCnt++;
-        }
-
-        // 判断右下角细胞状态
-
-        if (
-          i + 1 < matrixRow &&
-          j + 1 < matrixColumn &&
-          matrix[i + 1][j + 1] == 1
-        ) {
-          nAliveCnt++;
-        }
-
-        // 判断细胞下一代死活情况
-
-        //Live
-        if (matrix[i][j] == 1) {
-          if (nAliveCnt == 2 || nAliveCnt == 3) {
-            copyMatrix[i][j] = 1;
-          } else {
-            copyMatrix[i][j] = 0;
-            nLive--;
-          }
-        }
-
-        //Dead
-        if (matrix[i][j] == 0) {
-          if (nAliveCnt == 3) {
-            copyMatrix[i][j] = 1;
-            nLive++;
-          }
-        }
-      }
-    }
-
-    //将下一代细胞分布情况从克隆二维数组赋值回原始二维数组,并绘图
-    board.suspendUpdate();
-    for (i = 0; i < matrixRow; i++) {
-      for (j = 0; j < matrixColumn; j++) {
-        matrix[i][j] = copyMatrix[i][j];
-        if (matrix[i][j] == 1) {
-          if (plotMatrix[i][j] != "") {
-            board.removeObject(plotMatrix[i][j]);
-          }
-          plotMatrix[i][j] = board.create("point", [-j, -i], {
-            size: 8,
-            name: "",
-            fixed: true
-          });
-        } else {
-          board.removeObject(plotMatrix[i][j]);
-          plotMatrix[i][j] = "";
-        }
-      }
-    }
-    board.unsuspendUpdate();
-
-    // 更新剩余生命和进化次数
-    evolutionCount++;
-    document.getElementById("remainLifes").innerHTML = nLive;
-    // numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
-    //     fontSize: 28
-    // }));
-    if (nLive != 0) {
-      document.getElementById("evolutionTimes").innerHTML = evolutionCount;
-    } else {
-      startBl = true;
-      clearInterval(timer);
-    }
-  };
-
   timer = setInterval(function() {
     nextGeneration();
   }, timeInterval);
+}
+
+function nextGeneration() {
+  // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
+  // numberDisplayStack.pop();
+
+  // 判断下一代细胞分布
+  for (i = 0; i < matrixRow; i++) {
+    for (j = 0; j < matrixColumn; j++) {
+      //周围细胞数置零
+      nAliveCnt = 0;
+
+      //判断细胞周围九宫格
+
+      //判断左上角细胞状态
+      if (i - 1 >= 0 && j - 1 >= 0 && matrix[i - 1][j - 1] == 1) {
+        nAliveCnt++;
+      }
+
+      //判断上方细胞状态
+      if (i - 1 >= 0 && matrix[i - 1][j] == 1) {
+        nAliveCnt++;
+      }
+
+      //判断右上角细胞状态
+      if (i - 1 >= 0 && j + 1 < matrixColumn && matrix[i - 1][j + 1] == 1) {
+        nAliveCnt++;
+      }
+
+      //判断左细胞状态
+      if (j - 1 >= 0 && matrix[i][j - 1] == 1) {
+        nAliveCnt++;
+      }
+
+      //判断右细胞状态
+
+      if (j + 1 < matrixColumn && matrix[i][j + 1] == 1) {
+        nAliveCnt++;
+      }
+
+      //判断左下角细胞状态
+      if (i + 1 < matrixRow && j - 1 >= 0 && matrix[i + 1][j - 1] == 1)
+        if (matrix[i + 1][j - 1] == 1) {
+          nAliveCnt++;
+        }
+
+      // 判断下方细胞状态
+      if (i + 1 < matrixRow && matrix[i + 1][j] == 1) {
+        nAliveCnt++;
+      }
+
+      // 判断右下角细胞状态
+
+      if (
+        i + 1 < matrixRow &&
+        j + 1 < matrixColumn &&
+        matrix[i + 1][j + 1] == 1
+      ) {
+        nAliveCnt++;
+      }
+
+      // 判断细胞下一代死活情况
+
+      //Live
+      if (matrix[i][j] == 1) {
+        if (nAliveCnt == 2 || nAliveCnt == 3) {
+          copyMatrix[i][j] = 1;
+        } else {
+          copyMatrix[i][j] = 0;
+          nLive--;
+        }
+      }
+
+      //Dead
+      if (matrix[i][j] == 0) {
+        if (nAliveCnt == 3) {
+          copyMatrix[i][j] = 1;
+          nLive++;
+        }
+      }
+    }
+  }
+
+  //将下一代细胞分布情况从克隆二维数组赋值回原始二维数组,并绘图
+  board.suspendUpdate();
+  for (i = 0; i < matrixRow; i++) {
+    for (j = 0; j < matrixColumn; j++) {
+      matrix[i][j] = copyMatrix[i][j];
+      if (matrix[i][j] == 1) {
+        if (plotMatrix[i][j] != "") {
+          board.removeObject(plotMatrix[i][j]);
+        }
+        plotMatrix[i][j] = board.create("point", [-j, -i], {
+          size: 8,
+          name: "",
+          fixed: true
+        });
+      } else {
+        board.removeObject(plotMatrix[i][j]);
+        plotMatrix[i][j] = "";
+      }
+    }
+  }
+  board.unsuspendUpdate();
+
+  // 更新剩余生命和进化次数
+  evolutionCount++;
+  document.getElementById("remainLifes").innerHTML = nLive;
+  // numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
+  //     fontSize: 28
+  // }));
+  if (nLive != 0) {
+    document.getElementById("evolutionTimes").innerHTML = evolutionCount;
+  } else {
+    startBl = true;
+    clearInterval(timer);
+  }
 }
 
 // function changeTimeInterval() {
