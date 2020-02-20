@@ -55,7 +55,11 @@ function bindEvent() {
   rate.onclick = function() {
     // console.log(rateCounter);
     if (rateCounter == 1) {
-      rateLabel.innerText = "Slow";
+      if (document.getElementsByClassName("en")[0]) {
+        rateLabel.innerText = "Slow";
+      } else {
+        rateLabel.innerText = "慢速";
+      }
       timeInterval = 1000;
       if (!startBl) {
         clearInterval(timer);
@@ -74,7 +78,11 @@ function bindEvent() {
       //     nextGeneration()
       // }, timeInterval);
     } else if (rateCounter == 2) {
-      rateLabel.innerText = "Fast";
+      if (document.getElementsByClassName("en")[0]) {
+        rateLabel.innerText = "Fast";
+      } else {
+        rateLabel.innerText = "快速";
+      }
       timeInterval = 250;
       if (!startBl) {
         clearInterval(timer);
@@ -88,7 +96,11 @@ function bindEvent() {
       rateCounter++;
       // lb.innerText = "Discount offer of 20% on all products";
     } else if (rateCounter == 3) {
-      rateLabel.innerText = "Medium";
+      if (document.getElementsByClassName("en")[0]) {
+        rateLabel.innerText = "Medium";
+      } else {
+        rateLabel.innerText = "中速";
+      }
       timeInterval = 500;
       if (!startBl) {
         clearInterval(timer);
