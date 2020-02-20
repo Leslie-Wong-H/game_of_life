@@ -27,14 +27,23 @@
       <div id="box" class="jxgbox"></div>
       <div class="contLink">
         <div class="buttonmenu">
-          <input type="button" value="重置" class="reset" />
-          <input type="button" value="开始" class="start" />
+          <input type="button" value="重置" id="resetButton" class="reset" />
+          <input type="button" value="开始" id="startButton" class="start" />
           <!-- 初始数量：<input type="text" value="20" id="lifeSize" style="width:40px;margin-right:20px;"> -->
-          初始数量：<span id="originalNumber" class="originalNumber">0</span>
-          剩余生命：<span id="remainLifes" class="remainLifes">0</span>
-          进化次数：<span id="evolutionTimes" class="evolutionTimes">0</span>
-          <input type="button" value="停止" class="stop" />
-          <input type="button" value="速度" class="rate" />
+          <span id="originalNumberText" class="originalNumber inlineText"
+            >初始数量：</span
+          >
+          <span id="originalNumber" class="originalNumber">0</span>
+          <span id="remainLifesText" class="remainLifes inlineText"
+            >剩余生命：</span
+          >
+          <span id="remainLifes" class="remainLifes">0</span>
+          <span id="evolutionTimesText" class="evolutionTimes inlineText"
+            >进化次数：</span
+          >
+          <span id="evolutionTimes" class="evolutionTimes">0</span>
+          <input type="button" value="停止" id="stopButton" class="stop" />
+          <input type="button" value="速度" id="rateButton" class="rate" />
           <label class="rateLabel"></label>
           <!-- <section>
                 <label for="select_choice">Select Your Choice</label> 

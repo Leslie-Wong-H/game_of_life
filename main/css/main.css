@@ -145,6 +145,10 @@ body {
   padding-right: 1.5%;
 }
 
+.inlineText {
+  width: auto;
+}
+
 .stop {
   width: 70px;
   margin-right: 20px;
