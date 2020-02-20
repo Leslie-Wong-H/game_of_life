@@ -9,6 +9,32 @@ body {
   /* width: 100vw; */
 }
 
+.githubContainer {
+  width: 150px;
+  height: 75px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(315deg) translateX(-28px) translateY(-53px);
+  /* background-color: #a5a5a5; */
+}
+
+.githubContainer:hover {
+  background-color: #a5a5a5;
+}
+
+.githubLink {
+  transform: scale(0.8, 0.8);
+}
+
+.githubImg {
+  transform: translateY(10px);
+}
+
 .container {
   position: absolute;
   top: 0;
