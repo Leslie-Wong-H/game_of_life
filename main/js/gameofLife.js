@@ -57,10 +57,12 @@ function bindEvent() {
     if (rateCounter == 1) {
       rateLabel.innerText = "Slow";
       timeInterval = 1000;
-      clearInterval(timer);
-      timer = setInterval(function() {
-        nextGeneration();
-      }, timeInterval);
+      if (!startBl) {
+        clearInterval(timer);
+        timer = setInterval(function () {
+          nextGeneration();
+        }, timeInterval);
+      }
       setTimeout(function() {
         rateLabel.innerText = "";
       }, 1000);
@@ -74,10 +76,12 @@ function bindEvent() {
     } else if (rateCounter == 2) {
       rateLabel.innerText = "Fast";
       timeInterval = 250;
-      clearInterval(timer);
-      timer = setInterval(function() {
-        nextGeneration();
-      }, timeInterval);
+      if (!startBl) {
+        clearInterval(timer);
+        timer = setInterval(function () {
+          nextGeneration();
+        }, timeInterval);
+      }
       setTimeout(function() {
         rateLabel.innerText = "";
       }, 1000);
@@ -86,10 +90,12 @@ function bindEvent() {
     } else if (rateCounter == 3) {
       rateLabel.innerText = "Medium";
       timeInterval = 500;
-      clearInterval(timer);
-      timer = setInterval(function() {
-        nextGeneration();
-      }, timeInterval);
+      if (!startBl) {
+        clearInterval(timer);
+        timer = setInterval(function () {
+          nextGeneration();
+        }, timeInterval);
+      }
       setTimeout(function() {
         rateLabel.innerText = "";
       }, 1000);
