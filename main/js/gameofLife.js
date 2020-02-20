@@ -358,4 +358,8 @@ function clearBoard() {
   document.getElementById("originalNumber").innerHTML = 0;
   document.getElementById("remainLifes").innerHTML = 0;
   document.getElementById("evolutionTimes").innerHTML = 0;
+  originalNumber = 0;
+  nLive = originalNumber;
+  evolutionCount = 0;
+  nAliveCnt = 0;
 }
