@@ -59,13 +59,13 @@ function bindEvent() {
       timeInterval = 1000;
       if (!startBl) {
         clearInterval(timer);
-        timer = setInterval(function () {
+        timer = setInterval(function() {
           nextGeneration();
         }, timeInterval);
       }
       setTimeout(function() {
         rateLabel.innerText = "";
-      }, 1000);
+      }, 500);
       rateCounter++;
       // (function () {
       //     var x = "Hello!!";      // 我将调用自己
@@ -78,13 +78,13 @@ function bindEvent() {
       timeInterval = 250;
       if (!startBl) {
         clearInterval(timer);
-        timer = setInterval(function () {
+        timer = setInterval(function() {
           nextGeneration();
         }, timeInterval);
       }
       setTimeout(function() {
         rateLabel.innerText = "";
-      }, 1000);
+      }, 500);
       rateCounter++;
       // lb.innerText = "Discount offer of 20% on all products";
     } else if (rateCounter == 3) {
@@ -92,13 +92,13 @@ function bindEvent() {
       timeInterval = 500;
       if (!startBl) {
         clearInterval(timer);
-        timer = setInterval(function () {
+        timer = setInterval(function() {
           nextGeneration();
         }, timeInterval);
       }
       setTimeout(function() {
         rateLabel.innerText = "";
-      }, 1000);
+      }, 500);
       rateCounter = 1;
     }
   };
