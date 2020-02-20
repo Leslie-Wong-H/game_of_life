@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Game of Life | Leslie Wong</title>
+    <title>Game of Life | ©Leslie Wong</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="img/favicon.ico" />
@@ -11,26 +11,48 @@
     <link rel="stylesheet" type="text/css" href="css/jsxgraph.css" />
     <script type="text/javascript" src="js/jsxgraphcore.js"></script>
     <!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
-    <!-- <script src="js/jquery-3.1.0.min.js"></script> -->
+    <script src="js/jquery-3.1.0.min.js"></script>
     <!-- <script src="js/bootstrap.js"></script> -->
+    <script src="js/languageSwitcher.js"></script>
   </head>
 
   <body>
+    <div class="githubContainer">
+      <a
+        class="githubLink"
+        href="https://github.com/Leslie-Wong-H/GameofLIfe"
+        target="_blank"
+      >
+        <img class="githubImg" src="img/GitHub.png" alt="Github Link" />
+      </a>
+    </div>
+    <div id="container" class="container">
+      <div id="selector" class="selector en">
+        <span class="langCn">中</span>
+        <span class="langEn">Eng</span>
+      </div>
+    </div>
     <div class="bigbox">
       <div id="box" class="jxgbox"></div>
       <div class="contLink">
-        <a id="start" href="#">
-          <!-- <img src="images/start.jpg" class="contLinkimg" style="position: absolute; top: 100px; right: 20px; height: 100px; width: 100px; background-size: 100% 100%;" > -->
-        </a>
         <div class="buttonmenu">
-          <input type="button" value="重置" class="reset" />
-          <input type="button" value="开始" class="start" />
+          <input type="button" value="Reset" id="resetButton" class="reset" />
+          <input type="button" value="Start" id="startButton" class="start" />
           <!-- 初始数量：<input type="text" value="20" id="lifeSize" style="width:40px;margin-right:20px;"> -->
-          初始数量：<span id="originalNumber" class="originalNumber">0</span>
-          剩余生命：<span id="remainLifes" class="remainLifes">0</span>
-          进化次数：<span id="evolutionTimes" class="evolutionTimes">0</span>
-          <input type="button" value="停止" class="stop" />
-          <input type="button" value="速度" class="rate" />
+          <span id="originalNumberText" class="originalNumber inlineText"
+            >Original Number:
+          </span>
+          <span id="originalNumber" class="originalNumber">0</span>
+          <span id="remainLifesText" class="remainLifes inlineText"
+            >Remaining Lives:
+          </span>
+          <span id="remainLifes" class="remainLifes">0</span>
+          <span id="evolutionTimesText" class="evolutionTimes inlineText"
+            >Evolution Times:
+          </span>
+          <span id="evolutionTimes" class="evolutionTimes">0</span>
+          <input type="button" value="Stop" id="stopButton" class="stop" />
+          <input type="button" value="Rate" id="rateButton" class="rate" />
           <label class="rateLabel"></label>
           <!-- <section>
                 <label for="select_choice">Select Your Choice</label> 
