@@ -85,9 +85,9 @@ function bindEvent() {
 //生成随机矩阵
 
 function init() {
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 30; i++) {
     matrix[i] = [];
-    for (let j = 0; j < 20; j++) {
+    for (let j = 0; j < 40; j++) {
       if (Math.random() * 100 <= 20) {
         matrix[i][j] = 1;
         originalNumber++;
@@ -98,12 +98,13 @@ function init() {
   }
 }
 
-// 初始化20*20画板
+// 初始化20*20画板(deprecated)
+// 初始化40*30画板
 
 var board = JXG.JSXGraph.initBoard("box", {
-  boundingbox: [0, 0, -20, -20],
+  boundingbox: [0, 0, -40, -30],
   keepaspectratio: true,
-  axis: false,
+  axis: true,
   grid: true,
   showCopyright: true,
   pan: {
@@ -161,7 +162,7 @@ function main() {
     for (j = 0; j < matrixColumn; j++) {
       if (matrix[i][j] == 1) {
         plotMatrix[i][j] = board.create("point", [-j, -i], {
-          size: 16,
+          size: 8,
           name: "",
           fixed: true
         });
@@ -271,7 +272,7 @@ function main() {
             board.removeObject(plotMatrix[i][j]);
           }
           plotMatrix[i][j] = board.create("point", [-j, -i], {
-            size: 16,
+            size: 8,
             name: "",
             fixed: true
           });
