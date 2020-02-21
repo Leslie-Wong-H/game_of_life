@@ -157,6 +157,16 @@ var board = JXG.JSXGraph.initBoard("box", {
 
 // incubated from code at http://jsxgraph.org/wiki/index.php/Browser_event_and_coordinates
 // mouse click event function
+
+// user clicked point matrix
+var initialPlotMatrix = new Array();
+for (i = 0; i < matrix.length; i++) {
+  initialPlotMatrix[i] = new Array();
+  for (j = 0; j < matrix[0].length; j++) {
+    initialPlotMatrix[i][j] = "";
+  }
+}
+
 var getMouseCoords = function(e, i) {
     var cPos = board.getCoordsTopLeftCorner(e, i),
       absPos = JXG.getPosition(e, i),
@@ -189,17 +199,13 @@ var getMouseCoords = function(e, i) {
     }
 
     if (canCreate) {
-      board.create(
-        "point",
-        [Math.round(coords.usrCoords[1]), Math.round(coords.usrCoords[2])],
-        {
-          size: 8,
-          name: "",
-          fixed: true
-        }
-      );
       var x = Math.round(coords.usrCoords[1]),
         y = Math.round(coords.usrCoords[2]);
+      initialPlotMatrix[-y][-x] = board.create("point", [x, y], {
+        size: 8,
+        name: "",
+        fixed: true
+      });
       matrix[-y][-x] = 1;
       originalNumber++;
       console.log(matrix[-y].length);
@@ -250,10 +256,11 @@ function main() {
     }
   }
 
-  //绘制原始细胞分布情况
+  //绘制初代细胞分布情况
   for (i = 0; i < matrixRow; i++) {
     for (j = 0; j < matrixColumn; j++) {
       if (matrix[i][j] == 1) {
+        board.removeObject(initialPlotMatrix[i][j]);
         plotMatrix[i][j] = board.create("point", [-j, -i], {
           size: 8,
           name: "",
