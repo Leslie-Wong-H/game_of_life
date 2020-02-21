@@ -45,6 +45,7 @@ function bindEvent() {
         // clearBoard();
         // matrix = [];
         main();
+        board.off("down", down);
         startBl = false;
         if (document.getElementsByClassName("selector en")[0]) {
           start.value = "Pause";
@@ -503,6 +504,7 @@ function clearBoard() {
   // }
 
   startBl = true;
+  board.on("down", down);
   if (document.getElementsByClassName("selector en")[0]) {
     start.value = "Start";
   } else if (document.getElementsByClassName("selector cn")[0]) {
