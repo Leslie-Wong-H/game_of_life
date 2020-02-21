@@ -26,19 +26,48 @@ var nLive = originalNumber;
 var evolutionCount = 0;
 var nAliveCnt = 0;
 
-// 绑定开始、停止、重置、速度按钮的点击事件
+// 绑定开始、暂停、继续、重置、速度按钮的点击事件
 
 function bindEvent() {
   start.onclick = function() {
-    if (startBl) {
-      // clearBoard();
-      // matrix = [];
-      main();
-      startBl = false;
+    // console.log(start.value);
+    if (start.value == "Pause" || start.value == "暂停") {
+      if (!startBl) {
+        clearInterval(timer);
+        if (document.getElementsByClassName("selector en")[0]) {
+          start.value = "Continue";
+        } else if (document.getElementsByClassName("selector cn")[0]) {
+          start.value = "继续";
+        }
+      }
+    } else if (start.value == "Start" || start.value == "开始") {
+      if (startBl) {
+        // clearBoard();
+        // matrix = [];
+        main();
+        startBl = false;
+        if (document.getElementsByClassName("selector en")[0]) {
+          start.value = "Pause";
+        } else if (document.getElementsByClassName("selector cn")[0]) {
+          start.value = "暂停";
+        }
+      }
+    } else if (start.value == "Continue" || start.value == "继续") {
+      if (!startBl) {
+        clearInterval(timer);
+        timer = setInterval(function() {
+          nextGeneration();
+        }, timeInterval);
+        if (document.getElementsByClassName("selector en")[0]) {
+          start.value = "Pause";
+        } else if (document.getElementsByClassName("selector cn")[0]) {
+          start.value = "暂停";
+        }
+      }
     }
   };
 
-  //TO DO: Dynamically switch "start" to "pause"
+  //TO DO（Done): Dynamically switch "start" to "pause"
 
   stop.onclick = function() {
     startBl = true;
@@ -474,6 +503,11 @@ function clearBoard() {
   // }
 
   startBl = true;
+  if (document.getElementsByClassName("selector en")[0]) {
+    start.value = "Start";
+  } else if (document.getElementsByClassName("selector cn")[0]) {
+    start.value = "开始";
+  }
 
   // 初始生命、剩余生命、进化次数置零
   document.getElementById("originalNumber").innerHTML = 0;
