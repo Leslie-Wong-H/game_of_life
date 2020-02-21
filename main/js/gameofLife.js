@@ -419,6 +419,7 @@ function nextGeneration() {
         needShift: false // mouse panning needs pressing of the shift key
       }
     });
+    originalNumber = 0;
   }
 }
 
