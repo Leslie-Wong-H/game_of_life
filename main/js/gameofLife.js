@@ -120,9 +120,9 @@ bindEvent();
 //初始化细胞矩阵
 
 function init() {
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i <= 30; i++) {
     matrix[i] = [];
-    for (let j = 0; j < 40; j++) {
+    for (let j = 0; j <= 40; j++) {
       // if (Math.random() * 100 <= 20) {
       //   matrix[i][j] = 1;
       //   originalNumber++;
@@ -137,7 +137,8 @@ function init() {
 init();
 
 // 初始化20*20画板(deprecated)
-// 初始化40*30画板
+// 初始化40*30画板(misunderstood)
+// 初始化41*31画板
 
 var board = JXG.JSXGraph.initBoard("box", {
   boundingbox: [0, 0, -40, -30],
