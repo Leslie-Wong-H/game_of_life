@@ -208,7 +208,8 @@ var getMouseCoords = function(e, i) {
       });
       matrix[-y][-x] = 1;
       originalNumber++;
-      console.log(matrix[-y].length);
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+      // console.log(matrix[-y].length);
     }
   };
 
