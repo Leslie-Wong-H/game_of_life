@@ -259,6 +259,7 @@ function main() {
   }
 
   //绘制初代细胞分布情况
+  board.suspendUpdate();
   for (i = 0; i < matrixRow; i++) {
     for (j = 0; j < matrixColumn; j++) {
       if (matrix[i][j] == 1) {
@@ -271,6 +272,7 @@ function main() {
       }
     }
   }
+  board.unsuspendUpdate();
 
   // //显示初始存活细胞数目
   // // var strLiveNumber = str(nLive);
