@@ -264,6 +264,7 @@ function main() {
     for (j = 0; j < matrixColumn; j++) {
       if (matrix[i][j] == 1) {
         board.removeObject(initialPlotMatrix[i][j]);
+        initialPlotMatrix[i][j] = "";
         plotMatrix[i][j] = board.create("point", [-j, -i], {
           size: 8,
           name: "",
@@ -412,17 +413,52 @@ function nextGeneration() {
 // }
 
 function clearBoard() {
-  startBl = true;
   clearInterval(timer);
+  board = JXG.JSXGraph.initBoard("box", {
+    boundingbox: [0, 0, -40, -30],
+    keepaspectratio: true,
+    axis: true,
+    grid: true,
+    showCopyright: true,
+    shownavigation: false,
+    pan: {
+      //panning interaction(i.e.moving the origin)
+      enabled: false, // disallow panning
+      needTwoFingers: false, // panning could not be done with two fingers on touch devices
+      needShift: false // mouse panning needs pressing of the shift key
+    }
+  });
   board.suspendUpdate();
   for (let i = 0; i < matrixRow; i++) {
     for (let j = 0; j < matrixColumn; j++) {
       matrix[i][j] = 0;
-      board.removeObject(plotMatrix[i][j]);
-      plotMatrix[i][j] = "";
+      if (initialPlotMatrix[i][j] != "") {
+        board.removeObject(initialPlotMatrix[i][j]);
+        initialPlotMatrix[i][j] = "";
+      }
+      if (plotMatrix[i][j] != "") {
+        board.removeObject(plotMatrix[i][j]);
+        plotMatrix[i][j] = "";
+      }
     }
   }
   board.unsuspendUpdate();
+
+  // } else {
+  //   console.log("yeah");
+  //   clearInterval(timer);
+  //   board.suspendUpdate();
+  //   for (let i = 0; i < matrixRow; i++) {
+  //     for (let j = 0; j < matrixColumn; j++) {
+  //       matrix[i][j] = 0;
+  //       board.removeObject(plotMatrix[i][j]);
+  //       plotMatrix[i][j] = "";
+  //     }
+  //   }
+  //   board.unsuspendUpdate();
+  // }
+
+  startBl = true;
 
   // 初始生命、剩余生命、进化次数置零
   document.getElementById("originalNumber").innerHTML = 0;
