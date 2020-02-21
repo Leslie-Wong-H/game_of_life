@@ -145,6 +145,7 @@ var board = JXG.JSXGraph.initBoard("box", {
   axis: true,
   grid: true,
   showCopyright: true,
+  shownavigation: false,
   pan: {
     //panning interaction(i.e.moving the origin)
     enabled: false, // disallow panning
