@@ -204,7 +204,8 @@ var getMouseCoords = function(e, i) {
       initialPlotMatrix[-y][-x] = board.create("point", [x, y], {
         size: 8,
         name: "",
-        fixed: true
+        fixed: true,
+        showinfobox: false
       });
       matrix[-y][-x] = 1;
       originalNumber++;
