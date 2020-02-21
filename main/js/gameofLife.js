@@ -403,7 +403,7 @@ function nextGeneration() {
   if (nLive != 0) {
     document.getElementById("evolutionTimes").innerHTML = evolutionCount;
   } else {
-    startBl = true;
+    // startBl = true;
     clearInterval(timer);
   }
 }
