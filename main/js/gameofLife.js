@@ -90,10 +90,14 @@ function bindEvent() {
       }
       timeInterval = 1000;
       if (!startBl) {
-        clearInterval(timer);
-        timer = setInterval(function() {
-          nextGeneration();
-        }, timeInterval);
+        if (start.value == "Continue" || start.value == "继续") {
+          clearInterval(timer);
+        } else {
+          clearInterval(timer);
+          timer = setInterval(function() {
+            nextGeneration();
+          }, timeInterval);
+        }
       }
       setTimeout(function() {
         rateLabel.innerText = "";
@@ -113,10 +117,14 @@ function bindEvent() {
       }
       timeInterval = 250;
       if (!startBl) {
-        clearInterval(timer);
-        timer = setInterval(function() {
-          nextGeneration();
-        }, timeInterval);
+        if (start.value == "Continue" || start.value == "继续") {
+          clearInterval(timer);
+        } else {
+          clearInterval(timer);
+          timer = setInterval(function() {
+            nextGeneration();
+          }, timeInterval);
+        }
       }
       setTimeout(function() {
         rateLabel.innerText = "";
@@ -131,10 +139,14 @@ function bindEvent() {
       }
       timeInterval = 500;
       if (!startBl) {
-        clearInterval(timer);
-        timer = setInterval(function() {
-          nextGeneration();
-        }, timeInterval);
+        if (start.value == "Continue" || start.value == "继续") {
+          clearInterval(timer);
+        } else {
+          clearInterval(timer);
+          timer = setInterval(function() {
+            nextGeneration();
+          }, timeInterval);
+        }
       }
       setTimeout(function() {
         rateLabel.innerText = "";
