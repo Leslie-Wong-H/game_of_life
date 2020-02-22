@@ -9,6 +9,7 @@
  */
 
 var matrix = [];
+var initialPlotMatrix = [];
 var copyMatrix = [];
 var plotMatrix = [];
 var matrixRow, matrixColumn;
@@ -173,7 +174,13 @@ function init() {
       // }
     }
   }
-  // console.log(matrix[0].length);
+  // user clicked point matrix
+  for (i = 0; i < matrix.length; i++) {
+    initialPlotMatrix[i] = new Array();
+    for (j = 0; j < matrix[0].length; j++) {
+      initialPlotMatrix[i][j] = "";
+    }
+  }
 }
 
 init();
@@ -199,15 +206,6 @@ var board = JXG.JSXGraph.initBoard("box", {
 
 // incubated from code at http://jsxgraph.org/wiki/index.php/Browser_event_and_coordinates
 // mouse click event function
-
-// user clicked point matrix
-var initialPlotMatrix = new Array();
-for (i = 0; i < matrix.length; i++) {
-  initialPlotMatrix[i] = new Array();
-  for (j = 0; j < matrix[0].length; j++) {
-    initialPlotMatrix[i][j] = "";
-  }
-}
 
 var getMouseCoords = function(e, i) {
     var cPos = board.getCoordsTopLeftCorner(e, i),
@@ -305,12 +303,12 @@ function main() {
   for (i = 0; i < matrixRow; i++) {
     for (j = 0; j < matrixColumn; j++) {
       if (initialPlotMatrix[i][j] != "") {
-      board.removeObject(initialPlotMatrix[i][j]);
-      initialPlotMatrix[i][j] = "";
-      // after heavy manual labor of work, it seems that one cell left bug is led by cache problem.
-      // Doubt remains.
-      // Set no-cache in Network bar of Chrome devtools, still got this bug. Surely this shoulb not
-      // be led by cache.
+        board.removeObject(initialPlotMatrix[i][j]);
+        initialPlotMatrix[i][j] = "";
+        // after heavy manual labor of work, it seems that one cell left bug is led by cache problem.
+        // Doubt remains.
+        // Set no-cache in Network bar of Chrome devtools, still got this bug. Surely this shoulb not
+        // be led by cache.
       }
       if (matrix[i][j] == 1) {
         plotMatrix[i][j] = board.create("point", [-j, -i], {
