@@ -304,14 +304,14 @@ function main() {
   board.suspendUpdate();
   for (i = 0; i < matrixRow; i++) {
     for (j = 0; j < matrixColumn; j++) {
-      // if (initialPlotMatrix[i][j] != "") {
+      if (initialPlotMatrix[i][j] != "") {
       board.removeObject(initialPlotMatrix[i][j]);
       initialPlotMatrix[i][j] = "";
       // after heavy manual labor of work, it seems that one cell left bug is led by cache problem.
       // Doubt remains.
       // Set no-cache in Network bar of Chrome devtools, still got this bug. Surely this shoulb not
       // be led by cache.
-      // }
+      }
       if (matrix[i][j] == 1) {
         plotMatrix[i][j] = board.create("point", [-j, -i], {
           size: 8,
