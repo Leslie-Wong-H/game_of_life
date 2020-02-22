@@ -221,11 +221,11 @@ var getMouseCoords = function(e, i) {
       coords,
       el;
 
-    // if (e[JXG.touchProperty]) {
-    //   // index of the finger that is used to extract the coordinates = [];
-    //   coordinates.push();
-    //   i = 0;
-    // }
+    if (e[JXG.touchProperty]) {
+      // index of the finger that is used to extract the coordinates
+      i = 0;
+    }
+
     coords = getMouseCoords(e, i);
     // console.log(coords);
     for (el in board.objects) {
