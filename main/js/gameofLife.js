@@ -9,6 +9,7 @@
  */
 
 var matrix = [];
+var initialPlotMatrix = [];
 var copyMatrix = [];
 var plotMatrix = [];
 var matrixRow, matrixColumn;
@@ -26,19 +27,49 @@ var nLive = originalNumber;
 var evolutionCount = 0;
 var nAliveCnt = 0;
 
-// 绑定开始、停止、重置、速度按钮的点击事件
+// 绑定开始、暂停、继续、重置、速度按钮的点击事件
 
 function bindEvent() {
   start.onclick = function() {
-    if (startBl) {
-      // clearBoard();
-      // matrix = [];
-      main();
-      startBl = false;
+    // console.log(start.value);
+    if (start.value == "Pause" || start.value == "暂停") {
+      if (!startBl) {
+        clearInterval(timer);
+        if (document.getElementsByClassName("selector en")[0]) {
+          start.value = "Continue";
+        } else if (document.getElementsByClassName("selector cn")[0]) {
+          start.value = "继续";
+        }
+      }
+    } else if (start.value == "Start" || start.value == "开始") {
+      if (startBl) {
+        // clearBoard();
+        // matrix = [];
+        main();
+        board.off("down", down);
+        startBl = false;
+        if (document.getElementsByClassName("selector en")[0]) {
+          start.value = "Pause";
+        } else if (document.getElementsByClassName("selector cn")[0]) {
+          start.value = "暂停";
+        }
+      }
+    } else if (start.value == "Continue" || start.value == "继续") {
+      if (!startBl) {
+        clearInterval(timer);
+        timer = setInterval(function() {
+          nextGeneration();
+        }, timeInterval);
+        if (document.getElementsByClassName("selector en")[0]) {
+          start.value = "Pause";
+        } else if (document.getElementsByClassName("selector cn")[0]) {
+          start.value = "暂停";
+        }
+      }
     }
   };
 
-  //TO DO: Dynamically switch "start" to "pause"
+  //TO DO（Done): Dynamically switch "start" to "pause"
 
   stop.onclick = function() {
     startBl = true;
@@ -60,10 +91,14 @@ function bindEvent() {
       }
       timeInterval = 1000;
       if (!startBl) {
-        clearInterval(timer);
-        timer = setInterval(function() {
-          nextGeneration();
-        }, timeInterval);
+        if (start.value == "Continue" || start.value == "继续") {
+          clearInterval(timer);
+        } else {
+          clearInterval(timer);
+          timer = setInterval(function() {
+            nextGeneration();
+          }, timeInterval);
+        }
       }
       setTimeout(function() {
         rateLabel.innerText = "";
@@ -83,10 +118,14 @@ function bindEvent() {
       }
       timeInterval = 250;
       if (!startBl) {
-        clearInterval(timer);
-        timer = setInterval(function() {
-          nextGeneration();
-        }, timeInterval);
+        if (start.value == "Continue" || start.value == "继续") {
+          clearInterval(timer);
+        } else {
+          clearInterval(timer);
+          timer = setInterval(function() {
+            nextGeneration();
+          }, timeInterval);
+        }
       }
       setTimeout(function() {
         rateLabel.innerText = "";
@@ -101,10 +140,14 @@ function bindEvent() {
       }
       timeInterval = 500;
       if (!startBl) {
-        clearInterval(timer);
-        timer = setInterval(function() {
-          nextGeneration();
-        }, timeInterval);
+        if (start.value == "Continue" || start.value == "继续") {
+          clearInterval(timer);
+        } else {
+          clearInterval(timer);
+          timer = setInterval(function() {
+            nextGeneration();
+          }, timeInterval);
+        }
       }
       setTimeout(function() {
         rateLabel.innerText = "";
@@ -131,7 +174,15 @@ function init() {
       // }
     }
   }
-  // console.log(matrix[0].length);
+  //生成绘图记录二维数组
+  plotMatrix = new Array();
+  for (i = 0; i <= 30; i++) {
+    plotMatrix[i] = new Array();
+    for (j = 0; j <= 40; j++) {
+      plotMatrix[i][j] = "";
+    }
+  }
+  // console.log(plotMatrix);
 }
 
 init();
@@ -153,25 +204,30 @@ var board = JXG.JSXGraph.initBoard("box", {
     needTwoFingers: false, // panning could not be done with two fingers on touch devices
     needShift: false // mouse panning needs pressing of the shift key
   }
+  // zoom: {
+  //   factorX: 1, // horizontal zoom factor (multiplied to JXG.Board#zoomX)
+  //   factorY: 1, // vertical zoom factor (multiplied to JXG.Board#zoomY)
+  //   wheel: false, // allow zooming by mouse wheel or
+  //   // by pinch-to-toom gesture on touch devices
+  //   needShift: true, // mouse wheel zooming needs pressing of the shift key
+  //   min: 1, // minimal values of JXG.Board#zoomX and JXG.Board#zoomY, limits zoomOut
+  //   max: 1, // maximal values of JXG.Board#zoomX and JXG.Board#zoomY, limits zoomIn
+  //   pinchHorizontal: false, // Allow pinch-to-zoom to zoom only horizontal axis
+  //   pinchVertical: false, // Allow pinch-to-zoom to zoom only vertical axis
+  //   pinchSensitivity: 0 // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
+  // }
 });
 
 // incubated from code at http://jsxgraph.org/wiki/index.php/Browser_event_and_coordinates
 // mouse click event function
 
-// user clicked point matrix
-var initialPlotMatrix = new Array();
-for (i = 0; i < matrix.length; i++) {
-  initialPlotMatrix[i] = new Array();
-  for (j = 0; j < matrix[0].length; j++) {
-    initialPlotMatrix[i][j] = "";
-  }
-}
-
 var getMouseCoords = function(e, i) {
     var cPos = board.getCoordsTopLeftCorner(e, i),
       absPos = JXG.getPosition(e, i),
-      dx = Math.round(absPos[0] - cPos[0]),
-      dy = Math.round(absPos[1] - cPos[1]);
+      // dx = Math.round(absPos[0] - cPos[0]),
+      // dy = Math.round(absPos[1] - cPos[1]);
+      dx = absPos[0] - cPos[0],
+      dy = absPos[1] - cPos[1];
 
     return new JXG.Coords(JXG.COORDS_BY_SCREEN, [dx, dy], board);
   },
@@ -181,11 +237,11 @@ var getMouseCoords = function(e, i) {
       coords,
       el;
 
-    // if (e[JXG.touchProperty]) {
-    //   // index of the finger that is used to extract the coordinates = [];
-    //   coordinates.push();
-    //   i = 0;
-    // }
+    if (e[JXG.touchProperty]) {
+      // index of the finger that is used to extract the coordinates
+      i = 0;
+    }
+
     coords = getMouseCoords(e, i);
     // console.log(coords);
     for (el in board.objects) {
@@ -201,16 +257,18 @@ var getMouseCoords = function(e, i) {
     if (canCreate) {
       var x = Math.round(coords.usrCoords[1]),
         y = Math.round(coords.usrCoords[2]);
-      initialPlotMatrix[-y][-x] = board.create("point", [x, y], {
-        size: 8,
-        name: "",
-        fixed: true,
-        showinfobox: false
-      });
-      matrix[-y][-x] = 1;
-      originalNumber++;
-      document.getElementById("originalNumber").innerHTML = originalNumber;
-      // console.log(matrix[-y].length);
+      if (plotMatrix[-y][-x] == "") {
+        plotMatrix[-y][-x] = board.create("point", [x, y], {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        });
+        matrix[-y][-x] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+        // console.log(matrix[-y].length);
+      }
     }
   };
 
@@ -248,32 +306,28 @@ function main() {
     }
   }
 
-  //生成绘图记录二维数组
-  plotMatrix = new Array();
-  for (i = 0; i < matrixRow; i++) {
-    plotMatrix[i] = new Array();
-
-    for (j = 0; j < matrixColumn; j++) {
-      plotMatrix[i][j] = "";
-    }
-  }
-
-  //绘制初代细胞分布情况
-  board.suspendUpdate();
-  for (i = 0; i < matrixRow; i++) {
-    for (j = 0; j < matrixColumn; j++) {
-      if (matrix[i][j] == 1) {
-        board.removeObject(initialPlotMatrix[i][j]);
-        initialPlotMatrix[i][j] = "";
-        plotMatrix[i][j] = board.create("point", [-j, -i], {
-          size: 8,
-          name: "",
-          fixed: true
-        });
-      }
-    }
-  }
-  board.unsuspendUpdate();
+  //绘制初代细胞分布情况(deprecated)
+  // board.suspendUpdate();
+  // for (i = 0; i < matrixRow; i++) {
+  //   for (j = 0; j < matrixColumn; j++) {
+  //     if (initialPlotMatrix[i][j] != "") {
+  //       board.removeObject(initialPlotMatrix[i][j]);
+  //       initialPlotMatrix[i][j] = "";
+  //       // after heavy manual labor of work, it seems that one cell left bug is led by cache problem.
+  //       // Doubt remains.
+  //       // Set no-cache in Network bar of Chrome devtools, still got this bug. Surely this shoulb not
+  //       // be led by cache.
+  //     }
+  //     if (matrix[i][j] == 1) {
+  //       plotMatrix[i][j] = board.create("point", [-j, -i], {
+  //         size: 8,
+  //         name: "",
+  //         fixed: true
+  //       });
+  //     }
+  //   }
+  // }
+  // board.unsuspendUpdate();
 
   // //显示初始存活细胞数目
   // // var strLiveNumber = str(nLive);
@@ -447,10 +501,10 @@ function clearBoard() {
   for (let i = 0; i < matrixRow; i++) {
     for (let j = 0; j < matrixColumn; j++) {
       matrix[i][j] = 0;
-      if (initialPlotMatrix[i][j] != "") {
-        board.removeObject(initialPlotMatrix[i][j]);
-        initialPlotMatrix[i][j] = "";
-      }
+      // if (initialPlotMatrix[i][j] != "") {
+      // board.removeObject(initialPlotMatrix[i][j]);
+      // initialPlotMatrix[i][j] = "";
+      // }
       if (plotMatrix[i][j] != "") {
         board.removeObject(plotMatrix[i][j]);
         plotMatrix[i][j] = "";
@@ -474,6 +528,12 @@ function clearBoard() {
   // }
 
   startBl = true;
+  board.on("down", down);
+  if (document.getElementsByClassName("selector en")[0]) {
+    start.value = "Start";
+  } else if (document.getElementsByClassName("selector cn")[0]) {
+    start.value = "开始";
+  }
 
   // 初始生命、剩余生命、进化次数置零
   document.getElementById("originalNumber").innerHTML = 0;
