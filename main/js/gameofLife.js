@@ -224,8 +224,10 @@ var board = JXG.JSXGraph.initBoard("box", {
 var getMouseCoords = function(e, i) {
     var cPos = board.getCoordsTopLeftCorner(e, i),
       absPos = JXG.getPosition(e, i),
-      dx = Math.round(absPos[0] - cPos[0]),
-      dy = Math.round(absPos[1] - cPos[1]);
+      // dx = Math.round(absPos[0] - cPos[0]),
+      // dy = Math.round(absPos[1] - cPos[1]);
+      dx = absPos[0] - cPos[0],
+      dy = absPos[1] - cPos[1];
 
     return new JXG.Coords(JXG.COORDS_BY_SCREEN, [dx, dy], board);
   },
@@ -255,16 +257,18 @@ var getMouseCoords = function(e, i) {
     if (canCreate) {
       var x = Math.round(coords.usrCoords[1]),
         y = Math.round(coords.usrCoords[2]);
-      plotMatrix[-y][-x] = board.create("point", [x, y], {
-        size: 8,
-        name: "",
-        fixed: true,
-        showinfobox: false
-      });
-      matrix[-y][-x] = 1;
-      originalNumber++;
-      document.getElementById("originalNumber").innerHTML = originalNumber;
-      // console.log(matrix[-y].length);
+      if (plotMatrix[-y][-x] == "") {
+        plotMatrix[-y][-x] = board.create("point", [x, y], {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        });
+        matrix[-y][-x] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+        // console.log(matrix[-y].length);
+      }
     }
   };
 
