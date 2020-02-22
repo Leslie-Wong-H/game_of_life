@@ -9,7 +9,7 @@
  */
 
 var matrix = [];
-var initialPlotMatrix = [];
+// var initialPlotMatrix = [];
 var copyMatrix = [];
 var plotMatrix = [];
 var matrixRow, matrixColumn;
