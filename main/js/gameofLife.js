@@ -174,13 +174,15 @@ function init() {
       // }
     }
   }
-  // user clicked point matrix
-  for (i = 0; i < matrix.length; i++) {
-    initialPlotMatrix[i] = new Array();
-    for (j = 0; j < matrix[0].length; j++) {
-      initialPlotMatrix[i][j] = "";
+  //生成绘图记录二维数组
+  plotMatrix = new Array();
+  for (i = 0; i <= 30; i++) {
+    plotMatrix[i] = new Array();
+    for (j = 0; j <= 40; j++) {
+      plotMatrix[i][j] = "";
     }
   }
+  // console.log(plotMatrix);
 }
 
 init();
@@ -241,7 +243,7 @@ var getMouseCoords = function(e, i) {
     if (canCreate) {
       var x = Math.round(coords.usrCoords[1]),
         y = Math.round(coords.usrCoords[2]);
-      initialPlotMatrix[-y][-x] = board.create("point", [x, y], {
+      plotMatrix[-y][-x] = board.create("point", [x, y], {
         size: 8,
         name: "",
         fixed: true,
@@ -288,38 +290,28 @@ function main() {
     }
   }
 
-  //生成绘图记录二维数组
-  plotMatrix = new Array();
-  for (i = 0; i < matrixRow; i++) {
-    plotMatrix[i] = new Array();
-
-    for (j = 0; j < matrixColumn; j++) {
-      plotMatrix[i][j] = "";
-    }
-  }
-
-  //绘制初代细胞分布情况
-  board.suspendUpdate();
-  for (i = 0; i < matrixRow; i++) {
-    for (j = 0; j < matrixColumn; j++) {
-      if (initialPlotMatrix[i][j] != "") {
-        board.removeObject(initialPlotMatrix[i][j]);
-        initialPlotMatrix[i][j] = "";
-        // after heavy manual labor of work, it seems that one cell left bug is led by cache problem.
-        // Doubt remains.
-        // Set no-cache in Network bar of Chrome devtools, still got this bug. Surely this shoulb not
-        // be led by cache.
-      }
-      if (matrix[i][j] == 1) {
-        plotMatrix[i][j] = board.create("point", [-j, -i], {
-          size: 8,
-          name: "",
-          fixed: true
-        });
-      }
-    }
-  }
-  board.unsuspendUpdate();
+  //绘制初代细胞分布情况(deprecated)
+  // board.suspendUpdate();
+  // for (i = 0; i < matrixRow; i++) {
+  //   for (j = 0; j < matrixColumn; j++) {
+  //     if (initialPlotMatrix[i][j] != "") {
+  //       board.removeObject(initialPlotMatrix[i][j]);
+  //       initialPlotMatrix[i][j] = "";
+  //       // after heavy manual labor of work, it seems that one cell left bug is led by cache problem.
+  //       // Doubt remains.
+  //       // Set no-cache in Network bar of Chrome devtools, still got this bug. Surely this shoulb not
+  //       // be led by cache.
+  //     }
+  //     if (matrix[i][j] == 1) {
+  //       plotMatrix[i][j] = board.create("point", [-j, -i], {
+  //         size: 8,
+  //         name: "",
+  //         fixed: true
+  //       });
+  //     }
+  //   }
+  // }
+  // board.unsuspendUpdate();
 
   // //显示初始存活细胞数目
   // // var strLiveNumber = str(nLive);
@@ -494,8 +486,8 @@ function clearBoard() {
     for (let j = 0; j < matrixColumn; j++) {
       matrix[i][j] = 0;
       // if (initialPlotMatrix[i][j] != "") {
-      board.removeObject(initialPlotMatrix[i][j]);
-      initialPlotMatrix[i][j] = "";
+      // board.removeObject(initialPlotMatrix[i][j]);
+      // initialPlotMatrix[i][j] = "";
       // }
       if (plotMatrix[i][j] != "") {
         board.removeObject(plotMatrix[i][j]);
