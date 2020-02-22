@@ -304,9 +304,11 @@ function main() {
   board.suspendUpdate();
   for (i = 0; i < matrixRow; i++) {
     for (j = 0; j < matrixColumn; j++) {
-      if (matrix[i][j] == 1) {
+      if (initialPlotMatrix[i][j] != "") {
         board.removeObject(initialPlotMatrix[i][j]);
         initialPlotMatrix[i][j] = "";
+      }
+      if (matrix[i][j] == 1) {
         plotMatrix[i][j] = board.create("point", [-j, -i], {
           size: 8,
           name: "",
