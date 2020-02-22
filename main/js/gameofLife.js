@@ -204,6 +204,18 @@ var board = JXG.JSXGraph.initBoard("box", {
     needTwoFingers: false, // panning could not be done with two fingers on touch devices
     needShift: false // mouse panning needs pressing of the shift key
   }
+  // zoom: {
+  //   factorX: 1, // horizontal zoom factor (multiplied to JXG.Board#zoomX)
+  //   factorY: 1, // vertical zoom factor (multiplied to JXG.Board#zoomY)
+  //   wheel: false, // allow zooming by mouse wheel or
+  //   // by pinch-to-toom gesture on touch devices
+  //   needShift: true, // mouse wheel zooming needs pressing of the shift key
+  //   min: 1, // minimal values of JXG.Board#zoomX and JXG.Board#zoomY, limits zoomOut
+  //   max: 1, // maximal values of JXG.Board#zoomX and JXG.Board#zoomY, limits zoomIn
+  //   pinchHorizontal: false, // Allow pinch-to-zoom to zoom only horizontal axis
+  //   pinchVertical: false, // Allow pinch-to-zoom to zoom only vertical axis
+  //   pinchSensitivity: 0 // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
+  // }
 });
 
 // incubated from code at http://jsxgraph.org/wiki/index.php/Browser_event_and_coordinates
