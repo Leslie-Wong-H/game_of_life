@@ -9,18 +9,141 @@
  */
 
 var matrix = [];
-var initialPlotMatrix = [];
+// var initialPlotMatrix = [];
 var copyMatrix = [];
 var plotMatrix = [];
 var matrixRow, matrixColumn;
 var start = document.getElementsByClassName("start")[0];
-var stop = document.getElementsByClassName("stop")[0];
+
+// var stop = document.getElementsByClassName("stop")[0];
+var glider = document.getElementById("glider");
+var gliderpattern = [
+  [2, 8],
+  [3, 9],
+  [4, 9],
+  [4, 8],
+  [4, 7]
+];
+var smallexploder = document.getElementById("smallexploder");
+var smallexploderpattern = [
+  [12, 20],
+  [13, 19],
+  [13, 20],
+  [13, 21],
+  [14, 19],
+  [14, 21],
+  [15, 20]
+];
+var exploder = document.getElementById("exploder");
+var exploderpattern = [
+  [11, 18],
+  [11, 20],
+  [11, 22],
+  [12, 18],
+  [12, 22],
+  [13, 18],
+  [13, 22],
+  [14, 18],
+  [14, 22],
+  [15, 18],
+  [15, 20],
+  [15, 22]
+];
+var tencellcolumn = document.getElementById("tencellcolumn");
+var tencellcolumnpattern = [
+  [10, 20],
+  [11, 20],
+  [12, 20],
+  [13, 20],
+  [14, 20],
+  [15, 20],
+  [16, 20],
+  [17, 20],
+  [18, 20],
+  [19, 20]
+];
+var lightweightapaceship = document.getElementById("lightweightspaceship");
+var lightweightapaceshippattern = [
+  [12, 6],
+  [12, 7],
+  [12, 8],
+  [12, 9],
+  [13, 5],
+  [13, 9],
+  [14, 9],
+  [15, 5],
+  [15, 8]
+];
+var tumbler = document.getElementById("tumbler");
+var tumblerpattern = [
+  [10, 18],
+  [10, 19],
+  [10, 21],
+  [10, 22],
+  [11, 18],
+  [11, 19],
+  [11, 21],
+  [11, 22],
+  [12, 19],
+  [12, 21],
+  [13, 17],
+  [13, 19],
+  [13, 21],
+  [13, 23],
+  [14, 17],
+  [14, 19],
+  [14, 21],
+  [14, 23],
+  [15, 17],
+  [15, 18],
+  [15, 22],
+  [15, 23]
+];
+var gosperglidergun = document.getElementById("gosperglidergun");
+var gosperglidergunpattern = [
+  [7, 1],
+  [7, 2],
+  [8, 1],
+  [8, 2],
+  [7, 10],
+  [7, 11],
+  [8, 9],
+  [8, 11],
+  [9, 9],
+  [9, 10],
+  [9, 17],
+  [9, 18],
+  [10, 17],
+  [10, 19],
+  [11, 17],
+  [5, 24],
+  [5, 25],
+  [6, 23],
+  [6, 25],
+  [7, 23],
+  [7, 24],
+  [5, 35],
+  [5, 36],
+  [6, 35],
+  [6, 36],
+  [12, 36],
+  [12, 37],
+  [13, 36],
+  [13, 38],
+  [14, 36],
+  [17, 25],
+  [17, 26],
+  [17, 27],
+  [18, 25],
+  [19, 26]
+];
+
 var reset = document.getElementsByClassName("reset")[0];
 var rate = document.getElementsByClassName("rate")[0];
 var rateLabel = document.getElementsByClassName("rateLabel")[0];
 var startBl = true;
 var timer;
-var timeInterval = 500;
+var timeInterval = 300;
 var rateCounter = 1;
 var originalNumber = 0;
 var nLive = originalNumber;
@@ -71,11 +194,187 @@ function bindEvent() {
 
   //TO DO（Done): Dynamically switch "start" to "pause"
 
-  stop.onclick = function() {
-    startBl = true;
+  // stop.onclick = function() {
+  //   startBl = true;
 
-    clearInterval(timer);
+  //   clearInterval(timer);
+  // };
+
+  // start of click event of items of pattern button group
+  glider.onclick = function() {
+    board.suspendUpdate();
+    for (let i = 0; i < gliderpattern.length; i++) {
+      // console.log(gliderpattern[i][0]);
+      if (plotMatrix[gliderpattern[i][0]][gliderpattern[i][1]] == "") {
+        plotMatrix[gliderpattern[i][0]][gliderpattern[i][1]] = board.create(
+          "point",
+          [-gliderpattern[i][1], -gliderpattern[i][0]],
+          {
+            size: 8,
+            name: "",
+            fixed: true,
+            showinfobox: false
+          }
+        );
+        matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+      }
+    }
+    board.unsuspendUpdate();
   };
+  smallexploder.onclick = function() {
+    board.suspendUpdate();
+    for (let i = 0; i < smallexploderpattern.length; i++) {
+      if (
+        plotMatrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] == ""
+      ) {
+        plotMatrix[smallexploderpattern[i][0]][
+          smallexploderpattern[i][1]
+        ] = board.create(
+          "point",
+          [-smallexploderpattern[i][1], -smallexploderpattern[i][0]],
+          {
+            size: 8,
+            name: "",
+            fixed: true,
+            showinfobox: false
+          }
+        );
+        matrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+      }
+    }
+    board.unsuspendUpdate();
+  };
+  exploder.onclick = function() {
+    board.suspendUpdate();
+    for (let i = 0; i < exploderpattern.length; i++) {
+      if (plotMatrix[exploderpattern[i][0]][exploderpattern[i][1]] == "") {
+        plotMatrix[exploderpattern[i][0]][exploderpattern[i][1]] = board.create(
+          "point",
+          [-exploderpattern[i][1], -exploderpattern[i][0]],
+          {
+            size: 8,
+            name: "",
+            fixed: true,
+            showinfobox: false
+          }
+        );
+        matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+      }
+    }
+    board.unsuspendUpdate();
+  };
+  tencellcolumn.onclick = function() {
+    board.suspendUpdate();
+    for (let i = 0; i < tencellcolumnpattern.length; i++) {
+      if (
+        plotMatrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] == ""
+      ) {
+        plotMatrix[tencellcolumnpattern[i][0]][
+          tencellcolumnpattern[i][1]
+        ] = board.create(
+          "point",
+          [-tencellcolumnpattern[i][1], -tencellcolumnpattern[i][0]],
+          {
+            size: 8,
+            name: "",
+            fixed: true,
+            showinfobox: false
+          }
+        );
+        matrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+      }
+    }
+    board.unsuspendUpdate();
+  };
+  lightweightapaceship.onclick = function() {
+    board.suspendUpdate();
+    for (let i = 0; i < lightweightapaceshippattern.length; i++) {
+      if (
+        plotMatrix[lightweightapaceshippattern[i][0]][
+          lightweightapaceshippattern[i][1]
+        ] == ""
+      ) {
+        plotMatrix[lightweightapaceshippattern[i][0]][
+          lightweightapaceshippattern[i][1]
+        ] = board.create(
+          "point",
+          [
+            -lightweightapaceshippattern[i][1],
+            -lightweightapaceshippattern[i][0]
+          ],
+          {
+            size: 8,
+            name: "",
+            fixed: true,
+            showinfobox: false
+          }
+        );
+        matrix[lightweightapaceshippattern[i][0]][
+          lightweightapaceshippattern[i][1]
+        ] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+      }
+    }
+    board.unsuspendUpdate();
+  };
+  tumbler.onclick = function() {
+    board.suspendUpdate();
+    for (let i = 0; i < tumblerpattern.length; i++) {
+      if (plotMatrix[tumblerpattern[i][0]][tumblerpattern[i][1]] == "") {
+        plotMatrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = board.create(
+          "point",
+          [-tumblerpattern[i][1], -tumblerpattern[i][0]],
+          {
+            size: 8,
+            name: "",
+            fixed: true,
+            showinfobox: false
+          }
+        );
+        matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+      }
+    }
+    board.unsuspendUpdate();
+  };
+  gosperglidergun.onclick = function() {
+    board.suspendUpdate();
+    for (let i = 0; i < gosperglidergunpattern.length; i++) {
+      if (
+        plotMatrix[gosperglidergunpattern[i][0]][
+          gosperglidergunpattern[i][1]
+        ] == ""
+      ) {
+        plotMatrix[gosperglidergunpattern[i][0]][
+          gosperglidergunpattern[i][1]
+        ] = board.create(
+          "point",
+          [-gosperglidergunpattern[i][1], -gosperglidergunpattern[i][0]],
+          {
+            size: 8,
+            name: "",
+            fixed: true,
+            showinfobox: false
+          }
+        );
+        matrix[gosperglidergunpattern[i][0]][gosperglidergunpattern[i][1]] = 1;
+        originalNumber++;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
+      }
+    }
+    board.unsuspendUpdate();
+  };
+  // end of click event of items of pattern button group
 
   reset.onclick = function() {
     clearBoard();
@@ -116,7 +415,7 @@ function bindEvent() {
       } else {
         rateLabel.innerText = "快速";
       }
-      timeInterval = 250;
+      timeInterval = 30;
       if (!startBl) {
         if (start.value == "Continue" || start.value == "继续") {
           clearInterval(timer);
@@ -138,7 +437,7 @@ function bindEvent() {
       } else {
         rateLabel.innerText = "中速";
       }
-      timeInterval = 500;
+      timeInterval = 300;
       if (!startBl) {
         if (start.value == "Continue" || start.value == "继续") {
           clearInterval(timer);
@@ -193,7 +492,7 @@ init();
 
 var board = JXG.JSXGraph.initBoard("box", {
   boundingbox: [0, 0, -40, -30],
-  keepaspectratio: true,
+  keepaspectratio: false,
   axis: true,
   grid: true,
   showCopyright: true,
@@ -243,20 +542,25 @@ var getMouseCoords = function(e, i) {
     }
 
     coords = getMouseCoords(e, i);
+    var x = Math.round(coords.usrCoords[1]),
+      y = Math.round(coords.usrCoords[2]);
     // console.log(coords);
     for (el in board.objects) {
       if (
         JXG.isPoint(board.objects[el]) &&
         board.objects[el].hasPoint(coords.scrCoords[1], coords.scrCoords[2])
       ) {
+        board.removeObject(el);
+        plotMatrix[-y][-x] = "";
+        matrix[-y][-x] = 0;
+        originalNumber--;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
         canCreate = false;
         break;
       }
     }
 
     if (canCreate) {
-      var x = Math.round(coords.usrCoords[1]),
-        y = Math.round(coords.usrCoords[2]);
       if (plotMatrix[-y][-x] == "") {
         plotMatrix[-y][-x] = board.create("point", [x, y], {
           size: 8,
