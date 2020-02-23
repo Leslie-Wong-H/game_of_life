@@ -143,7 +143,7 @@ var rate = document.getElementsByClassName("rate")[0];
 var rateLabel = document.getElementsByClassName("rateLabel")[0];
 var startBl = true;
 var timer;
-var timeInterval = 500;
+var timeInterval = 300;
 var rateCounter = 1;
 var originalNumber = 0;
 var nLive = originalNumber;
@@ -415,7 +415,7 @@ function bindEvent() {
       } else {
         rateLabel.innerText = "快速";
       }
-      timeInterval = 250;
+      timeInterval = 30;
       if (!startBl) {
         if (start.value == "Continue" || start.value == "继续") {
           clearInterval(timer);
@@ -437,7 +437,7 @@ function bindEvent() {
       } else {
         rateLabel.innerText = "中速";
       }
-      timeInterval = 500;
+      timeInterval = 300;
       if (!startBl) {
         if (start.value == "Continue" || start.value == "继续") {
           clearInterval(timer);
