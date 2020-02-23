@@ -144,13 +144,13 @@ body {
 }
 
 .reset {
-  width: 70px;
+  width: 90px;
   margin-right: 20px;
   color: #bf0045;
 }
 
 .start {
-  width: 70px;
+  width: 90px;
   margin-right: 20px;
   color: #bf0045;
 }
@@ -158,6 +158,10 @@ body {
 .originalNumber {
   display: inline-block;
   width: 40px;
+}
+
+.originalNumberText {
+  margin-left: 1.1rem;
 }
 
 .remainLifes {
@@ -168,7 +172,7 @@ body {
 .evolutionTimes {
   display: inline-block;
   width: 40px;
-  padding-right: 1.5%;
+  /* padding-right: 1.5%; */
 }
 
 .inlineText {
@@ -176,14 +180,14 @@ body {
 }
 
 .stop {
-  width: 70px;
-  margin-right: 20px;
+  width: 90px;
+  margin-left: 20px;
   color: #bf0045;
 }
 
 .rate {
-  width: 70px;
-  margin-right: 20px;
+  width: 90px;
+  margin-left: 20px;
   color: #bf0045;
 }
 
