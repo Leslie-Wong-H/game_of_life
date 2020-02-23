@@ -542,20 +542,25 @@ var getMouseCoords = function(e, i) {
     }
 
     coords = getMouseCoords(e, i);
+    var x = Math.round(coords.usrCoords[1]),
+      y = Math.round(coords.usrCoords[2]);
     // console.log(coords);
     for (el in board.objects) {
       if (
         JXG.isPoint(board.objects[el]) &&
         board.objects[el].hasPoint(coords.scrCoords[1], coords.scrCoords[2])
       ) {
+        board.removeObject(el);
+        plotMatrix[-y][-x] = "";
+        matrix[-y][-x] = 0;
+        originalNumber--;
+        document.getElementById("originalNumber").innerHTML = originalNumber;
         canCreate = false;
         break;
       }
     }
 
     if (canCreate) {
-      var x = Math.round(coords.usrCoords[1]),
-        y = Math.round(coords.usrCoords[2]);
       if (plotMatrix[-y][-x] == "") {
         plotMatrix[-y][-x] = board.create("point", [x, y], {
           size: 8,
