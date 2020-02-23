@@ -140,7 +140,8 @@ body {
   border-bottom: 1px solid #c1c1c1;
   text-align: center;
   width: 1000px;
-  color: #fd7e37;
+  /* color: #fd7e37; */
+  color: #f94b18;
 }
 
 .reset {
