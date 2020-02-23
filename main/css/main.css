@@ -193,6 +193,8 @@ body {
 }
 
 .rateLabel {
-  color: #fd7e37;
+  width: 90px;
+  padding-top: 0.5rem;
+  color: #f94b18;
   position: absolute;
 }
