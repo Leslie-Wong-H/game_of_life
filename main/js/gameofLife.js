@@ -80,6 +80,7 @@ function bindEvent() {
 
   reset.onclick = function() {
     clearBoard();
+    clearBoard(); //  try fix the bug of invalid clcik
   };
 
   rate.onclick = function() {
@@ -154,10 +155,10 @@ var board = JXG.JSXGraph.initBoard("box", {
 var getMouseCoords = function(e, i) {
     var cPos = board.getCoordsTopLeftCorner(e, i),
       absPos = JXG.getPosition(e, i),
-      // dx = Math.round(absPos[0] - cPos[0]),
-      // dy = Math.round(absPos[1] - cPos[1]);
-      dx = absPos[0] - cPos[0],
-      dy = absPos[1] - cPos[1];
+      dx = Math.round(absPos[0] - cPos[0]),
+      dy = Math.round(absPos[1] - cPos[1]);
+    // dx = absPos[0] - cPos[0],
+    // dy = absPos[1] - cPos[1];
 
     return new JXG.Coords(JXG.COORDS_BY_SCREEN, [dx, dy], board);
   },
@@ -179,7 +180,10 @@ var getMouseCoords = function(e, i) {
     for (el in board.objects) {
       if (
         JXG.isPoint(board.objects[el]) &&
-        board.objects[el].hasPoint(coords.scrCoords[1], coords.scrCoords[2])
+        board.objects[el].hasPoint(
+          Math.round(coords.scrCoords[1]),
+          Math.round(coords.scrCoords[2])
+        )
       ) {
         board.removeObject(el);
         plotMatrix[-y][-x] = "";
@@ -418,6 +422,7 @@ function nextGeneration() {
 
 function clearBoard() {
   clearInterval(timer);
+  board.off("down", down);
   // board.suspendUpdate();
   for (let i = 0; i < matrixRow; i++) {
     for (let j = 0; j < matrixColumn; j++) {
@@ -426,10 +431,10 @@ function clearBoard() {
       // board.removeObject(initialPlotMatrix[i][j]);
       // initialPlotMatrix[i][j] = "";
       // }
-      if (plotMatrix[i][j] != "") {
-        // board.removeObject(plotMatrix[i][j]);
-        plotMatrix[i][j] = "";
-      }
+      // if (plotMatrix[i][j] != "") {
+      // board.removeObject(plotMatrix[i][j]);
+      plotMatrix[i][j] = "";
+      // }
     }
   }
   // board.unsuspendUpdate();
