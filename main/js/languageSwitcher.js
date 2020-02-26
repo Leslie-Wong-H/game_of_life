@@ -21,6 +21,16 @@ $(document).ready(function() {
       $("#originalNumberText").text("Original Number: ");
       $("#remainLifesText").text("Remaining Lives: ");
       $("#evolutionTimesText").text("Evolution Times: ");
+      //
+      $("#dropupButton").text("Pattern");
+      $("#glider").text("Glider");
+      $("#smallexploder").text("Small Exploder");
+      $("#exploder").text("Exploder");
+      $("#tencellcolumn").text("10 Cell Column");
+      $("#lightweightspaceship").text("Lightweight Spaceship");
+      $("#tumbler").text("Tumbler");
+      $("#gosperglidergun").text("Gosper Glider Gun");
+      $("#lifeLexicon").text("Life Lexicon");
     } else {
       $("#selector").attr("class", "selector cn");
       $("#resetButton").attr("value", "重置");
@@ -40,6 +50,16 @@ $(document).ready(function() {
       $("#originalNumberText").text("初始数量： ");
       $("#remainLifesText").text("剩余生命：");
       $("#evolutionTimesText").text("进化次数：");
+      //
+      $("#dropupButton").text("模式");
+      $("#glider").text("滑翔机");
+      $("#smallexploder").text("小型炸弹");
+      $("#exploder").text("炸弹");
+      $("#tencellcolumn").text("十细胞阵列");
+      $("#lightweightspaceship").text("轻型飞船");
+      $("#tumbler").text("翻筋斗杂技者");
+      $("#gosperglidergun").text("高斯帕滑翔机发射器");
+      $("#lifeLexicon").text("生命模式大全");
     }
   });
 });
