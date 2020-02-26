@@ -26,6 +26,10 @@ Rules of the Game of Life: The universe of the Game of Life is an infinite, two-
 
 ---
 
+演示：[Game of Life | ©Leslie Wong](http://lesliewong.cn/gameoflife/)
+
+---
+
 ![english1.jpg](https://i.loli.net/2020/02/26/ra496MIGvwdgoRL.jpg)
 
 ---
