@@ -418,6 +418,21 @@ function nextGeneration() {
 
 function clearBoard() {
   clearInterval(timer);
+  // board.suspendUpdate();
+  for (let i = 0; i < matrixRow; i++) {
+    for (let j = 0; j < matrixColumn; j++) {
+      matrix[i][j] = 0;
+      // if (initialPlotMatrix[i][j] != "") {
+      // board.removeObject(initialPlotMatrix[i][j]);
+      // initialPlotMatrix[i][j] = "";
+      // }
+      if (plotMatrix[i][j] != "") {
+        // board.removeObject(plotMatrix[i][j]);
+        plotMatrix[i][j] = "";
+      }
+    }
+  }
+  // board.unsuspendUpdate();
   board = JXG.JSXGraph.initBoard("box", {
     boundingbox: [0, 0, -40, -30],
     keepaspectratio: true,
@@ -432,21 +447,6 @@ function clearBoard() {
       needShift: false // mouse panning needs pressing of the shift key
     }
   });
-  board.suspendUpdate();
-  for (let i = 0; i < matrixRow; i++) {
-    for (let j = 0; j < matrixColumn; j++) {
-      matrix[i][j] = 0;
-      // if (initialPlotMatrix[i][j] != "") {
-      // board.removeObject(initialPlotMatrix[i][j]);
-      // initialPlotMatrix[i][j] = "";
-      // }
-      if (plotMatrix[i][j] != "") {
-        board.removeObject(plotMatrix[i][j]);
-        plotMatrix[i][j] = "";
-      }
-    }
-  }
-  board.unsuspendUpdate();
 
   // } else {
   //   console.log("yeah");
