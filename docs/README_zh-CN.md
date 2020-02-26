@@ -25,6 +25,10 @@
 
 ---
 
+演示：[Game of Life | ©Leslie Wong](http://lesliewong.cn/gameoflife/)
+
+---
+
 ![Chinese1.jpg](https://i.loli.net/2020/02/26/DThZANFmwecMpWG.jpg)
 
 ---
