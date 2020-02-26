@@ -17,126 +17,15 @@ var start = document.getElementsByClassName("start")[0];
 
 // var stop = document.getElementsByClassName("stop")[0];
 var glider = document.getElementById("glider");
-var gliderpattern = [
-  [2, 8],
-  [3, 9],
-  [4, 9],
-  [4, 8],
-  [4, 7]
-];
 var smallexploder = document.getElementById("smallexploder");
-var smallexploderpattern = [
-  [12, 20],
-  [13, 19],
-  [13, 20],
-  [13, 21],
-  [14, 19],
-  [14, 21],
-  [15, 20]
-];
 var exploder = document.getElementById("exploder");
-var exploderpattern = [
-  [11, 18],
-  [11, 20],
-  [11, 22],
-  [12, 18],
-  [12, 22],
-  [13, 18],
-  [13, 22],
-  [14, 18],
-  [14, 22],
-  [15, 18],
-  [15, 20],
-  [15, 22]
-];
+
 var tencellcolumn = document.getElementById("tencellcolumn");
-var tencellcolumnpattern = [
-  [10, 20],
-  [11, 20],
-  [12, 20],
-  [13, 20],
-  [14, 20],
-  [15, 20],
-  [16, 20],
-  [17, 20],
-  [18, 20],
-  [19, 20]
-];
+
 var lightweightapaceship = document.getElementById("lightweightspaceship");
-var lightweightapaceshippattern = [
-  [12, 6],
-  [12, 7],
-  [12, 8],
-  [12, 9],
-  [13, 5],
-  [13, 9],
-  [14, 9],
-  [15, 5],
-  [15, 8]
-];
 var tumbler = document.getElementById("tumbler");
-var tumblerpattern = [
-  [10, 18],
-  [10, 19],
-  [10, 21],
-  [10, 22],
-  [11, 18],
-  [11, 19],
-  [11, 21],
-  [11, 22],
-  [12, 19],
-  [12, 21],
-  [13, 17],
-  [13, 19],
-  [13, 21],
-  [13, 23],
-  [14, 17],
-  [14, 19],
-  [14, 21],
-  [14, 23],
-  [15, 17],
-  [15, 18],
-  [15, 22],
-  [15, 23]
-];
+
 var gosperglidergun = document.getElementById("gosperglidergun");
-var gosperglidergunpattern = [
-  [7, 1],
-  [7, 2],
-  [8, 1],
-  [8, 2],
-  [7, 10],
-  [7, 11],
-  [8, 9],
-  [8, 11],
-  [9, 9],
-  [9, 10],
-  [9, 17],
-  [9, 18],
-  [10, 17],
-  [10, 19],
-  [11, 17],
-  [5, 24],
-  [5, 25],
-  [6, 23],
-  [6, 25],
-  [7, 23],
-  [7, 24],
-  [5, 35],
-  [5, 36],
-  [6, 35],
-  [6, 36],
-  [12, 36],
-  [12, 37],
-  [13, 36],
-  [13, 38],
-  [14, 36],
-  [17, 25],
-  [17, 26],
-  [17, 27],
-  [18, 25],
-  [19, 26]
-];
 
 var reset = document.getElementsByClassName("reset")[0];
 var rate = document.getElementsByClassName("rate")[0];
@@ -154,42 +43,7 @@ var nAliveCnt = 0;
 
 function bindEvent() {
   start.onclick = function() {
-    // console.log(start.value);
-    if (start.value == "Pause" || start.value == "暂停") {
-      if (!startBl) {
-        clearInterval(timer);
-        if (document.getElementsByClassName("selector en")[0]) {
-          start.value = "Continue";
-        } else if (document.getElementsByClassName("selector cn")[0]) {
-          start.value = "继续";
-        }
-      }
-    } else if (start.value == "Start" || start.value == "开始") {
-      if (startBl) {
-        // clearBoard();
-        // matrix = [];
-        main();
-        board.off("down", down);
-        startBl = false;
-        if (document.getElementsByClassName("selector en")[0]) {
-          start.value = "Pause";
-        } else if (document.getElementsByClassName("selector cn")[0]) {
-          start.value = "暂停";
-        }
-      }
-    } else if (start.value == "Continue" || start.value == "继续") {
-      if (!startBl) {
-        clearInterval(timer);
-        timer = setInterval(function() {
-          nextGeneration();
-        }, timeInterval);
-        if (document.getElementsByClassName("selector en")[0]) {
-          start.value = "Pause";
-        } else if (document.getElementsByClassName("selector cn")[0]) {
-          start.value = "暂停";
-        }
-      }
-    }
+    startbuttonclicked();
   };
 
   //TO DO（Done): Dynamically switch "start" to "pause"
@@ -202,257 +56,35 @@ function bindEvent() {
 
   // start of click event of items of pattern button group
   glider.onclick = function() {
-    board.suspendUpdate();
-    for (let i = 0; i < gliderpattern.length; i++) {
-      // console.log(gliderpattern[i][0]);
-      if (plotMatrix[gliderpattern[i][0]][gliderpattern[i][1]] == "") {
-        plotMatrix[gliderpattern[i][0]][gliderpattern[i][1]] = board.create(
-          "point",
-          [-gliderpattern[i][1], -gliderpattern[i][0]],
-          {
-            size: 8,
-            name: "",
-            fixed: true,
-            showinfobox: false
-          }
-        );
-        matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
-        originalNumber++;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-      }
-    }
-    board.unsuspendUpdate();
+    gliderpatternselected();
   };
   smallexploder.onclick = function() {
-    board.suspendUpdate();
-    for (let i = 0; i < smallexploderpattern.length; i++) {
-      if (
-        plotMatrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] == ""
-      ) {
-        plotMatrix[smallexploderpattern[i][0]][
-          smallexploderpattern[i][1]
-        ] = board.create(
-          "point",
-          [-smallexploderpattern[i][1], -smallexploderpattern[i][0]],
-          {
-            size: 8,
-            name: "",
-            fixed: true,
-            showinfobox: false
-          }
-        );
-        matrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] = 1;
-        originalNumber++;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-      }
-    }
-    board.unsuspendUpdate();
+    smallexploderpatternselected();
   };
   exploder.onclick = function() {
-    board.suspendUpdate();
-    for (let i = 0; i < exploderpattern.length; i++) {
-      if (plotMatrix[exploderpattern[i][0]][exploderpattern[i][1]] == "") {
-        plotMatrix[exploderpattern[i][0]][exploderpattern[i][1]] = board.create(
-          "point",
-          [-exploderpattern[i][1], -exploderpattern[i][0]],
-          {
-            size: 8,
-            name: "",
-            fixed: true,
-            showinfobox: false
-          }
-        );
-        matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
-        originalNumber++;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-      }
-    }
-    board.unsuspendUpdate();
+    exploderpatternselected();
   };
   tencellcolumn.onclick = function() {
-    board.suspendUpdate();
-    for (let i = 0; i < tencellcolumnpattern.length; i++) {
-      if (
-        plotMatrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] == ""
-      ) {
-        plotMatrix[tencellcolumnpattern[i][0]][
-          tencellcolumnpattern[i][1]
-        ] = board.create(
-          "point",
-          [-tencellcolumnpattern[i][1], -tencellcolumnpattern[i][0]],
-          {
-            size: 8,
-            name: "",
-            fixed: true,
-            showinfobox: false
-          }
-        );
-        matrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] = 1;
-        originalNumber++;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-      }
-    }
-    board.unsuspendUpdate();
+    tencellcolumnpatternselected();
   };
   lightweightapaceship.onclick = function() {
-    board.suspendUpdate();
-    for (let i = 0; i < lightweightapaceshippattern.length; i++) {
-      if (
-        plotMatrix[lightweightapaceshippattern[i][0]][
-          lightweightapaceshippattern[i][1]
-        ] == ""
-      ) {
-        plotMatrix[lightweightapaceshippattern[i][0]][
-          lightweightapaceshippattern[i][1]
-        ] = board.create(
-          "point",
-          [
-            -lightweightapaceshippattern[i][1],
-            -lightweightapaceshippattern[i][0]
-          ],
-          {
-            size: 8,
-            name: "",
-            fixed: true,
-            showinfobox: false
-          }
-        );
-        matrix[lightweightapaceshippattern[i][0]][
-          lightweightapaceshippattern[i][1]
-        ] = 1;
-        originalNumber++;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-      }
-    }
-    board.unsuspendUpdate();
+    lightweightapaceshippatternselected();
   };
   tumbler.onclick = function() {
-    board.suspendUpdate();
-    for (let i = 0; i < tumblerpattern.length; i++) {
-      if (plotMatrix[tumblerpattern[i][0]][tumblerpattern[i][1]] == "") {
-        plotMatrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = board.create(
-          "point",
-          [-tumblerpattern[i][1], -tumblerpattern[i][0]],
-          {
-            size: 8,
-            name: "",
-            fixed: true,
-            showinfobox: false
-          }
-        );
-        matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
-        originalNumber++;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-      }
-    }
-    board.unsuspendUpdate();
+    tumblerpatternselected();
   };
   gosperglidergun.onclick = function() {
-    board.suspendUpdate();
-    for (let i = 0; i < gosperglidergunpattern.length; i++) {
-      if (
-        plotMatrix[gosperglidergunpattern[i][0]][
-          gosperglidergunpattern[i][1]
-        ] == ""
-      ) {
-        plotMatrix[gosperglidergunpattern[i][0]][
-          gosperglidergunpattern[i][1]
-        ] = board.create(
-          "point",
-          [-gosperglidergunpattern[i][1], -gosperglidergunpattern[i][0]],
-          {
-            size: 8,
-            name: "",
-            fixed: true,
-            showinfobox: false
-          }
-        );
-        matrix[gosperglidergunpattern[i][0]][gosperglidergunpattern[i][1]] = 1;
-        originalNumber++;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-      }
-    }
-    board.unsuspendUpdate();
+    gosperglidergunpatternselected();
   };
   // end of click event of items of pattern button group
 
   reset.onclick = function() {
     clearBoard();
+    clearBoard(); //  try fix the bug of invalid clcik
   };
 
   rate.onclick = function() {
-    // console.log(rateCounter);
-    if (rateCounter == 1) {
-      if (document.getElementsByClassName("en")[0]) {
-        rateLabel.innerText = "Slow";
-      } else {
-        rateLabel.innerText = "慢速";
-      }
-      timeInterval = 1000;
-      if (!startBl) {
-        if (start.value == "Continue" || start.value == "继续") {
-          clearInterval(timer);
-        } else {
-          clearInterval(timer);
-          timer = setInterval(function() {
-            nextGeneration();
-          }, timeInterval);
-        }
-      }
-      setTimeout(function() {
-        rateLabel.innerText = "";
-      }, 500);
-      rateCounter++;
-      // (function () {
-      //     var x = "Hello!!";      // 我将调用自己
-      // })();
-      // timer = setInterval(function () {
-      //     nextGeneration()
-      // }, timeInterval);
-    } else if (rateCounter == 2) {
-      if (document.getElementsByClassName("en")[0]) {
-        rateLabel.innerText = "Fast";
-      } else {
-        rateLabel.innerText = "快速";
-      }
-      timeInterval = 30;
-      if (!startBl) {
-        if (start.value == "Continue" || start.value == "继续") {
-          clearInterval(timer);
-        } else {
-          clearInterval(timer);
-          timer = setInterval(function() {
-            nextGeneration();
-          }, timeInterval);
-        }
-      }
-      setTimeout(function() {
-        rateLabel.innerText = "";
-      }, 500);
-      rateCounter++;
-      // lb.innerText = "Discount offer of 20% on all products";
-    } else if (rateCounter == 3) {
-      if (document.getElementsByClassName("en")[0]) {
-        rateLabel.innerText = "Medium";
-      } else {
-        rateLabel.innerText = "中速";
-      }
-      timeInterval = 300;
-      if (!startBl) {
-        if (start.value == "Continue" || start.value == "继续") {
-          clearInterval(timer);
-        } else {
-          clearInterval(timer);
-          timer = setInterval(function() {
-            nextGeneration();
-          }, timeInterval);
-        }
-      }
-      setTimeout(function() {
-        rateLabel.innerText = "";
-      }, 500);
-      rateCounter = 1;
-    }
+    ratebuttonclicked();
   };
 }
 
@@ -523,10 +155,10 @@ var board = JXG.JSXGraph.initBoard("box", {
 var getMouseCoords = function(e, i) {
     var cPos = board.getCoordsTopLeftCorner(e, i),
       absPos = JXG.getPosition(e, i),
-      // dx = Math.round(absPos[0] - cPos[0]),
-      // dy = Math.round(absPos[1] - cPos[1]);
-      dx = absPos[0] - cPos[0],
-      dy = absPos[1] - cPos[1];
+      dx = Math.round(absPos[0] - cPos[0]),
+      dy = Math.round(absPos[1] - cPos[1]);
+    // dx = absPos[0] - cPos[0],
+    // dy = absPos[1] - cPos[1];
 
     return new JXG.Coords(JXG.COORDS_BY_SCREEN, [dx, dy], board);
   },
@@ -548,7 +180,10 @@ var getMouseCoords = function(e, i) {
     for (el in board.objects) {
       if (
         JXG.isPoint(board.objects[el]) &&
-        board.objects[el].hasPoint(coords.scrCoords[1], coords.scrCoords[2])
+        board.objects[el].hasPoint(
+          Math.round(coords.scrCoords[1]),
+          Math.round(coords.scrCoords[2])
+        )
       ) {
         board.removeObject(el);
         plotMatrix[-y][-x] = "";
@@ -787,6 +422,22 @@ function nextGeneration() {
 
 function clearBoard() {
   clearInterval(timer);
+  board.off("down", down);
+  // board.suspendUpdate();
+  for (let i = 0; i < matrixRow; i++) {
+    for (let j = 0; j < matrixColumn; j++) {
+      matrix[i][j] = 0;
+      // if (initialPlotMatrix[i][j] != "") {
+      // board.removeObject(initialPlotMatrix[i][j]);
+      // initialPlotMatrix[i][j] = "";
+      // }
+      // if (plotMatrix[i][j] != "") {
+      // board.removeObject(plotMatrix[i][j]);
+      plotMatrix[i][j] = "";
+      // }
+    }
+  }
+  // board.unsuspendUpdate();
   board = JXG.JSXGraph.initBoard("box", {
     boundingbox: [0, 0, -40, -30],
     keepaspectratio: true,
@@ -801,21 +452,6 @@ function clearBoard() {
       needShift: false // mouse panning needs pressing of the shift key
     }
   });
-  board.suspendUpdate();
-  for (let i = 0; i < matrixRow; i++) {
-    for (let j = 0; j < matrixColumn; j++) {
-      matrix[i][j] = 0;
-      // if (initialPlotMatrix[i][j] != "") {
-      // board.removeObject(initialPlotMatrix[i][j]);
-      // initialPlotMatrix[i][j] = "";
-      // }
-      if (plotMatrix[i][j] != "") {
-        board.removeObject(plotMatrix[i][j]);
-        plotMatrix[i][j] = "";
-      }
-    }
-  }
-  board.unsuspendUpdate();
 
   // } else {
   //   console.log("yeah");
@@ -847,4 +483,411 @@ function clearBoard() {
   nLive = originalNumber;
   evolutionCount = 0;
   nAliveCnt = 0;
+}
+
+function startbuttonclicked() {
+  // console.log(start.value);
+  if (start.value == "Pause" || start.value == "暂停") {
+    if (!startBl) {
+      clearInterval(timer);
+      if (document.getElementsByClassName("selector en")[0]) {
+        start.value = "Continue";
+      } else if (document.getElementsByClassName("selector cn")[0]) {
+        start.value = "继续";
+      }
+    }
+  } else if (start.value == "Start" || start.value == "开始") {
+    if (startBl) {
+      // clearBoard();
+      // matrix = [];
+      main();
+      board.off("down", down);
+      startBl = false;
+      if (document.getElementsByClassName("selector en")[0]) {
+        start.value = "Pause";
+      } else if (document.getElementsByClassName("selector cn")[0]) {
+        start.value = "暂停";
+      }
+    }
+  } else if (start.value == "Continue" || start.value == "继续") {
+    if (!startBl) {
+      clearInterval(timer);
+      timer = setInterval(function() {
+        nextGeneration();
+      }, timeInterval);
+      if (document.getElementsByClassName("selector en")[0]) {
+        start.value = "Pause";
+      } else if (document.getElementsByClassName("selector cn")[0]) {
+        start.value = "暂停";
+      }
+    }
+  }
+}
+
+function gliderpatternselected() {
+  var gliderpattern = [
+    [2, 8],
+    [3, 9],
+    [4, 9],
+    [4, 8],
+    [4, 7]
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < gliderpattern.length; i++) {
+    // console.log(gliderpattern[i][0]);
+    if (plotMatrix[gliderpattern[i][0]][gliderpattern[i][1]] == "") {
+      plotMatrix[gliderpattern[i][0]][gliderpattern[i][1]] = board.create(
+        "point",
+        [-gliderpattern[i][1], -gliderpattern[i][0]],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        }
+      );
+      matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function smallexploderpatternselected() {
+  var smallexploderpattern = [
+    [12, 20],
+    [13, 19],
+    [13, 20],
+    [13, 21],
+    [14, 19],
+    [14, 21],
+    [15, 20]
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < smallexploderpattern.length; i++) {
+    if (
+      plotMatrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] == ""
+    ) {
+      plotMatrix[smallexploderpattern[i][0]][
+        smallexploderpattern[i][1]
+      ] = board.create(
+        "point",
+        [-smallexploderpattern[i][1], -smallexploderpattern[i][0]],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        }
+      );
+      matrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function exploderpatternselected() {
+  var exploderpattern = [
+    [11, 18],
+    [11, 20],
+    [11, 22],
+    [12, 18],
+    [12, 22],
+    [13, 18],
+    [13, 22],
+    [14, 18],
+    [14, 22],
+    [15, 18],
+    [15, 20],
+    [15, 22]
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < exploderpattern.length; i++) {
+    if (plotMatrix[exploderpattern[i][0]][exploderpattern[i][1]] == "") {
+      plotMatrix[exploderpattern[i][0]][exploderpattern[i][1]] = board.create(
+        "point",
+        [-exploderpattern[i][1], -exploderpattern[i][0]],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        }
+      );
+      matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function tencellcolumnpatternselected() {
+  var tencellcolumnpattern = [
+    [10, 20],
+    [11, 20],
+    [12, 20],
+    [13, 20],
+    [14, 20],
+    [15, 20],
+    [16, 20],
+    [17, 20],
+    [18, 20],
+    [19, 20]
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < tencellcolumnpattern.length; i++) {
+    if (
+      plotMatrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] == ""
+    ) {
+      plotMatrix[tencellcolumnpattern[i][0]][
+        tencellcolumnpattern[i][1]
+      ] = board.create(
+        "point",
+        [-tencellcolumnpattern[i][1], -tencellcolumnpattern[i][0]],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        }
+      );
+      matrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function lightweightapaceshippatternselected() {
+  var lightweightapaceshippattern = [
+    [12, 6],
+    [12, 7],
+    [12, 8],
+    [12, 9],
+    [13, 5],
+    [13, 9],
+    [14, 9],
+    [15, 5],
+    [15, 8]
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < lightweightapaceshippattern.length; i++) {
+    if (
+      plotMatrix[lightweightapaceshippattern[i][0]][
+        lightweightapaceshippattern[i][1]
+      ] == ""
+    ) {
+      plotMatrix[lightweightapaceshippattern[i][0]][
+        lightweightapaceshippattern[i][1]
+      ] = board.create(
+        "point",
+        [
+          -lightweightapaceshippattern[i][1],
+          -lightweightapaceshippattern[i][0]
+        ],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        }
+      );
+      matrix[lightweightapaceshippattern[i][0]][
+        lightweightapaceshippattern[i][1]
+      ] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function tumblerpatternselected() {
+  var tumblerpattern = [
+    [10, 18],
+    [10, 19],
+    [10, 21],
+    [10, 22],
+    [11, 18],
+    [11, 19],
+    [11, 21],
+    [11, 22],
+    [12, 19],
+    [12, 21],
+    [13, 17],
+    [13, 19],
+    [13, 21],
+    [13, 23],
+    [14, 17],
+    [14, 19],
+    [14, 21],
+    [14, 23],
+    [15, 17],
+    [15, 18],
+    [15, 22],
+    [15, 23]
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < tumblerpattern.length; i++) {
+    if (plotMatrix[tumblerpattern[i][0]][tumblerpattern[i][1]] == "") {
+      plotMatrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = board.create(
+        "point",
+        [-tumblerpattern[i][1], -tumblerpattern[i][0]],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        }
+      );
+      matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function gosperglidergunpatternselected() {
+  var gosperglidergunpattern = [
+    [7, 1],
+    [7, 2],
+    [8, 1],
+    [8, 2],
+    [7, 10],
+    [7, 11],
+    [8, 9],
+    [8, 11],
+    [9, 9],
+    [9, 10],
+    [9, 17],
+    [9, 18],
+    [10, 17],
+    [10, 19],
+    [11, 17],
+    [5, 24],
+    [5, 25],
+    [6, 23],
+    [6, 25],
+    [7, 23],
+    [7, 24],
+    [5, 35],
+    [5, 36],
+    [6, 35],
+    [6, 36],
+    [12, 36],
+    [12, 37],
+    [13, 36],
+    [13, 38],
+    [14, 36],
+    [17, 25],
+    [17, 26],
+    [17, 27],
+    [18, 25],
+    [19, 26]
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < gosperglidergunpattern.length; i++) {
+    if (
+      plotMatrix[gosperglidergunpattern[i][0]][gosperglidergunpattern[i][1]] ==
+      ""
+    ) {
+      plotMatrix[gosperglidergunpattern[i][0]][
+        gosperglidergunpattern[i][1]
+      ] = board.create(
+        "point",
+        [-gosperglidergunpattern[i][1], -gosperglidergunpattern[i][0]],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false
+        }
+      );
+      matrix[gosperglidergunpattern[i][0]][gosperglidergunpattern[i][1]] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function ratebuttonclicked() {
+  // console.log(rateCounter);
+  if (rateCounter == 1) {
+    if (document.getElementsByClassName("en")[0]) {
+      rateLabel.innerText = "Slow";
+    } else {
+      rateLabel.innerText = "慢速";
+    }
+    timeInterval = 1000;
+    if (!startBl) {
+      if (start.value == "Continue" || start.value == "继续") {
+        clearInterval(timer);
+      } else {
+        clearInterval(timer);
+        timer = setInterval(function() {
+          nextGeneration();
+        }, timeInterval);
+      }
+    }
+    setTimeout(function() {
+      rateLabel.innerText = "";
+    }, 500);
+    rateCounter++;
+    // (function () {
+    //     var x = "Hello!!";      // 我将调用自己
+    // })();
+    // timer = setInterval(function () {
+    //     nextGeneration()
+    // }, timeInterval);
+  } else if (rateCounter == 2) {
+    if (document.getElementsByClassName("en")[0]) {
+      rateLabel.innerText = "Fast";
+    } else {
+      rateLabel.innerText = "快速";
+    }
+    timeInterval = 30;
+    if (!startBl) {
+      if (start.value == "Continue" || start.value == "继续") {
+        clearInterval(timer);
+      } else {
+        clearInterval(timer);
+        timer = setInterval(function() {
+          nextGeneration();
+        }, timeInterval);
+      }
+    }
+    setTimeout(function() {
+      rateLabel.innerText = "";
+    }, 500);
+    rateCounter++;
+    // lb.innerText = "Discount offer of 20% on all products";
+  } else if (rateCounter == 3) {
+    if (document.getElementsByClassName("en")[0]) {
+      rateLabel.innerText = "Medium";
+    } else {
+      rateLabel.innerText = "中速";
+    }
+    timeInterval = 300;
+    if (!startBl) {
+      if (start.value == "Continue" || start.value == "继续") {
+        clearInterval(timer);
+      } else {
+        clearInterval(timer);
+        timer = setInterval(function() {
+          nextGeneration();
+        }, timeInterval);
+      }
+    }
+    setTimeout(function() {
+      rateLabel.innerText = "";
+    }, 500);
+    rateCounter = 1;
+  }
 }
