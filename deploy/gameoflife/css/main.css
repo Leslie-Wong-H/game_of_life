@@ -130,17 +130,13 @@ body {
 
 .parentbox {
   box-sizing: border-box;
-  width: 80vw;
-  height: 58vw;
-  margin: auto;
-  /* padding-top: 1%; */
+  height: 100%;
+  padding-top: 1%;
   position: relative;
 }
 
 .childrenbox {
   position: absolute;
-  width: 70vw;
-  height: 56vw;
   top: 50%;
   left: 50%;
   margin-top: -26vw;

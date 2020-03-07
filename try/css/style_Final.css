@@ -1,0 +1,102 @@
+@charset "utf-8";
+a {
+    text-decoration:none;
+}
+
+.menu {
+	height: 110px;
+	background-color: #FFFFFF;
+	border-bottom-style: solid;
+	border-bottom-color: #4E4E4E;
+}
+.menubtn {
+	margin-top: 30px;
+	background-color:#FFFFFF;
+}
+
+.navbarMin {
+  position: relative;
+  float: right;
+  padding: 13px 10px;
+  margin-top: 25px;
+  margin-right: 15px;
+  margin-bottom: 12px;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.banner {
+	margin-top: 110px;
+}
+.news {
+	margin-top: 30px;
+}
+.coursesTitle {
+	margin-bottom: 20px;
+}
+.CoursesShare .span {
+	color:#B5090B;
+	font-weight: bolder;
+	font-size: 1.4em;
+	margin-bottom: 10px;
+}
+.courseRow {
+	margin-top: 20px;
+}
+.courseImg {
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
+.contLink {
+	min-height: 120px;
+	background-color:#1F1F1F;
+	text-align:center;
+	margin-top:30px;
+}
+.contLink .contLinkimg {
+	display: inline-block;
+    width: 90px;
+    height: 90px;
+    margin: 15px 5px 0;
+}
+.contLink .contLinkimg:hover {
+	opacity: 0.7;
+	border:4px solid #dd3e3e;
+}
+
+.footer {
+	height: 40px;
+	text-align:center;
+	padding-top: 10px;
+	background-color:#272727;
+	color:#FFFFFF;
+}
+#toTop {
+	display: none;
+	text-decoration: none;
+	position: fixed;
+	bottom: 14px;
+	right: 3%;
+	overflow: hidden;
+	width: 40px;
+	height: 40px;
+	border: none;
+	text-indent: 100%;
+	background: url("../images/to-top1.png") no-repeat 0px 0px;
+}
+#toTopHover {
+	width: 40px;
+	height: 40px;
+	display: block;
+	overflow: hidden;
+	float: right;
+	opacity: 0;
+	-moz-opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+@media screen and (max-width: 640px) {
+.CoursesShare .span{
+	text-align: center;
+	}    
+}

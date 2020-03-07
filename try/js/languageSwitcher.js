@@ -31,6 +31,11 @@ $(document).ready(function() {
       $("#tumbler").text("Tumbler");
       $("#gosperglidergun").text("Gosper Glider Gun");
       $("#lifeLexicon").text("Life Lexicon");
+      // Mobile warning
+      $("#warningword1").text("ooh!");
+      $("#warningword2").text("Please use");
+      $("#warningword3").text("ipad or desktop");
+      $("#warningword4").html("&nbsp;to browse this website!");
     } else {
       $("#selector").attr("class", "selector cn");
       $("#resetButton").attr("value", "重置");
@@ -60,6 +65,13 @@ $(document).ready(function() {
       $("#tumbler").text("翻筋斗杂技者");
       $("#gosperglidergun").text("高斯帕滑翔机发射器");
       $("#lifeLexicon").text("生命模式大全");
+      // Mobile warning
+      $("#warningword1").html("噢~");
+      $("#warningword2").html("&nbsp;&nbsp;请使用&nbsp;&nbsp;");
+      $("#warningword3").html("&nbsp;ipad或者电脑&nbsp;");
+      $("#warningword4").html(
+        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浏览此网站&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+      );
     }
   });
 });
