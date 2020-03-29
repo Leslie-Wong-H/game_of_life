@@ -29,6 +29,14 @@
 
 ---
 
+![gif](https://i.loli.net/2020/03/29/A2QGYeI1fCc5LNg.gif)
+
+---
+
+![gif2](https://i.loli.net/2020/03/29/tUn7lTBIuJiRqmM.gif)
+
+---
+
 ![Chinese1.jpg](https://i.loli.net/2020/02/26/DThZANFmwecMpWG.jpg)
 
 ---
