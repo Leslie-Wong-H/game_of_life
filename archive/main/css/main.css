@@ -1,17 +1,11 @@
 body {
-  /* background-image: url(https://i.loli.net/2020/02/19/8cWUDIM1ERltom4.png);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  height: 100%;
-  min-height: 768px; */
   background-image: url(https://i.loli.net/2020/02/19/8cWUDIM1ERltom4.png);
   background-attachment: fixed;
   background-size: cover;
-  /* display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 101vh; */
+  height: 101vh;
   /* width: 100vw; */
 }
 
@@ -154,8 +148,6 @@ body {
 }
 
 .jxgbox {
-  max-width: 1140px;
-  max-height: 855px;
   width: 64vw;
   height: 48vw;
   margin: 0 auto;
@@ -167,42 +159,40 @@ body {
   padding-bottom: 0.625rem;
   border-bottom: 1px solid #c1c1c1;
   text-align: center;
-  /* width: 62.5rem; */
-  max-width: 1140px;
-  width: 100%;
+  width: 62.5rem;
   /* color: #fd7e37; */
   color: #f94b18;
 }
 
 .reset {
-  width: 5.9rem;
-  margin-right: 0.7rem;
+  width: 5.6rem;
+  margin-right: 1.3rem;
   color: #bf0045;
 }
 
 .start {
-  width: 5.9rem;
-  margin-right: 0.7rem;
+  width: 5.6rem;
+  margin-right: 1.3rem;
   color: #bf0045;
 }
 
 .originalNumber {
   display: inline-block;
-  width: 1.9rem;
+  width: 2.5rem;
 }
 
 .originalNumberText {
-  margin-left: 0.5rem;
+  margin-left: 1.1rem;
 }
 
 .remainLifes {
   display: inline-block;
-  width: 1.9rem;
+  width: 2.5rem;
 }
 
 .evolutionTimes {
   display: inline-block;
-  width: 1.9rem;
+  width: 2.5rem;
   /* padding-right: 1.5%; */
 }
 
@@ -211,13 +201,13 @@ body {
 }
 
 .pattern {
-  width: 5rem;
-  margin-left: 0.7rem;
+  width: 5.6rem;
+  margin-left: 1.3rem;
   color: #bf0045;
 }
 
 .rate {
-  width: 5.9rem;
+  width: 5.6rem;
   margin-left: 1.3rem;
   color: #bf0045;
 }
@@ -225,33 +215,6 @@ body {
 .rateLabel {
   width: 5.6rem;
   padding-top: 0.5rem;
-  /* margin-left: -0.3rem; */
   color: #f94b18;
   position: absolute;
-}
-
-@media screen and(max-width: 770px) {
-  .reset {
-    width: 5.9rem;
-    margin-right: 0.7rem;
-    color: #bf0045;
-  }
-
-  .start {
-    width: 5.9rem;
-    margin-right: 0rem;
-    color: #bf0045;
-  }
-
-  .pattern {
-    width: 5rem;
-    margin-left: 0rem;
-    color: #bf0045;
-  }
-
-  .rate {
-    width: 5.9rem;
-    margin-left: 1.3rem;
-    color: #bf0045;
-  }
 }

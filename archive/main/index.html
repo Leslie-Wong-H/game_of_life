@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game of Life | ©Leslie Wong</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="img/favicon.ico" />
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="css/jsxgraph.css" />
+    <!-- <script type="text/javascript" src="js/jsxgraphcore.js"></script> -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.7/jsxgraphcore.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </head>
+
+  <body>
+    <div class="githubContainer">
+      <a
+        class="githubLink"
+        href="https://github.com/Leslie-Wong-H/GameofLIfe"
+        target="_blank"
+      >
+        <img class="githubImg" src="img/GitHub.png" alt="Github Link" />
+      </a>
+    </div>
+    <div id="lgswitcherContainer" class="lgswitcherContainer">
+      <div id="selector" class="selector en">
+        <span class="langCn">中</span>
+        <span class="langEn">Eng</span>
+      </div>
+    </div>
+    <div class="parentbox">
+      <div class="childrenbox">
+        <div id="box" class="jxgbox"></div>
+        <div class="contLink">
+          <div class="buttonmenu">
+            <input
+              type="button"
+              value="Reset"
+              id="resetButton"
+              class="btn btn-outline-danger reset"
+            />
+            <input
+              type="button"
+              value="Start"
+              id="startButton"
+              class="btn btn-outline-danger start"
+            />
+            <span class="textBox">
+              <span
+                id="originalNumberText"
+                class="originalNumber originalNumberText inlineText"
+                >Original Number:
+              </span>
+              <span id="originalNumber" class="originalNumber">0</span>
+              <span id="remainLifesText" class="remainLifes inlineText"
+                >Remaining Lives:
+              </span>
+              <span id="remainLifes" class="remainLifes">0</span>
+              <span id="evolutionTimesText" class="evolutionTimes inlineText"
+                >Evolution Times:
+              </span>
+              <span id="evolutionTimes" class="evolutionTimes">0</span>
+            </span>
+            <!-- <input
+              type="button"
+              value="Stop"
+              id="stopButton"
+              class="btn btn-outline-danger stop"
+            /> -->
+            <div class="btn-group dropup pattern">
+              <button
+                type="button"
+                class="btn btn-outline-danger dropdown-toggle"
+                id="dropupButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Pattern
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" id="glider">Glider</a>
+                <a class="dropdown-item" id="smallexploder">Small Exploder</a>
+                <a class="dropdown-item" id="exploder">Exploder</a>
+                <a class="dropdown-item" id="tencellcolumn">10 Cell Column</a>
+                <a class="dropdown-item" id="lightweightspaceship"
+                  >Lightweight Spaceship</a
+                >
+                <a class="dropdown-item" id="tumbler">Tumbler</a>
+                <a class="dropdown-item" id="gosperglidergun"
+                  >Gosper Glider Gun</a
+                >
+                <div class="dropdown-divider"></div>
+                <a
+                  class="dropdown-item"
+                  id="lifeLexicon"
+                  href="https://conwaylife.com/ref/lexicon/lex_1.htm"
+                  target="_blank"
+                  >Life Lexicon</a
+                >
+              </div>
+            </div>
+            <input
+              type="button"
+              value="Rate"
+              id="rateButton"
+              class="btn btn-outline-danger rate"
+            />
+            <label class="rateLabel"></label>
+            <!-- <section>
+                  <label for="select_choice">Select Your Choice</label> 
+                  <select id="select_choice" name="select_choice">
+                      <option value="0">速度</option>
+                      <option value="1">0.5秒</option>
+                      <option value="2">1.0秒</option>
+                      <option value="3">2.0秒</option>
+                  </select>
+              </section> -->
+            <!-- <input type="button" value="预设" style="width: 70px;" class="model"> -->
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript" src="js/gameofLife.js"></script>
+      <script src="js/languageSwitcher.js"></script>
+    </div>
+  </body>
+</html>
