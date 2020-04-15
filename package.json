@@ -1,23 +1,38 @@
 {
-  "name": "js-online-quiz-template",
+  "name": "gameoflife",
   "version": "1.0.0",
-  "description": "Powered by ThoughtWorks School",
+  "description": "An implementation to John Conway's Game of Life with JSXgraph",
   "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
-    "start": "node app.js",
-    "test": "node run-tests.js"
+    "test": "node test.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tws-stack/js-online-quiz-template.git"
+    "url": "git+https://github.com/Leslie-Wong-H/game_of_life.git"
   },
-  "author": "ThoughtWorks School",
-  "license": "GPL-3.0",
+  "keywords": [
+    "game of life",
+    "john conway",
+    "express",
+    "node",
+    "JSXGraph"
+  ],
+  "author": "Leslie Wong",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/tws-stack/js-online-quiz-template/issues"
+    "url": "https://github.com/Leslie-Wong-H/game_of_life/issues"
   },
-  "homepage": "https://school.thoughtworks.cn",
+  "homepage": "https://github.com/Leslie-Wong-H/game_of_life#readme",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1"
+  },
   "devDependencies": {
-    "jasmine": "^2.6.0"
+    "request": "^2.81.0",
+    "tape": "^4.13.2"
   }
 }
