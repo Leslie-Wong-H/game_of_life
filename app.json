@@ -1,0 +1,7 @@
+{
+  "name": "gameoflife",
+  "description": "An implementation to John Conway's Game of Life with JSXgraph",
+  "repository": "https://github.com/Leslie-Wong-H/game_of_life",
+  "keywords": ["game of life", "John Conway", "node", "express", "JSXGraph"],
+  "image": "heroku/nodejs"
+}
