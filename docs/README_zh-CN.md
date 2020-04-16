@@ -25,7 +25,13 @@
 
 ---
 
-演示：[Game of Life | ©Leslie Wong](http://lesliewong.cn/gameoflife/)
+演示：
+
+[Game of Life | ©Leslie Wong (Heroku App)](http://playgameoflife.live)
+
+或者
+
+[Game of Life | ©Leslie Wong (GitHub Pages)](http://lesliewong.cn/gameoflife/)
 
 ---
 
