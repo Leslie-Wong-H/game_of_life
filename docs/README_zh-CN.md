@@ -27,11 +27,11 @@
 
 演示：
 
-[Game of Life | ©Leslie Wong (GitHub Pages）](http://lesliewong.cn/gameoflife/)
+[Game of Life | ©Leslie Wong (Heroku App)](http://playgameoflife.live)
 
-或者：
+或者
 
-[Game of Life | ©Leslie Wong (Heroku App）](http://playgameoflife.herokuapp.com)
+[Game of Life | ©Leslie Wong (GitHub Pages)](http://lesliewong.cn/gameoflife/)
 
 ---
 

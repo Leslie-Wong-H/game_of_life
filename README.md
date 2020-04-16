@@ -28,11 +28,11 @@ Rules of the Game of Life: The universe of the Game of Life is an infinite, two-
 
 Demo：
 
-[Game of Life | ©Leslie Wong(Github Pages)](http://lesliewong.cn/gameoflife/)
+[Game of Life | ©Leslie Wong(Heroku app)](http://playgameoflife.live)
 
 or
 
-[Game of Life | ©Leslie Wong(Heroku app)](http://playgameoflife.herokuapp.com)
+[Game of Life | ©Leslie Wong(Github Pages)](http://lesliewong.cn/gameoflife/)
 
 ---
 
