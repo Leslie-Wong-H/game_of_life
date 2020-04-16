@@ -29,7 +29,8 @@
   "homepage": "https://github.com/Leslie-Wong-H/game_of_life#readme",
   "dependencies": {
     "ejs": "^3.0.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "heroku-ssl-redirect": "0.0.4"
   },
   "devDependencies": {
     "request": "^2.88.2",
