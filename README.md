@@ -22,13 +22,19 @@ Rules of the Game of Life: The universe of the Game of Life is an infinite, two-
 3. Able to set the initial state in advance
 4. Able to take control of the animation rate
 
+## Project Architecture
+
+---
+
+![project architecture](https://i.loli.net/2020/04/19/rjDMonSRZBgJUHz.png)
+
 ## Implementation Result
 
 ---
 
 Demo：
 
-[Game of Life | ©Leslie Wong(Heroku app)](http://playgameoflife.live)
+[Game of Life | ©Leslie Wong(Heroku App)](http://playgameoflife.live)
 
 or
 
