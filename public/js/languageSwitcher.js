@@ -23,6 +23,7 @@ $(document).ready(function () {
       $("#evolutionTimesText").text("Evolution Times: ");
       //
       $("#dropupButton").text("Pattern");
+      $("#random").text("Random");
       $("#glider").text("Glider");
       $("#smallexploder").text("Small Exploder");
       $("#exploder").text("Exploder");
@@ -57,6 +58,7 @@ $(document).ready(function () {
       $("#evolutionTimesText").text("进化次数：");
       //
       $("#dropupButton").text("模式");
+      $("#random").text("随机");
       $("#glider").text("滑翔机");
       $("#smallexploder").text("小型炸弹");
       $("#exploder").text("炸弹");
