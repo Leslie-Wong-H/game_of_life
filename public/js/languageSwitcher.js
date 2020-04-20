@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  $("#lgswitcherContainer").click(function() {
+$(document).ready(function () {
+  $("#lgswitcherContainer").click(function () {
     // console.log("click!");
     if ($("#selector").hasClass("cn")) {
       $("#selector").attr("class", "selector en");
@@ -32,7 +32,7 @@ $(document).ready(function() {
       $("#gosperglidergun").text("Gosper Glider Gun");
       $("#lifeLexicon").text("Life Lexicon");
       // Mobile warning
-      $("#warningword1").text("ooh!");
+      $("#warningword1").text("Oops!");
       $("#warningword2").text("Please use");
       $("#warningword3").text("ipad or desktop");
       $("#warningword4").html("&nbsp;to browse this website!");
@@ -66,7 +66,7 @@ $(document).ready(function() {
       $("#gosperglidergun").text("高斯帕滑翔机发射器");
       $("#lifeLexicon").text("生命模式大全");
       // Mobile warning
-      $("#warningword1").html("噢~");
+      $("#warningword1").html("噢~~");
       $("#warningword2").html("&nbsp;&nbsp;请使用&nbsp;&nbsp;");
       $("#warningword3").html("&nbsp;ipad或者电脑&nbsp;");
       $("#warningword4").html(
