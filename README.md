@@ -1,6 +1,6 @@
 # Game of Life
 
-- English Document | [中文文档](https://github.com/Leslie-Wong-H/game_of_life/blob/master/docs/README_zh-CN.md)
+- English Document | [中文文档](./README_zh-CN.md)
 
 ## Algorithm Description
 
