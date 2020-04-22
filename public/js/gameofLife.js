@@ -16,6 +16,7 @@ var matrixRow, matrixColumn;
 var start = document.getElementsByClassName("start")[0];
 
 // var stop = document.getElementsByClassName("stop")[0];
+var random = document.getElementById("random");
 var glider = document.getElementById("glider");
 var smallexploder = document.getElementById("smallexploder");
 var exploder = document.getElementById("exploder");
@@ -42,7 +43,7 @@ var nAliveCnt = 0;
 // 绑定开始、暂停、继续、重置、速度按钮的点击事件
 
 function bindEvent() {
-  start.onclick = function() {
+  start.onclick = function () {
     startbuttonclicked();
   };
 
@@ -55,35 +56,39 @@ function bindEvent() {
   // };
 
   // start of click event of items of pattern button group
-  glider.onclick = function() {
+  random.onclick = function () {
+    randompatternselected();
+  };
+
+  glider.onclick = function () {
     gliderpatternselected();
   };
-  smallexploder.onclick = function() {
+  smallexploder.onclick = function () {
     smallexploderpatternselected();
   };
-  exploder.onclick = function() {
+  exploder.onclick = function () {
     exploderpatternselected();
   };
-  tencellcolumn.onclick = function() {
+  tencellcolumn.onclick = function () {
     tencellcolumnpatternselected();
   };
-  lightweightapaceship.onclick = function() {
+  lightweightapaceship.onclick = function () {
     lightweightapaceshippatternselected();
   };
-  tumbler.onclick = function() {
+  tumbler.onclick = function () {
     tumblerpatternselected();
   };
-  gosperglidergun.onclick = function() {
+  gosperglidergun.onclick = function () {
     gosperglidergunpatternselected();
   };
   // end of click event of items of pattern button group
 
-  reset.onclick = function() {
+  reset.onclick = function () {
     clearBoard();
     clearBoard(); //  try fix the bug of invalid clcik
   };
 
-  rate.onclick = function() {
+  rate.onclick = function () {
     ratebuttonclicked();
   };
 }
@@ -133,8 +138,8 @@ var board = JXG.JSXGraph.initBoard("box", {
     //panning interaction(i.e.moving the origin)
     enabled: false, // disallow panning
     needTwoFingers: false, // panning could not be done with two fingers on touch devices
-    needShift: false // mouse panning needs pressing of the shift key
-  }
+    needShift: false, // mouse panning needs pressing of the shift key
+  },
   // zoom: {
   //   factorX: 1, // horizontal zoom factor (multiplied to JXG.Board#zoomX)
   //   factorY: 1, // vertical zoom factor (multiplied to JXG.Board#zoomY)
@@ -152,7 +157,7 @@ var board = JXG.JSXGraph.initBoard("box", {
 // incubated from code at http://jsxgraph.org/wiki/index.php/Browser_event_and_coordinates
 // mouse click event function
 
-var getMouseCoords = function(e, i) {
+var getMouseCoords = function (e, i) {
     var cPos = board.getCoordsTopLeftCorner(e, i),
       absPos = JXG.getPosition(e, i),
       dx = Math.round(absPos[0] - cPos[0]),
@@ -162,7 +167,7 @@ var getMouseCoords = function(e, i) {
 
     return new JXG.Coords(JXG.COORDS_BY_SCREEN, [dx, dy], board);
   },
-  down = function(e) {
+  down = function (e) {
     var canCreate = true,
       i,
       coords,
@@ -201,7 +206,7 @@ var getMouseCoords = function(e, i) {
           size: 8,
           name: "",
           fixed: true,
-          showinfobox: false
+          showinfobox: false,
         });
         matrix[-y][-x] = 1;
         originalNumber++;
@@ -279,7 +284,7 @@ function main() {
 
   // setInterval(function(){JXG.JSXGraph.freeBoard(board)},2000);
 
-  timer = setInterval(function() {
+  timer = setInterval(function () {
     nextGeneration();
   }, timeInterval);
 }
@@ -377,7 +382,7 @@ function nextGeneration() {
         plotMatrix[i][j] = board.create("point", [-j, -i], {
           size: 8,
           name: "",
-          fixed: true
+          fixed: true,
         });
       } else {
         board.removeObject(plotMatrix[i][j]);
@@ -409,8 +414,8 @@ function nextGeneration() {
         //panning interaction(i.e.moving the origin)
         enabled: false, // disallow panning
         needTwoFingers: false, // panning could not be done with two fingers on touch devices
-        needShift: false // mouse panning needs pressing of the shift key
-      }
+        needShift: false, // mouse panning needs pressing of the shift key
+      },
     });
     originalNumber = 0;
   }
@@ -449,8 +454,8 @@ function clearBoard() {
       //panning interaction(i.e.moving the origin)
       enabled: false, // disallow panning
       needTwoFingers: false, // panning could not be done with two fingers on touch devices
-      needShift: false // mouse panning needs pressing of the shift key
-    }
+      needShift: false, // mouse panning needs pressing of the shift key
+    },
   });
 
   // } else {
@@ -512,7 +517,7 @@ function startbuttonclicked() {
   } else if (start.value == "Continue" || start.value == "继续") {
     if (!startBl) {
       clearInterval(timer);
-      timer = setInterval(function() {
+      timer = setInterval(function () {
         nextGeneration();
       }, timeInterval);
       if (document.getElementsByClassName("selector en")[0]) {
@@ -524,13 +529,78 @@ function startbuttonclicked() {
   }
 }
 
+// To compare 2d arrays at function randompatternselected， from https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
+
+/*** deprecated, prever array.prototype for efficiency ***/
+// function isItemInArray(array, item) {
+//   for (var i = 0; i < array.length; i++) {
+//     // This if statement depends on the format of your array
+//     if (array[i][0] == item[0] && array[i][1] == item[1]) {
+//       return true; // Found it
+//     }
+//   }
+//   return false; // Not found
+// }
+
+Array.prototype.indexOf2d = function (item) {
+  // arrCoords is an array with previous coordinates converted to strings in format "x|y"
+  arrCoords = JSON.stringify(
+    this.map(function (a) {
+      return a[0] + "|" + a[1];
+    })
+  );
+
+  // now use indexOf to find item converted to a string in format "x|y"
+  return arrCoords.indexOf(item[0] + "|" + item[1]) !== -1;
+};
+
+function randompatternselected() {
+  var randompattern = [];
+  var randomcellnumber = Math.round(Math.random() * 20 * 20);
+  var tempcoord = 0;
+  for (let i = 0; i < randomcellnumber; i++) {
+    tempcoord = [
+      Math.floor(Math.random() * 31),
+      Math.floor(Math.random() * 41),
+    ];
+    // while (isItemInArray(randompattern, tempcoord)) {
+    while (randompattern.indexOf2d(tempcoord)) {
+      tempcoord = [
+        Math.floor(Math.random() * 31),
+        Math.floor(Math.random() * 41),
+      ];
+    }
+    randompattern.push(tempcoord);
+  }
+  board.suspendUpdate();
+  for (let i = 0; i < randompattern.length; i++) {
+    // console.log(randompattern[i][0]);
+    if (plotMatrix[randompattern[i][0]][randompattern[i][1]] == "") {
+      plotMatrix[randompattern[i][0]][randompattern[i][1]] = board.create(
+        "point",
+        [-randompattern[i][1], -randompattern[i][0]],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false,
+        }
+      );
+      matrix[randompattern[i][0]][randompattern[i][1]] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
 function gliderpatternselected() {
   var gliderpattern = [
     [2, 8],
     [3, 9],
     [4, 9],
     [4, 8],
-    [4, 7]
+    [4, 7],
   ];
   board.suspendUpdate();
   for (let i = 0; i < gliderpattern.length; i++) {
@@ -543,7 +613,7 @@ function gliderpatternselected() {
           size: 8,
           name: "",
           fixed: true,
-          showinfobox: false
+          showinfobox: false,
         }
       );
       matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
@@ -562,7 +632,7 @@ function smallexploderpatternselected() {
     [13, 21],
     [14, 19],
     [14, 21],
-    [15, 20]
+    [15, 20],
   ];
   board.suspendUpdate();
   for (let i = 0; i < smallexploderpattern.length; i++) {
@@ -578,7 +648,7 @@ function smallexploderpatternselected() {
           size: 8,
           name: "",
           fixed: true,
-          showinfobox: false
+          showinfobox: false,
         }
       );
       matrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] = 1;
@@ -602,7 +672,7 @@ function exploderpatternselected() {
     [14, 22],
     [15, 18],
     [15, 20],
-    [15, 22]
+    [15, 22],
   ];
   board.suspendUpdate();
   for (let i = 0; i < exploderpattern.length; i++) {
@@ -614,7 +684,7 @@ function exploderpatternselected() {
           size: 8,
           name: "",
           fixed: true,
-          showinfobox: false
+          showinfobox: false,
         }
       );
       matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
@@ -636,7 +706,7 @@ function tencellcolumnpatternselected() {
     [16, 20],
     [17, 20],
     [18, 20],
-    [19, 20]
+    [19, 20],
   ];
   board.suspendUpdate();
   for (let i = 0; i < tencellcolumnpattern.length; i++) {
@@ -652,7 +722,7 @@ function tencellcolumnpatternselected() {
           size: 8,
           name: "",
           fixed: true,
-          showinfobox: false
+          showinfobox: false,
         }
       );
       matrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] = 1;
@@ -673,7 +743,7 @@ function lightweightapaceshippatternselected() {
     [13, 9],
     [14, 9],
     [15, 5],
-    [15, 8]
+    [15, 8],
   ];
   board.suspendUpdate();
   for (let i = 0; i < lightweightapaceshippattern.length; i++) {
@@ -688,13 +758,13 @@ function lightweightapaceshippatternselected() {
         "point",
         [
           -lightweightapaceshippattern[i][1],
-          -lightweightapaceshippattern[i][0]
+          -lightweightapaceshippattern[i][0],
         ],
         {
           size: 8,
           name: "",
           fixed: true,
-          showinfobox: false
+          showinfobox: false,
         }
       );
       matrix[lightweightapaceshippattern[i][0]][
@@ -730,7 +800,7 @@ function tumblerpatternselected() {
     [15, 17],
     [15, 18],
     [15, 22],
-    [15, 23]
+    [15, 23],
   ];
   board.suspendUpdate();
   for (let i = 0; i < tumblerpattern.length; i++) {
@@ -742,7 +812,7 @@ function tumblerpatternselected() {
           size: 8,
           name: "",
           fixed: true,
-          showinfobox: false
+          showinfobox: false,
         }
       );
       matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
@@ -789,7 +859,7 @@ function gosperglidergunpatternselected() {
     [17, 26],
     [17, 27],
     [18, 25],
-    [19, 26]
+    [19, 26],
   ];
   board.suspendUpdate();
   for (let i = 0; i < gosperglidergunpattern.length; i++) {
@@ -806,7 +876,7 @@ function gosperglidergunpatternselected() {
           size: 8,
           name: "",
           fixed: true,
-          showinfobox: false
+          showinfobox: false,
         }
       );
       matrix[gosperglidergunpattern[i][0]][gosperglidergunpattern[i][1]] = 1;
@@ -831,12 +901,12 @@ function ratebuttonclicked() {
         clearInterval(timer);
       } else {
         clearInterval(timer);
-        timer = setInterval(function() {
+        timer = setInterval(function () {
           nextGeneration();
         }, timeInterval);
       }
     }
-    setTimeout(function() {
+    setTimeout(function () {
       rateLabel.innerText = "";
     }, 500);
     rateCounter++;
@@ -858,12 +928,12 @@ function ratebuttonclicked() {
         clearInterval(timer);
       } else {
         clearInterval(timer);
-        timer = setInterval(function() {
+        timer = setInterval(function () {
           nextGeneration();
         }, timeInterval);
       }
     }
-    setTimeout(function() {
+    setTimeout(function () {
       rateLabel.innerText = "";
     }, 500);
     rateCounter++;
@@ -880,12 +950,12 @@ function ratebuttonclicked() {
         clearInterval(timer);
       } else {
         clearInterval(timer);
-        timer = setInterval(function() {
+        timer = setInterval(function () {
           nextGeneration();
         }, timeInterval);
       }
     }
-    setTimeout(function() {
+    setTimeout(function () {
       rateLabel.innerText = "";
     }, 500);
     rateCounter = 1;
