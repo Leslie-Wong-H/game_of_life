@@ -1,6 +1,6 @@
 # 生命游戏
 
-- [English Document](https://github.com/Leslie-Wong-H/game_of_life#requirements) | 中文文档
+- [English Document](../README.md) | 中文文档
 
 ## 算法描述
 
