@@ -95,34 +95,6 @@ function bindEvent() {
 
 bindEvent();
 
-//生成随机矩阵（deprecated)
-//初始化细胞矩阵
-
-function init() {
-  for (let i = 0; i <= 30; i++) {
-    matrix[i] = [];
-    for (let j = 0; j <= 40; j++) {
-      // if (Math.random() * 100 <= 20) {
-      //   matrix[i][j] = 1;
-      //   originalNumber++;
-      // } else {
-      matrix[i][j] = 0;
-      // }
-    }
-  }
-  //生成绘图记录二维数组
-  plotMatrix = new Array();
-  for (i = 0; i <= 30; i++) {
-    plotMatrix[i] = new Array();
-    for (j = 0; j <= 40; j++) {
-      plotMatrix[i][j] = "";
-    }
-  }
-  // console.log(plotMatrix);
-}
-
-init();
-
 // 初始化20*20画板(deprecated)
 // 初始化40*30画板(misunderstood)
 // 初始化41*31画板
@@ -153,6 +125,37 @@ var board = JXG.JSXGraph.initBoard("box", {
   //   pinchSensitivity: 0 // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
   // }
 });
+
+//生成随机矩阵（deprecated)
+//初始化细胞矩阵
+
+function init() {
+  for (let i = 0; i <= 30; i++) {
+    matrix[i] = [];
+    for (let j = 0; j <= 40; j++) {
+      // if (Math.random() * 100 <= 20) {
+      //   matrix[i][j] = 1;
+      //   originalNumber++;
+      // } else {
+      matrix[i][j] = 0;
+      // }
+    }
+  }
+  //生成绘图记录二维数组
+  plotMatrix = new Array();
+  for (i = 0; i <= 30; i++) {
+    plotMatrix[i] = new Array();
+    for (j = 0; j <= 40; j++) {
+      plotMatrix[i][j] = "";
+    }
+  }
+  // console.log(plotMatrix);
+}
+
+init();
+// Initial mournJohnConway pattern instead of blank board.
+// See the bottom for function detail
+mournJohnConwaypatterninitialized();
 
 // incubated from code at http://jsxgraph.org/wiki/index.php/Browser_event_and_coordinates
 // mouse click event function
@@ -219,8 +222,6 @@ var getMouseCoords = function (e, i) {
 board.on("down", down);
 
 function main() {
-  // init();
-
   var i = 0,
     j = 0;
   nLive = originalNumber;
@@ -880,6 +881,57 @@ function gosperglidergunpatternselected() {
         }
       );
       matrix[gosperglidergunpattern[i][0]][gosperglidergunpattern[i][1]] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function mournJohnConwaypatterninitialized() {
+  var mournJohnConwaypattern = [
+    [10, 19],
+    [10, 20],
+    [10, 21],
+    [11, 19],
+    [11, 21],
+    [12, 19],
+    [12, 21],
+    [13, 20],
+    [14, 17],
+    [14, 19],
+    [14, 20],
+    [14, 21],
+    [15, 18],
+    [15, 20],
+    [15, 22],
+    [16, 20],
+    [16, 23],
+    [17, 19],
+    [17, 21],
+    [18, 19],
+    [18, 21],
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < mournJohnConwaypattern.length; i++) {
+    // console.log mournJohnConwaypattern[i][0]);
+    if (
+      plotMatrix[mournJohnConwaypattern[i][0]][mournJohnConwaypattern[i][1]] ==
+      ""
+    ) {
+      plotMatrix[mournJohnConwaypattern[i][0]][
+        mournJohnConwaypattern[i][1]
+      ] = board.create(
+        "point",
+        [-mournJohnConwaypattern[i][1], -mournJohnConwaypattern[i][0]],
+        {
+          size: 8,
+          name: "",
+          fixed: true,
+          showinfobox: false,
+        }
+      );
+      matrix[mournJohnConwaypattern[i][0]][mournJohnConwaypattern[i][1]] = 1;
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
