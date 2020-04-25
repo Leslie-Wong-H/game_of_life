@@ -101,7 +101,7 @@ bindEvent();
 
 var board = JXG.JSXGraph.initBoard("box", {
   boundingbox: [0, 0, -40, -30],
-  keepaspectratio: false,
+  keepaspectratio: true,
   axis: true,
   grid: true,
   showCopyright: true,
