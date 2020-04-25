@@ -35,10 +35,6 @@
 
 [Game of Life | ©Leslie Wong (Heroku App)](http://playgameoflife.live)
 
-或者
-
-[Game of Life | ©Leslie Wong (GitHub Pages)](http://lesliewong.cn/gameoflife/)
-
 ---
 
 ![gif1](https://i.loli.net/2020/03/29/A2QGYeI1fCc5LNg.gif)
