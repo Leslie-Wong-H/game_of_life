@@ -1,11 +1,11 @@
 /**
- * 生命游戏后台逻辑
+ * Backend logic of the Game of Life
  * @author LeslieWong & Caiyijia  https://github.com/Leslie-Wong-H/GameofLIfe
- * 实现核心逻辑
- * 动画库：JSXGraph
- * 鼠标点击自定义初始状态
- * 选择预设初始状态
- * 控制动画速度
+ * Achieve the main logic
+ * Animation library：JSXGraph
+ * Able to custom initial state with mouse
+ * Able to set the initial state in advance
+ * Able to take control of the animation rate
  */
 
 var matrix = [];
@@ -40,7 +40,7 @@ var nLive = originalNumber;
 var evolutionCount = 0;
 var nAliveCnt = 0;
 
-// 绑定开始、暂停、继续、重置、速度按钮的点击事件
+// Bind the click events with start, pause, continue, reset and rate buttons
 
 function bindEvent() {
   start.onclick = function () {
@@ -95,9 +95,9 @@ function bindEvent() {
 
 bindEvent();
 
-// 初始化20*20画板(deprecated)
-// 初始化40*30画板(misunderstood)
-// 初始化41*31画板
+// Initialize 20*20 board(deprecated)
+// Initialize 40*30 board(misunderstood)
+// Initialize 41*31 board
 
 var board = JXG.JSXGraph.initBoard("box", {
   boundingbox: [0, 0, -40, -30],
@@ -126,8 +126,8 @@ var board = JXG.JSXGraph.initBoard("box", {
   // }
 });
 
-//生成随机矩阵（deprecated)
-//初始化细胞矩阵
+//Generate random matrix（deprecated)
+//Initialize cell matrix
 
 function init() {
   for (let i = 0; i <= 30; i++) {
@@ -141,7 +141,7 @@ function init() {
       // }
     }
   }
-  //生成绘图记录二维数组
+  //Generate plot matrix
   plotMatrix = new Array();
   for (i = 0; i <= 30; i++) {
     plotMatrix[i] = new Array();
@@ -228,9 +228,9 @@ function main() {
   // var evolutionCount = 0;
   // var nAliveCnt = 0;
 
-  // 显示初始活细胞数量
+  // Display the initial number of live cells
   document.getElementById("originalNumber").innerHTML = originalNumber;
-  // 剩余生命初始化
+  // Initialize the remaining lives
   document.getElementById("remainLifes").innerHTML = nLive;
 
   matrixRow = matrix.length;
@@ -238,7 +238,7 @@ function main() {
 
   // var numberDisplayStack = [];
 
-  //克隆二维数组
+  // Clone matrix
   copyMatrix = new Array();
   for (i = 0; i < matrixRow; i++) {
     copyMatrix[i] = new Array();
@@ -251,7 +251,7 @@ function main() {
     }
   }
 
-  //绘制初代细胞分布情况(deprecated)
+  //Plot the initial state of the first generation cells(deprecated)
   // board.suspendUpdate();
   // for (i = 0; i < matrixRow; i++) {
   //   for (j = 0; j < matrixColumn; j++) {
@@ -274,7 +274,7 @@ function main() {
   // }
   // board.unsuspendUpdate();
 
-  // //显示初始存活细胞数目
+  // //Display the number of the first generation live cells
   // // var strLiveNumber = str(nLive);
   // numberDisplayStack.push(board.create('text', [-11, -1, 'Live Cells Number:'], {
   //     fontSize: 30
@@ -294,52 +294,52 @@ function nextGeneration() {
   // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
   // numberDisplayStack.pop();
 
-  // 判断下一代细胞分布
+  // Judge the state of next generation cell
   for (i = 0; i < matrixRow; i++) {
     for (j = 0; j < matrixColumn; j++) {
-      //周围细胞数置零
+      //set the number of surrounding cells 0
       nAliveCnt = 0;
 
-      //判断细胞周围九宫格
+      // Judge the state of the eight surrounding cells
 
-      //判断左上角细胞状态
+      //Judge the state of cell top-left
       if (i - 1 >= 0 && j - 1 >= 0 && matrix[i - 1][j - 1] == 1) {
         nAliveCnt++;
       }
 
-      //判断上方细胞状态
+      //Judge the state of cell at the top
       if (i - 1 >= 0 && matrix[i - 1][j] == 1) {
         nAliveCnt++;
       }
 
-      //判断右上角细胞状态
+      //Judge the state of cell top-right
       if (i - 1 >= 0 && j + 1 < matrixColumn && matrix[i - 1][j + 1] == 1) {
         nAliveCnt++;
       }
 
-      //判断左细胞状态
+      //Judge the state of cell at the left
       if (j - 1 >= 0 && matrix[i][j - 1] == 1) {
         nAliveCnt++;
       }
 
-      //判断右细胞状态
+      // Judge the state of cell at the right
 
       if (j + 1 < matrixColumn && matrix[i][j + 1] == 1) {
         nAliveCnt++;
       }
 
-      //判断左下角细胞状态
+      //Judge the state of cell bottom-left
       if (i + 1 < matrixRow && j - 1 >= 0 && matrix[i + 1][j - 1] == 1)
         if (matrix[i + 1][j - 1] == 1) {
           nAliveCnt++;
         }
 
-      // 判断下方细胞状态
+      // Judge the state of cell at the bottom
       if (i + 1 < matrixRow && matrix[i + 1][j] == 1) {
         nAliveCnt++;
       }
 
-      // 判断右下角细胞状态
+      // Judge the state of cell bottom-right
 
       if (
         i + 1 < matrixRow &&
@@ -349,7 +349,7 @@ function nextGeneration() {
         nAliveCnt++;
       }
 
-      // 判断细胞下一代死活情况
+      // Judge the state of the next generation cell, dead or alive
 
       //Live
       if (matrix[i][j] == 1) {
@@ -371,7 +371,7 @@ function nextGeneration() {
     }
   }
 
-  //将下一代细胞分布情况从克隆二维数组赋值回原始二维数组,并绘图
+  //Update back the state of next generation cell from clone matrix to original matrix, and plot
   board.suspendUpdate();
   for (i = 0; i < matrixRow; i++) {
     for (j = 0; j < matrixColumn; j++) {
@@ -393,7 +393,7 @@ function nextGeneration() {
   }
   board.unsuspendUpdate();
 
-  // 更新剩余生命和进化次数
+  // Update remianing lives and evelution times
   evolutionCount++;
   document.getElementById("remainLifes").innerHTML = nLive;
   // numberDisplayStack.push(board.create('text', [-18, -1, nLive], {
@@ -481,7 +481,7 @@ function clearBoard() {
     start.value = "开始";
   }
 
-  // 初始生命、剩余生命、进化次数置零
+  // Set original number, remaining lives and evelution times 0
   document.getElementById("originalNumber").innerHTML = 0;
   document.getElementById("remainLifes").innerHTML = 0;
   document.getElementById("evolutionTimes").innerHTML = 0;
