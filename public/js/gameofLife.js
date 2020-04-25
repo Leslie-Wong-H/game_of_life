@@ -85,7 +85,7 @@ function bindEvent() {
 
   reset.onclick = function () {
     clearBoard();
-    clearBoard(); //  try fix the bug of invalid clcik
+    // clearBoard(); //  try fix the bug of invalid clcik   ---（wrong fix, now resovle, 2020.04.25)
   };
 
   rate.onclick = function () {
@@ -122,8 +122,8 @@ var board = JXG.JSXGraph.initBoard("box", {
     max: 1, // maximal values of JXG.Board#zoomX and JXG.Board#zoomY, limits zoomIn
     pinchHorizontal: false, // Allow pinch-to-zoom to zoom only horizontal axis
     pinchVertical: false, // Allow pinch-to-zoom to zoom only vertical axis
-    pinchSensitivity: 0 // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
-  }
+    pinchSensitivity: 0, // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
+  },
 });
 
 //Generate random matrix（deprecated)
@@ -149,6 +149,9 @@ function init() {
       plotMatrix[i][j] = "";
     }
   }
+
+  matrixRow = matrix.length;
+  matrixColumn = matrix[0].length;
   // console.log(plotMatrix);
 }
 
@@ -232,9 +235,6 @@ function main() {
   document.getElementById("originalNumber").innerHTML = originalNumber;
   // Initialize the remaining lives
   document.getElementById("remainLifes").innerHTML = nLive;
-
-  matrixRow = matrix.length;
-  matrixColumn = matrix[0].length;
 
   // var numberDisplayStack = [];
 
@@ -427,8 +427,8 @@ function nextGeneration() {
         max: 1, // maximal values of JXG.Board#zoomX and JXG.Board#zoomY, limits zoomIn
         pinchHorizontal: false, // Allow pinch-to-zoom to zoom only horizontal axis
         pinchVertical: false, // Allow pinch-to-zoom to zoom only vertical axis
-        pinchSensitivity: 0 // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
-      }
+        pinchSensitivity: 0, // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
+      },
     });
     originalNumber = 0;
   }
@@ -442,19 +442,20 @@ function clearBoard() {
   clearInterval(timer);
   board.off("down", down);
   // board.suspendUpdate();
-  for (let i = 0; i < matrixRow; i++) {
-    for (let j = 0; j < matrixColumn; j++) {
-      matrix[i][j] = 0;
-      // if (initialPlotMatrix[i][j] != "") {
-      // board.removeObject(initialPlotMatrix[i][j]);
-      // initialPlotMatrix[i][j] = "";
-      // }
-      // if (plotMatrix[i][j] != "") {
-      // board.removeObject(plotMatrix[i][j]);
-      plotMatrix[i][j] = "";
-      // }
+
+  for (el in board.objects) {
+    if (JXG.isPoint(board.objects[el])) {
+      board.removeObject(el);
     }
   }
+
+  for (i = 0; i < matrixRow; i++) {
+    for (j = 0; j < matrixColumn; j++) {
+      plotMatrix[i][j] = "";
+      matrix[i][j] = 0;
+    }
+  }
+
   // board.unsuspendUpdate();
   board = JXG.JSXGraph.initBoard("box", {
     boundingbox: [0, 0, -40, -30],
@@ -479,8 +480,8 @@ function clearBoard() {
       max: 1, // maximal values of JXG.Board#zoomX and JXG.Board#zoomY, limits zoomIn
       pinchHorizontal: false, // Allow pinch-to-zoom to zoom only horizontal axis
       pinchVertical: false, // Allow pinch-to-zoom to zoom only vertical axis
-      pinchSensitivity: 0 // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
-    }
+      pinchSensitivity: 0, // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
+    },
   });
 
   // } else {
