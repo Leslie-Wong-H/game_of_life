@@ -24,19 +24,15 @@ Rules of the Game of Life: The universe of the Game of Life is an infinite, two-
 
 ## Project Architecture
 
----
-
 ![project architecture](https://i.loli.net/2020/04/19/rjDMonSRZBgJUHz.png)
 
 ## Implementation Result
 
----
-
-Demo：
+Website：
 
 [Game of Life | ©Leslie Wong (Heroku App)](http://playgameoflife.live)
 
----
+## Snapshots
 
 ![gif1](https://i.loli.net/2020/03/29/A2QGYeI1fCc5LNg.gif)
 
