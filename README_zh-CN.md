@@ -23,19 +23,15 @@
 
 ## 项目架构
 
----
-
 ![项目架构](https://i.loli.net/2020/04/19/KtesLrvnIqd3yxb.png)
 
-## 实现效果
+## 实现结果
 
----
-
-演示：
+在线演示：
 
 [Game of Life | ©Leslie Wong (Heroku App)](http://playgameoflife.live)
 
----
+## 网站截图
 
 ![gif1](https://i.loli.net/2020/03/29/A2QGYeI1fCc5LNg.gif)
 
