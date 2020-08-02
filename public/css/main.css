@@ -255,3 +255,63 @@ body {
     color: #bf0045;
   }
 }
+
+.modal-content {
+  color: #000;
+  text-align: left;
+}
+
+.help-center-question-guide-container {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  align-self: flex-end;
+  width: 34px;
+  position: absolute;
+  bottom: 5em;
+  right: -3em;
+}
+
+.help-center-question-guide-dropdown {
+  position: relative;
+}
+
+.dui-m-badge {
+  display: block;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-family: PingFang SC, Microsoft YaHei, 黑体, 宋体, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.help-center-question-guide-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #fff;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+.help-svg {
+  height: inherit;
+  background: url(../img/help-bd2f9e.svg) no-repeat center;
+  outline: none;
+}
+
+.help-center-question-guide-btn-cover {
+  height: inherit;
+  position: absolute;
+  width: 34px;
+  top: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.help-center-question-guide-btn-cover:hover {
+  background: rgba(0, 0, 0, 0.34);
+}
