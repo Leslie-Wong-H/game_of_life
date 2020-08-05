@@ -43,12 +43,12 @@
         <div class="col-md-12" style="margin: 20px 0; visibility: hidden;">
           1 of 3
         </div>
-        <div class="col-md-12 justify-content-md-center">
+        <div class="col-md-10 justify-content-md-center">
           <div id="box" class="jxgbox"></div>
         </div>
         <div class="col-md-12">
-          <div class="row justify-content-md-center">
-            <div class="buttonmenu">
+          <div class="row justify-content-md-center buttonmenu">
+            <div class="col-lg-3 col-md-12 align-self-center">
               <input
                 type="button"
                 value="Reset"
@@ -62,6 +62,8 @@
                 class="btn btn-outline-danger start"
               />
               <!-- <div class="w-100" style="margin: 10px;"></div> -->
+            </div>
+            <div class="col-lg-6 col-md-12 align-self-center">
               <span class="textBox">
                 <span
                   id="originalNumberText"
@@ -79,6 +81,8 @@
                 <span id="evolutionTimes" class="evolutionTimes">0</span>
               </span>
               <!-- <div class="w-100" style="margin: 10px;"></div> -->
+            </div>
+            <div class="col-lg-3 col-md-12 align-self-center">
               <div class="btn-group dropup pattern">
                 <button
                   type="button"
@@ -121,115 +125,113 @@
                 class="btn btn-outline-danger rate"
               />
               <label class="rateLabel"></label>
-              <div id="rulesDescriptionModal" class="rulesDescriptionModal">
-                <!-- Button trigger modal -->
-                <div
-                  class="help-center-question-guide-container"
-                  data-toggle="modal"
-                  data-target="#descriptionModal"
-                >
-                  <div class="help-center-question-guide-dropdown">
-                    <div placement="leftBottom">
-                      <div>
-                        <span class="dui-m-badge">
-                          <div class="help-center-question-guide-btn">
-                            <div class="help-svg"></div>
-                            <div
-                              class="help-center-question-guide-btn-cover"
-                            ></div>
-                          </div>
-                        </span>
-                      </div>
+            </div>
+            <div id="rulesDescriptionModal" class="rulesDescriptionModal">
+              <!-- Button trigger modal -->
+              <div
+                class="help-center-question-guide-container"
+                data-toggle="modal"
+                data-target="#descriptionModal"
+              >
+                <div class="help-center-question-guide-dropdown">
+                  <div placement="leftBottom">
+                    <div>
+                      <span class="dui-m-badge">
+                        <div class="help-center-question-guide-btn">
+                          <div class="help-svg"></div>
+                          <div
+                            class="help-center-question-guide-btn-cover"
+                          ></div>
+                        </div>
+                      </span>
                     </div>
                   </div>
                 </div>
-                <!-- Modal -->
-                <div
-                  class="modal fade"
-                  id="descriptionModal"
-                  tabindex="-1"
-                  role="dialog"
-                  aria-labelledby="descriptionModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="descriptionModalLabel">
-                          Game of Life Algorithm Description
-                        </h5>
-                        <button
-                          type="button"
-                          class="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <p id="descriptionContentParagraphOne">
-                          The Game of Life is a cellular automation devised by
-                          the mathematician John Horton Conway from Cambridge
-                          University. It came to become well-known for the
-                          article published at Scientific American in 1970.
-                        </p>
-                        <p id="descriptionContentParagraphTwo">
-                          Rules of the Game of Life: The universe of the Game of
-                          Life is an infinite, two-dimensional orthogonal grid
-                          of square cells, each of which is in one of two
-                          possible states, alive and dead, (or populated and
-                          unpopulated, respectively). Every cell interacts with
-                          its eight neighbors, which are the cells that are
-                          horizontally, vertically, or diagonally adjacent. At
-                          each step of evolution, the following transitions
-                          occur:
-                        </p>
-                        <ol>
-                          <li>
-                            <div id="descriptionContentParagraphThree">
-                              For a box with a live cell:
-                            </div>
-                            <ul>
-                              <li id="descriptionContentParagraphFour">
-                                There existing fewer than two live neighbors,
-                                the cell dies, due to loneliness.
-                              </li>
-                              <li id="descriptionContentParagraphFive">
-                                There existing more than three live neighbors,
-                                the cell dies, due to crowding.
-                              </li>
-                              <li id="descriptionContentParagraphSix">
-                                There existing two or three live neighbors, the
-                                cell lives on to the next generation.
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <div id="descriptionContentParagraphSeven">
-                              For an empty box or a box with a dead cell:
-                            </div>
-                            <ul>
-                              <li id="descriptionContentParagraphEight">
-                                There existing three neighbors, the box
-                                generates a new live cell, as if by
-                                reproduction.
-                              </li>
-                            </ul>
-                          </li>
-                        </ol>
-                        <p></p>
-                      </div>
-                      <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          id="modalBtnContent"
-                          data-dismiss="modal"
-                        >
-                          Understood & Close
-                        </button>
-                      </div>
+              </div>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="descriptionModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="descriptionModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="descriptionModalLabel">
+                        Game of Life Algorithm Description
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p id="descriptionContentParagraphOne">
+                        The Game of Life is a cellular automation devised by the
+                        mathematician John Horton Conway from Cambridge
+                        University. It came to become well-known for the article
+                        published at Scientific American in 1970.
+                      </p>
+                      <p id="descriptionContentParagraphTwo">
+                        Rules of the Game of Life: The universe of the Game of
+                        Life is an infinite, two-dimensional orthogonal grid of
+                        square cells, each of which is in one of two possible
+                        states, alive and dead, (or populated and unpopulated,
+                        respectively). Every cell interacts with its eight
+                        neighbors, which are the cells that are horizontally,
+                        vertically, or diagonally adjacent. At each step of
+                        evolution, the following transitions occur:
+                      </p>
+                      <ol>
+                        <li>
+                          <div id="descriptionContentParagraphThree">
+                            For a box with a live cell:
+                          </div>
+                          <ul>
+                            <li id="descriptionContentParagraphFour">
+                              There existing fewer than two live neighbors, the
+                              cell dies, due to loneliness.
+                            </li>
+                            <li id="descriptionContentParagraphFive">
+                              There existing more than three live neighbors, the
+                              cell dies, due to crowding.
+                            </li>
+                            <li id="descriptionContentParagraphSix">
+                              There existing two or three live neighbors, the
+                              cell lives on to the next generation.
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <div id="descriptionContentParagraphSeven">
+                            For an empty box or a box with a dead cell:
+                          </div>
+                          <ul>
+                            <li id="descriptionContentParagraphEight">
+                              There existing three neighbors, the box generates
+                              a new live cell, as if by reproduction.
+                            </li>
+                          </ul>
+                        </li>
+                      </ol>
+                      <p></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        id="modalBtnContent"
+                        data-dismiss="modal"
+                      >
+                        Understood & Close
+                      </button>
                     </div>
                   </div>
                 </div>

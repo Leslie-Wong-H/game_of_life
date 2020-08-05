@@ -164,7 +164,7 @@ body {
 
 .buttonmenu {
   margin: 1.3rem auto;
-  padding-bottom: 0.625rem;
+  padding-bottom: 1.625rem;
   border-bottom: 1px solid #c1c1c1;
   text-align: center;
   /* width: 62.5rem; */
@@ -230,15 +230,15 @@ body {
   position: absolute;
 }
 
-@media screen and(max-width: 770px) {
+@media screen and (max-width: 1050px) {
   .reset {
-    width: 5.9rem;
+    width: 4.9rem;
     margin-right: 0.7rem;
     color: #bf0045;
   }
 
   .start {
-    width: 5.9rem;
+    width: 4.9rem;
     margin-right: 0rem;
     color: #bf0045;
   }
@@ -250,7 +250,7 @@ body {
   }
 
   .rate {
-    width: 5.9rem;
+    width: 4.9rem;
     margin-left: 1.3rem;
     color: #bf0045;
   }
