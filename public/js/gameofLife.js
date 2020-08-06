@@ -40,6 +40,8 @@ var nLive = originalNumber;
 var evolutionCount = 0;
 var nAliveCnt = 0;
 
+var cellSize = window.innerWidth < 1500 ? 6 : 8;
+
 // Bind the click events with start, pause, continue, reset and rate buttons
 
 function bindEvent() {
@@ -209,7 +211,7 @@ var getMouseCoords = function (e, i) {
     if (canCreate) {
       if (plotMatrix[-y][-x] == "") {
         plotMatrix[-y][-x] = board.create("point", [x, y], {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -265,7 +267,7 @@ function main() {
   //     }
   //     if (matrix[i][j] == 1) {
   //       plotMatrix[i][j] = board.create("point", [-j, -i], {
-  //         size: 8,
+  //         size: cellSize,
   //         name: "",
   //         fixed: true
   //       });
@@ -381,7 +383,7 @@ function nextGeneration() {
           board.removeObject(plotMatrix[i][j]);
         }
         plotMatrix[i][j] = board.create("point", [-j, -i], {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
         });
@@ -606,7 +608,7 @@ function randompatternselected() {
         "point",
         [-randompattern[i][1], -randompattern[i][0]],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -636,7 +638,7 @@ function gliderpatternselected() {
         "point",
         [-gliderpattern[i][1], -gliderpattern[i][0]],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -671,7 +673,7 @@ function smallexploderpatternselected() {
         "point",
         [-smallexploderpattern[i][1], -smallexploderpattern[i][0]],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -707,7 +709,7 @@ function exploderpatternselected() {
         "point",
         [-exploderpattern[i][1], -exploderpattern[i][0]],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -745,7 +747,7 @@ function tencellcolumnpatternselected() {
         "point",
         [-tencellcolumnpattern[i][1], -tencellcolumnpattern[i][0]],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -787,7 +789,7 @@ function lightweightapaceshippatternselected() {
           -lightweightapaceshippattern[i][0],
         ],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -835,7 +837,7 @@ function tumblerpatternselected() {
         "point",
         [-tumblerpattern[i][1], -tumblerpattern[i][0]],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -899,7 +901,7 @@ function gosperglidergunpatternselected() {
         "point",
         [-gosperglidergunpattern[i][1], -gosperglidergunpattern[i][0]],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
@@ -950,7 +952,7 @@ function mournJohnConwaypatterninitialized() {
         "point",
         [-mournJohnConwaypattern[i][1], -mournJohnConwaypattern[i][0]],
         {
-          size: 8,
+          size: cellSize,
           name: "",
           fixed: true,
           showinfobox: false,
