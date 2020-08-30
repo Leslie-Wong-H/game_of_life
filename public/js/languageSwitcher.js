@@ -49,10 +49,10 @@ $(document).ready(function () {
         "For a box with a live cell:"
       );
       $("#descriptionContentParagraphFour").text(
-        "There existing fewer than two live neighbors, the cell dies, due to loneliness."
+        "There existing fewer than two live neighbors, the cell dies, due to isolation."
       );
       $("#descriptionContentParagraphFive").text(
-        "There existing more than three live neighbors, the cell dies, due to crowding."
+        "There existing more than three live neighbors, the cell dies, due to over-crowding."
       );
       $("#descriptionContentParagraphSix").text(
         "There existing two or three live neighbors, the cell lives on to the next generation."
