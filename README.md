@@ -9,8 +9,8 @@ The Game of Life is a cellular automation devised by the mathematician John Hort
 Rules of the Game of Life: The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive and dead, (or populated and unpopulated, respectively). Every cell interacts with its eight neighbors, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
 
 1. For a box with a live cell:
-   - There existing fewer than two live neighbors, the cell dies, due to loneliness.
-   - There existing more than three live neighbors, the cell dies, due to crowding.
+   - There existing fewer than two live neighbors, the cell dies, due to isolation.
+   - There existing more than three live neighbors, the cell dies, due to over-crowding.
    - There existing two or three live neighbors, the cell lives on to the next generation.
 2. For an empty box or a box with a dead cell:
    - There existing three neighbors, the box generates a new live cell, as if by reproduction.
