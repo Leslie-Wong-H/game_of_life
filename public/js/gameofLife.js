@@ -23,7 +23,7 @@ var exploder = document.getElementById("exploder");
 
 var tencellcolumn = document.getElementById("tencellcolumn");
 
-var lightweightapaceship = document.getElementById("lightweightspaceship");
+var lightweightspaceship = document.getElementById("lightweightspaceship");
 var tumbler = document.getElementById("tumbler");
 
 var gosperglidergun = document.getElementById("gosperglidergun");
@@ -74,8 +74,8 @@ function bindEvent() {
   tencellcolumn.onclick = function () {
     tencellcolumnpatternselected();
   };
-  lightweightapaceship.onclick = function () {
-    lightweightapaceshippatternselected();
+  lightweightspaceship.onclick = function () {
+    lightweightspaceshippatternselected();
   };
   tumbler.onclick = function () {
     tumblerpatternselected();
@@ -761,8 +761,8 @@ function tencellcolumnpatternselected() {
   board.unsuspendUpdate();
 }
 
-function lightweightapaceshippatternselected() {
-  var lightweightapaceshippattern = [
+function lightweightspaceshippatternselected() {
+  var lightweightspaceshippattern = [
     [12, 6],
     [12, 7],
     [12, 8],
@@ -774,19 +774,19 @@ function lightweightapaceshippatternselected() {
     [15, 8],
   ];
   board.suspendUpdate();
-  for (let i = 0; i < lightweightapaceshippattern.length; i++) {
+  for (let i = 0; i < lightweightspaceshippattern.length; i++) {
     if (
-      plotMatrix[lightweightapaceshippattern[i][0]][
-        lightweightapaceshippattern[i][1]
+      plotMatrix[lightweightspaceshippattern[i][0]][
+        lightweightspaceshippattern[i][1]
       ] == ""
     ) {
-      plotMatrix[lightweightapaceshippattern[i][0]][
-        lightweightapaceshippattern[i][1]
+      plotMatrix[lightweightspaceshippattern[i][0]][
+        lightweightspaceshippattern[i][1]
       ] = board.create(
         "point",
         [
-          -lightweightapaceshippattern[i][1],
-          -lightweightapaceshippattern[i][0],
+          -lightweightspaceshippattern[i][1],
+          -lightweightspaceshippattern[i][0],
         ],
         {
           size: cellSize,
@@ -795,8 +795,8 @@ function lightweightapaceshippatternselected() {
           showinfobox: false,
         }
       );
-      matrix[lightweightapaceshippattern[i][0]][
-        lightweightapaceshippattern[i][1]
+      matrix[lightweightspaceshippattern[i][0]][
+        lightweightspaceshippattern[i][1]
       ] = 1;
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
