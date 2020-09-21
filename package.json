@@ -30,7 +30,8 @@
   "dependencies": {
     "ejs": "^3.0.2",
     "express": "^4.17.1",
-    "heroku-ssl-redirect": "0.0.4"
+    "heroku-ssl-redirect": "0.0.4",
+    "mongodb": "^3.6.2"
   },
   "devDependencies": {
     "request": "^2.88.2",
