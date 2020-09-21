@@ -559,7 +559,7 @@ function startbuttonclicked() {
 
 // To compare 2d arrays at function randompatternselected， from https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
 
-/*** deprecated, prever array.prototype for efficiency ***/
+/*** deprecated, prefer array.prototype for efficiency ***/
 // function isItemInArray(array, item) {
 //   for (var i = 0; i < array.length; i++) {
 //     // This if statement depends on the format of your array
