@@ -6,7 +6,7 @@ const sslRedirect = require("heroku-ssl-redirect");
 
 const MongoClient = require("mongodb").MongoClient;
 const url = process.env.mongodb_altas_url;
-const randomPatternQuery = async (expressRes) => {
+const randomPatternQuery = async (expressRes, expressQuery) => {
   const client = await MongoClient.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -22,7 +22,18 @@ const randomPatternQuery = async (expressRes) => {
     let randomIndex = Math.floor(Math.random() * 733); // 733 kinds of pattern in total
     let query = { index: randomIndex };
     let res = await collection.findOne(query);
-    expressRes.send(res);
+    if (expressQuery && expressQuery.heightmax && expressQuery.widthmax) {
+      const heightmax = Number(expressQuery.heightmax);
+      const widthmax = Number(expressQuery.widthmax);
+      while (res.height > heightmax || res.width > widthmax) {
+        randomIndex = Math.floor(Math.random() * 733);
+        query = { index: randomIndex };
+        res = await collection.findOne(query);
+      }
+      expressRes.send(res);
+    } else {
+      expressRes.send(res);
+    }
   } catch (err) {
     console.log(err);
   } finally {
@@ -47,5 +58,5 @@ express()
     res.render("index", { google_analytics: google_analytics })
   )
   // .get("/", (req, res) => res.sendfile("views/index.html"))
-  .get("/random.json", (req, res) => randomPatternQuery(res))
+  .get("/random.json", (req, res) => randomPatternQuery(res, req.query))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
