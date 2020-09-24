@@ -584,42 +584,77 @@ Array.prototype.indexOf2d = function (item) {
 
 function randompatternselected() {
   var randompattern = [];
-  var randomcellnumber = Math.round(Math.random() * 20 * 20);
-  var tempcoord = 0;
-  for (let i = 0; i < randomcellnumber; i++) {
-    tempcoord = [
-      Math.floor(Math.random() * 31),
-      Math.floor(Math.random() * 41),
-    ];
-    // while (isItemInArray(randompattern, tempcoord)) {
-    while (randompattern.indexOf2d(tempcoord)) {
-      tempcoord = [
-        Math.floor(Math.random() * 31),
-        Math.floor(Math.random() * 41),
-      ];
-    }
-    randompattern.push(tempcoord);
-  }
-  board.suspendUpdate();
-  for (let i = 0; i < randompattern.length; i++) {
-    // console.log(randompattern[i][0]);
-    if (plotMatrix[randompattern[i][0]][randompattern[i][1]] == "") {
-      plotMatrix[randompattern[i][0]][randompattern[i][1]] = board.create(
-        "point",
-        [-randompattern[i][1], -randompattern[i][0]],
-        {
-          size: cellSize,
-          name: "",
-          fixed: true,
-          showinfobox: false,
+
+  // Turn to use lexicon patterns api instead of random function
+  // var randomcellnumber = Math.round(Math.random() * 20 * 20);
+  // var tempcoord = 0;
+  // for (let i = 0; i < randomcellnumber; i++) {
+  //   tempcoord = [
+  //     Math.floor(Math.random() * 31),
+  //     Math.floor(Math.random() * 41),
+  //   ];
+  //   // while (isItemInArray(randompattern, tempcoord)) {
+  //   while (randompattern.indexOf2d(tempcoord)) {
+  //     tempcoord = [
+  //       Math.floor(Math.random() * 31),
+  //       Math.floor(Math.random() * 41),
+  //     ];
+  //   }
+  //   randompattern.push(tempcoord);
+  // }
+
+  var tempcoord = [];
+  var url = "https://playgameoflife.live/random.json?heightmax=30&widthmax=40";
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      if (xhr.responseText != "") {
+        const responseJson = JSON.parse(xhr.responseText);
+        var widthOffset = Math.floor((40 - responseJson.width) / 2);
+        var heightOffset = Math.floor((30 - responseJson.height) / 2);
+        widthOffset = widthOffset > 0 ? widthOffset : 0;
+        heightOffset = heightOffset > 0 ? heightOffset : 0;
+        for (let i = 0; i < responseJson.height; i++) {
+          for (let j = 0; j < responseJson.width; j++) {
+            if (responseJson.pattern[i].slice(j, j + 1) === "*") {
+              tempcoord = [widthOffset + i, heightOffset + j];
+              randompattern.push(tempcoord);
+            }
+          }
         }
-      );
-      matrix[randompattern[i][0]][randompattern[i][1]] = 1;
-      originalNumber++;
-      document.getElementById("originalNumber").innerHTML = originalNumber;
+        board.suspendUpdate();
+        for (let i = 0; i < randompattern.length; i++) {
+          // console.log(randompattern[i][0]);
+          if (plotMatrix[randompattern[i][0]][randompattern[i][1]] == "") {
+            plotMatrix[randompattern[i][0]][randompattern[i][1]] = board.create(
+              "point",
+              [-randompattern[i][1], -randompattern[i][0]],
+              {
+                size: cellSize,
+                name: "",
+                fixed: true,
+                showinfobox: false,
+              }
+            );
+            matrix[randompattern[i][0]][randompattern[i][1]] = 1;
+            originalNumber++;
+            document.getElementById(
+              "originalNumber"
+            ).innerHTML = originalNumber;
+          }
+        }
+        board.unsuspendUpdate();
+      }
     }
-  }
-  board.unsuspendUpdate();
+  };
+  xhr.onerror = () => {
+    console.log(new Error(xhr.statusText));
+  };
+  xhr.onabort = () => {
+    console.log(new Error("abort this request"));
+  };
+  xhr.send();
 }
 
 function gliderpatternselected() {
