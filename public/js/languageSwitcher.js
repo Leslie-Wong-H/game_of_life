@@ -61,7 +61,7 @@ $(document).ready(function () {
         "For an empty box or a box with a dead cell:"
       );
       $("#descriptionContentParagraphEight").text(
-        "There existing three neighbors, the box generates a new live cell, as if by reproduction."
+        "There existing three live neighbors, the box generates a new live cell, as if by reproduction."
       );
       $("#modalBtnContent").text("Understood & Close");
     } else {

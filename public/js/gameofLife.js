@@ -166,63 +166,63 @@ mournJohnConwaypatterninitialized();
 // mouse click event function
 
 var getMouseCoords = function (e, i) {
-    var cPos = board.getCoordsTopLeftCorner(e, i),
-      absPos = JXG.getPosition(e, i),
-      dx = Math.round(absPos[0] - cPos[0]),
-      dy = Math.round(absPos[1] - cPos[1]);
-    // dx = absPos[0] - cPos[0],
-    // dy = absPos[1] - cPos[1];
+  var cPos = board.getCoordsTopLeftCorner(e, i),
+    absPos = JXG.getPosition(e, i),
+    dx = Math.round(absPos[0] - cPos[0]),
+    dy = Math.round(absPos[1] - cPos[1]);
+  // dx = absPos[0] - cPos[0],
+  // dy = absPos[1] - cPos[1];
+  return new JXG.Coords(JXG.COORDS_BY_SCREEN, [dx, dy], board);
+};
 
-    return new JXG.Coords(JXG.COORDS_BY_SCREEN, [dx, dy], board);
-  },
-  down = function (e) {
-    var canCreate = true,
-      i,
-      coords,
-      el;
+var down = function (e) {
+  var canCreate = true,
+    i,
+    coords,
+    el;
 
-    if (e[JXG.touchProperty]) {
-      // index of the finger that is used to extract the coordinates
-      i = 0;
+  if (e[JXG.touchProperty]) {
+    // index of the finger that is used to extract the coordinates
+    i = 0;
+  }
+
+  coords = getMouseCoords(e, i);
+  var x = Math.round(coords.usrCoords[1]),
+    y = Math.round(coords.usrCoords[2]);
+  // console.log(coords);
+  for (el in board.objects) {
+    if (
+      JXG.isPoint(board.objects[el]) &&
+      board.objects[el].hasPoint(
+        Math.round(coords.scrCoords[1]),
+        Math.round(coords.scrCoords[2])
+      )
+    ) {
+      board.removeObject(el);
+      plotMatrix[-y][-x] = "";
+      matrix[-y][-x] = 0;
+      originalNumber--;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+      canCreate = false;
+      break;
     }
+  }
 
-    coords = getMouseCoords(e, i);
-    var x = Math.round(coords.usrCoords[1]),
-      y = Math.round(coords.usrCoords[2]);
-    // console.log(coords);
-    for (el in board.objects) {
-      if (
-        JXG.isPoint(board.objects[el]) &&
-        board.objects[el].hasPoint(
-          Math.round(coords.scrCoords[1]),
-          Math.round(coords.scrCoords[2])
-        )
-      ) {
-        board.removeObject(el);
-        plotMatrix[-y][-x] = "";
-        matrix[-y][-x] = 0;
-        originalNumber--;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-        canCreate = false;
-        break;
-      }
+  if (canCreate) {
+    if (plotMatrix[-y][-x] == "") {
+      plotMatrix[-y][-x] = board.create("point", [x, y], {
+        size: cellSize,
+        name: "",
+        fixed: true,
+        showinfobox: false,
+      });
+      matrix[-y][-x] = 1;
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+      // console.log(matrix[-y].length);
     }
-
-    if (canCreate) {
-      if (plotMatrix[-y][-x] == "") {
-        plotMatrix[-y][-x] = board.create("point", [x, y], {
-          size: cellSize,
-          name: "",
-          fixed: true,
-          showinfobox: false,
-        });
-        matrix[-y][-x] = 1;
-        originalNumber++;
-        document.getElementById("originalNumber").innerHTML = originalNumber;
-        // console.log(matrix[-y].length);
-      }
-    }
-  };
+  }
+};
 
 board.on("down", down);
 
@@ -618,7 +618,7 @@ function randompatternselected() {
         for (let i = 0; i < responseJson.height; i++) {
           for (let j = 0; j < responseJson.width; j++) {
             if (responseJson.pattern[i].slice(j, j + 1) === "*") {
-              tempcoord = [widthOffset + i, heightOffset + j];
+              tempcoord = [heightOffset + i, widthOffset + j];
               randompattern.push(tempcoord);
             }
           }
