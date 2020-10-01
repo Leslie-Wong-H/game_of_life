@@ -618,7 +618,7 @@ function randompatternselected() {
         for (let i = 0; i < responseJson.height; i++) {
           for (let j = 0; j < responseJson.width; j++) {
             if (responseJson.pattern[i].slice(j, j + 1) === "*") {
-              tempcoord = [widthOffset + i, heightOffset + j];
+              tempcoord = [heightOffset + i, widthOffset + j];
               randompattern.push(tempcoord);
             }
           }
