@@ -13,7 +13,7 @@ Rules of the Game of Life: The universe of the Game of Life is an infinite, two-
    - There existing more than three live neighbors, the cell dies, due to over-crowding.
    - There existing two or three live neighbors, the cell lives on to the next generation.
 2. For an empty box or a box with a dead cell:
-   - There existing three neighbors, the box generates a new live cell, as if by reproduction.
+   - There existing three live neighbors, the box generates a new live cell, as if by reproduction.
 
 ## Demand Description
 
