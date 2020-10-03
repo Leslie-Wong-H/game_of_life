@@ -11,6 +11,8 @@
 var matrix = [];
 // var initialPlotMatrix = [];
 var copyMatrix = [];
+var sparseMatrix = [];
+var extendedSparseMatrix = [];
 var plotMatrix = [];
 var matrixRow, matrixColumn;
 var start = document.getElementsByClassName("start")[0];
@@ -143,6 +145,8 @@ function init() {
       // }
     }
   }
+  sparseMatrix = [];
+
   //Generate plot matrix
   plotMatrix = new Array();
   for (i = 0; i <= 30; i++) {
@@ -201,6 +205,8 @@ var down = function (e) {
       board.removeObject(el);
       plotMatrix[-y][-x] = "";
       matrix[-y][-x] = 0;
+      sparseMatrix = sparseMatrix.filter((val) => val !== [-y, -x]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber--;
       document.getElementById("originalNumber").innerHTML = originalNumber;
       canCreate = false;
@@ -217,6 +223,8 @@ var down = function (e) {
         showinfobox: false,
       });
       matrix[-y][-x] = 1;
+      sparseMatrix.push([-y, -x]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
       // console.log(matrix[-y].length);
@@ -227,9 +235,7 @@ var down = function (e) {
 board.on("down", down);
 
 function main() {
-  var i = 0,
-    j = 0;
-  nLive = originalNumber;
+  var nLive = originalNumber;
   // var evolutionCount = 0;
   // var nAliveCnt = 0;
 
@@ -242,10 +248,10 @@ function main() {
 
   // Clone matrix
   copyMatrix = new Array();
-  for (i = 0; i < matrixRow; i++) {
+  for (let i = 0; i < matrixRow; i++) {
     copyMatrix[i] = new Array();
 
-    for (j = 0; j < matrixColumn; j++) {
+    for (let j = 0; j < matrixColumn; j++) {
       // if (matrix[i][j] == 1) {
       //     nLive = nLive + 1;
       // }
@@ -296,89 +302,249 @@ function nextGeneration() {
   // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
   // numberDisplayStack.pop();
 
-  // Judge the state of next generation cell
-  for (i = 0; i < matrixRow; i++) {
-    for (j = 0; j < matrixColumn; j++) {
-      //set the number of surrounding cells 0
-      nAliveCnt = 0;
+  for (let i = 0; i < matrixRow; i++) {
+    copyMatrix[i] = new Array();
+    for (let j = 0; j < matrixColumn; j++) {
+      copyMatrix[i][j] = matrix[i][j];
+    }
+  }
 
-      // Judge the state of the eight surrounding cells
+  extendedSparseMatrix = [];
 
-      //Judge the state of cell top-left
-      if (i - 1 >= 0 && j - 1 >= 0 && matrix[i - 1][j - 1] == 1) {
-        nAliveCnt++;
-      }
+  for (let i = 0; i < sparseMatrix.length; i++) {
+    // Add surrounding box coordinates
+    if (sparseMatrix[i][0] - 1 >= 0 && sparseMatrix[i][1] - 1 >= 0) {
+      extendedSparseMatrix.push([
+        sparseMatrix[i][0] - 1,
+        sparseMatrix[i][1] - 1,
+      ]);
+    }
+    if (sparseMatrix[i][0] - 1 >= 0 && sparseMatrix[i][1] >= 0) {
+      extendedSparseMatrix.push([sparseMatrix[i][0] - 1, sparseMatrix[i][1]]);
+    }
+    if (sparseMatrix[i][0] - 1 >= 0 && sparseMatrix[i][1] + 1 >= 0) {
+      extendedSparseMatrix.push([
+        sparseMatrix[i][0] - 1,
+        sparseMatrix[i][1] + 1,
+      ]);
+    }
+    if (sparseMatrix[i][0] >= 0 && sparseMatrix[i][1] - 1 >= 0) {
+      extendedSparseMatrix.push([sparseMatrix[i][0], sparseMatrix[i][1] - 1]);
+    }
+    if (sparseMatrix[i][0] >= 0 && sparseMatrix[i][1] >= 0) {
+      extendedSparseMatrix.push([sparseMatrix[i][0], sparseMatrix[i][1]]);
+    }
+    if (sparseMatrix[i][0] >= 0 && sparseMatrix[i][1] + 1 >= 0) {
+      extendedSparseMatrix.push([sparseMatrix[i][0], sparseMatrix[i][1] + 1]);
+    }
+    if (sparseMatrix[i][0] + 1 >= 0 && sparseMatrix[i][1] - 1 >= 0) {
+      extendedSparseMatrix.push([
+        sparseMatrix[i][0] + 1,
+        sparseMatrix[i][1] - 1,
+      ]);
+    }
+    if (sparseMatrix[i][0] + 1 >= 0 && sparseMatrix[i][1] >= 0) {
+      extendedSparseMatrix.push([sparseMatrix[i][0] + 1, sparseMatrix[i][1]]);
+    }
+    if (sparseMatrix[i][0] + 1 >= 0 && sparseMatrix[i][1] + 1 >= 0) {
+      extendedSparseMatrix.push([
+        sparseMatrix[i][0] + 1,
+        sparseMatrix[i][1] + 1,
+      ]);
+    }
+  }
+  extendedSparseMatrix = [...new Set(extendedSparseMatrix)];
+  for (let i = 0; i < extendedSparseMatrix.length; i++) {
+    nAliveCnt = 0;
 
-      //Judge the state of cell at the top
-      if (i - 1 >= 0 && matrix[i - 1][j] == 1) {
-        nAliveCnt++;
-      }
+    // Judge the state of the eight surrounding cells
 
-      //Judge the state of cell top-right
-      if (i - 1 >= 0 && j + 1 < matrixColumn && matrix[i - 1][j + 1] == 1) {
-        nAliveCnt++;
-      }
+    //Judge the state of cell top-left
+    if (
+      extendedSparseMatrix[i][0] - 1 >= 0 &&
+      extendedSparseMatrix[i][1] - 1 >= 0 &&
+      matrix[extendedSparseMatrix[i][0] - 1][extendedSparseMatrix[i][1] - 1] ==
+        1
+    ) {
+      nAliveCnt++;
+    }
 
-      //Judge the state of cell at the left
-      if (j - 1 >= 0 && matrix[i][j - 1] == 1) {
-        nAliveCnt++;
-      }
+    //Judge the state of cell at the top
+    if (
+      extendedSparseMatrix[i][0] - 1 >= 0 &&
+      matrix[extendedSparseMatrix[i][0] - 1][extendedSparseMatrix[i][1]] == 1
+    ) {
+      nAliveCnt++;
+    }
 
-      // Judge the state of cell at the right
+    //Judge the state of cell top-right
+    if (
+      extendedSparseMatrix[i][0] - 1 >= 0 &&
+      extendedSparseMatrix[i][1] + 1 < matrixColumn &&
+      matrix[extendedSparseMatrix[i][0] - 1][extendedSparseMatrix[i][1] + 1] ==
+        1
+    ) {
+      nAliveCnt++;
+    }
 
-      if (j + 1 < matrixColumn && matrix[i][j + 1] == 1) {
-        nAliveCnt++;
-      }
+    //Judge the state of cell at the left
+    if (
+      extendedSparseMatrix[i][1] - 1 >= 0 &&
+      matrix[extendedSparseMatrix[i][0]][extendedSparseMatrix[i][1] - 1] == 1
+    ) {
+      nAliveCnt++;
+    }
 
-      //Judge the state of cell bottom-left
-      if (i + 1 < matrixRow && j - 1 >= 0 && matrix[i + 1][j - 1] == 1)
-        if (matrix[i + 1][j - 1] == 1) {
-          nAliveCnt++;
-        }
+    // Judge the state of cell at the right
 
-      // Judge the state of cell at the bottom
-      if (i + 1 < matrixRow && matrix[i + 1][j] == 1) {
-        nAliveCnt++;
-      }
+    if (
+      extendedSparseMatrix[i][1] + 1 < matrixColumn &&
+      matrix[extendedSparseMatrix[i][0]][extendedSparseMatrix[i][1] + 1] == 1
+    ) {
+      nAliveCnt++;
+    }
 
-      // Judge the state of cell bottom-right
-
+    //Judge the state of cell bottom-left
+    if (
+      extendedSparseMatrix[i][0] + 1 < matrixRow &&
+      extendedSparseMatrix[i][1] - 1 >= 0 &&
+      matrix[extendedSparseMatrix[i][0] + 1][extendedSparseMatrix[i][1] - 1] ==
+        1
+    )
       if (
-        i + 1 < matrixRow &&
-        j + 1 < matrixColumn &&
-        matrix[i + 1][j + 1] == 1
+        matrix[extendedSparseMatrix[i][0] + 1][
+          extendedSparseMatrix[i][1] - 1
+        ] == 1
       ) {
         nAliveCnt++;
       }
 
-      // Judge the state of the next generation cell, dead or alive
+    // Judge the state of cell at the bottom
+    if (
+      extendedSparseMatrix[i][0] + 1 < matrixRow &&
+      matrix[extendedSparseMatrix[i][0] + 1][extendedSparseMatrix[i][1]] == 1
+    ) {
+      nAliveCnt++;
+    }
 
-      //Live
-      if (matrix[i][j] == 1) {
-        if (nAliveCnt == 2 || nAliveCnt == 3) {
-          copyMatrix[i][j] = 1;
-        } else {
-          copyMatrix[i][j] = 0;
-          nLive--;
-        }
+    // Judge the state of cell bottom-right
+
+    if (
+      extendedSparseMatrix[i][0] + 1 < matrixRow &&
+      extendedSparseMatrix[i][1] + 1 < matrixColumn &&
+      matrix[extendedSparseMatrix[i][0] + 1][extendedSparseMatrix[i][1] + 1] ==
+        1
+    ) {
+      nAliveCnt++;
+    }
+
+    // Judge the state of the next generation cell, dead or alive
+
+    //Live
+    if (matrix[extendedSparseMatrix[i][0]][extendedSparseMatrix[i][1]] == 1) {
+      if (nAliveCnt == 2 || nAliveCnt == 3) {
+        copyMatrix[extendedSparseMatrix[i][0]][extendedSparseMatrix[i][1]] = 1;
+      } else {
+        copyMatrix[extendedSparseMatrix[i][0]][extendedSparseMatrix[i][1]] = 0;
       }
+    }
 
-      //Dead
-      if (matrix[i][j] == 0) {
-        if (nAliveCnt == 3) {
-          copyMatrix[i][j] = 1;
-          nLive++;
-        }
+    //Dead
+    if (matrix[extendedSparseMatrix[i][0]][extendedSparseMatrix[i][1]] == 0) {
+      if (nAliveCnt == 3) {
+        copyMatrix[extendedSparseMatrix[i][0]][extendedSparseMatrix[i][1]] = 1;
       }
     }
   }
 
+  // // Judge the state of next generation cell
+  // for (let i = 0; i < matrixRow; i++) {
+  //   for (let j = 0; j < matrixColumn; j++) {
+  //     //set the number of surrounding cells 0
+  //     nAliveCnt = 0;
+
+  //     // Judge the state of the eight surrounding cells
+
+  //     //Judge the state of cell top-left
+  //     if (i - 1 >= 0 && j - 1 >= 0 && matrix[i - 1][j - 1] == 1) {
+  //       nAliveCnt++;
+  //     }
+
+  //     //Judge the state of cell at the top
+  //     if (i - 1 >= 0 && matrix[i - 1][j] == 1) {
+  //       nAliveCnt++;
+  //     }
+
+  //     //Judge the state of cell top-right
+  //     if (i - 1 >= 0 && j + 1 < matrixColumn && matrix[i - 1][j + 1] == 1) {
+  //       nAliveCnt++;
+  //     }
+
+  //     //Judge the state of cell at the left
+  //     if (j - 1 >= 0 && matrix[i][j - 1] == 1) {
+  //       nAliveCnt++;
+  //     }
+
+  //     // Judge the state of cell at the right
+
+  //     if (j + 1 < matrixColumn && matrix[i][j + 1] == 1) {
+  //       nAliveCnt++;
+  //     }
+
+  //     //Judge the state of cell bottom-left
+  //     if (i + 1 < matrixRow && j - 1 >= 0 && matrix[i + 1][j - 1] == 1)
+  //       if (matrix[i + 1][j - 1] == 1) {
+  //         nAliveCnt++;
+  //       }
+
+  //     // Judge the state of cell at the bottom
+  //     if (i + 1 < matrixRow && matrix[i + 1][j] == 1) {
+  //       nAliveCnt++;
+  //     }
+
+  //     // Judge the state of cell bottom-right
+
+  //     if (
+  //       i + 1 < matrixRow &&
+  //       j + 1 < matrixColumn &&
+  //       matrix[i + 1][j + 1] == 1
+  //     ) {
+  //       nAliveCnt++;
+  //     }
+
+  //     // Judge the state of the next generation cell, dead or alive
+
+  //     //Live
+  //     if (matrix[i][j] == 1) {
+  //       if (nAliveCnt == 2 || nAliveCnt == 3) {
+  //         copyMatrix[i][j] = 1;
+  //       } else {
+  //         copyMatrix[i][j] = 0;
+  //         nLive--;
+  //       }
+  //     }
+
+  //     //Dead
+  //     if (matrix[i][j] == 0) {
+  //       if (nAliveCnt == 3) {
+  //         copyMatrix[i][j] = 1;
+  //         nLive++;
+  //       }
+  //     }
+  //   }
+  // }
+
+  
+  sparseMatrix = [];
+  nLive = 0;
   //Update back the state of next generation cell from clone matrix to original matrix, and plot
   board.suspendUpdate();
   for (i = 0; i < matrixRow; i++) {
     for (j = 0; j < matrixColumn; j++) {
       matrix[i][j] = copyMatrix[i][j];
       if (matrix[i][j] == 1) {
+        nLive++;
+        sparseMatrix.push([i, j]);
         if (plotMatrix[i][j] != "") {
           board.removeObject(plotMatrix[i][j]);
         }
@@ -457,6 +623,7 @@ function clearBoard() {
       matrix[i][j] = 0;
     }
   }
+  sparseMatrix = [];
 
   // board.unsuspendUpdate();
   board = JXG.JSXGraph.initBoard("box", {
@@ -638,6 +805,8 @@ function randompatternselected() {
               }
             );
             matrix[randompattern[i][0]][randompattern[i][1]] = 1;
+            sparseMatrix.push([randompattern[i][0], randompattern[i][1]]);
+            sparseMatrix = [...new Set(sparseMatrix)];
             originalNumber++;
             document.getElementById(
               "originalNumber"
@@ -680,6 +849,8 @@ function gliderpatternselected() {
         }
       );
       matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
+      sparseMatrix.push([gliderpattern[i][0], gliderpattern[i][1]]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -715,6 +886,11 @@ function smallexploderpatternselected() {
         }
       );
       matrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] = 1;
+      sparseMatrix.push([
+        smallexploderpattern[i][0],
+        smallexploderpattern[i][1],
+      ]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -751,6 +927,8 @@ function exploderpatternselected() {
         }
       );
       matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
+      sparseMatrix.push([exploderpattern[i][0], exploderpattern[i][1]]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -789,6 +967,11 @@ function tencellcolumnpatternselected() {
         }
       );
       matrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] = 1;
+      sparseMatrix.push([
+        tencellcolumnpattern[i][0],
+        tencellcolumnpattern[i][1],
+      ]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -879,6 +1062,8 @@ function tumblerpatternselected() {
         }
       );
       matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
+      sparseMatrix.push([tumblerpattern[i][0], tumblerpattern[i][1]]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -943,6 +1128,11 @@ function gosperglidergunpatternselected() {
         }
       );
       matrix[gosperglidergunpattern[i][0]][gosperglidergunpattern[i][1]] = 1;
+      sparseMatrix.push([
+        gosperglidergunpattern[i][0],
+        gosperglidergunpattern[i][1],
+      ]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -994,6 +1184,11 @@ function mournJohnConwaypatterninitialized() {
         }
       );
       matrix[mournJohnConwaypattern[i][0]][mournJohnConwaypattern[i][1]] = 1;
+      sparseMatrix.push([
+        mournJohnConwaypattern[i][0],
+        mournJohnConwaypattern[i][1],
+      ]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
