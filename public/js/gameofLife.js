@@ -1010,6 +1010,11 @@ function lightweightspaceshippatternselected() {
       matrix[lightweightspaceshippattern[i][0]][
         lightweightspaceshippattern[i][1]
       ] = 1;
+      sparseMatrix.push([
+        lightweightspaceshippattern[i][0],
+        lightweightspaceshippattern[i][1],
+      ]);
+      sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
