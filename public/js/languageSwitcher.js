@@ -40,7 +40,7 @@ $(document).ready(function () {
       // Algorithm description modal message
       $("#descriptionModalLabel").text("Game of Life Algorithm Description");
       $("#descriptionContentParagraphOne").text(
-        "The Game of Life is a cellular automation devised by the mathematician John Horton Conway from Cambridge University. It came to become well-known for the article published at Scientific American in 1970."
+        "The Game of Life is a cellular automata devised by the mathematician John Horton Conway from Cambridge University. It came to become well-known for the article published at Scientific American in 1970."
       );
       $("#descriptionContentParagraphTwo").text(
         "Rules of the Game of Life: The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive and dead, (or populated and unpopulated, respectively). Every cell interacts with its eight neighbors, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:"
