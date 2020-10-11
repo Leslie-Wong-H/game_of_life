@@ -301,7 +301,6 @@ function main() {
 function nextGeneration() {
   // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
   // numberDisplayStack.pop();
-
   for (let i = 0; i < matrixRow; i++) {
     copyMatrix[i] = new Array();
     for (let j = 0; j < matrixColumn; j++) {
@@ -322,7 +321,7 @@ function nextGeneration() {
     if (sparseMatrix[i][0] - 1 >= 0 && sparseMatrix[i][1] >= 0) {
       extendedSparseMatrix.push([sparseMatrix[i][0] - 1, sparseMatrix[i][1]]);
     }
-    if (sparseMatrix[i][0] - 1 >= 0 && sparseMatrix[i][1] + 1 >= 0) {
+    if (sparseMatrix[i][0] - 1 >= 0 && sparseMatrix[i][1] + 1 < matrixColumn) {
       extendedSparseMatrix.push([
         sparseMatrix[i][0] - 1,
         sparseMatrix[i][1] + 1,
@@ -334,19 +333,22 @@ function nextGeneration() {
     if (sparseMatrix[i][0] >= 0 && sparseMatrix[i][1] >= 0) {
       extendedSparseMatrix.push([sparseMatrix[i][0], sparseMatrix[i][1]]);
     }
-    if (sparseMatrix[i][0] >= 0 && sparseMatrix[i][1] + 1 >= 0) {
+    if (sparseMatrix[i][0] >= 0 && sparseMatrix[i][1] + 1 < matrixColumn) {
       extendedSparseMatrix.push([sparseMatrix[i][0], sparseMatrix[i][1] + 1]);
     }
-    if (sparseMatrix[i][0] + 1 >= 0 && sparseMatrix[i][1] - 1 >= 0) {
+    if (sparseMatrix[i][0] + 1 < matrixRow && sparseMatrix[i][1] - 1 >= 0) {
       extendedSparseMatrix.push([
         sparseMatrix[i][0] + 1,
         sparseMatrix[i][1] - 1,
       ]);
     }
-    if (sparseMatrix[i][0] + 1 >= 0 && sparseMatrix[i][1] >= 0) {
+    if (sparseMatrix[i][0] + 1 < matrixRow && sparseMatrix[i][1] >= 0) {
       extendedSparseMatrix.push([sparseMatrix[i][0] + 1, sparseMatrix[i][1]]);
     }
-    if (sparseMatrix[i][0] + 1 >= 0 && sparseMatrix[i][1] + 1 >= 0) {
+    if (
+      sparseMatrix[i][0] + 1 < matrixRow &&
+      sparseMatrix[i][1] + 1 < matrixColumn
+    ) {
       extendedSparseMatrix.push([
         sparseMatrix[i][0] + 1,
         sparseMatrix[i][1] + 1,
@@ -534,7 +536,6 @@ function nextGeneration() {
   //   }
   // }
 
-  
   sparseMatrix = [];
   nLive = 0;
   //Update back the state of next generation cell from clone matrix to original matrix, and plot
