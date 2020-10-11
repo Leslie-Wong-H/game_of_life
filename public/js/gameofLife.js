@@ -301,13 +301,6 @@ function main() {
 function nextGeneration() {
   // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
   // numberDisplayStack.pop();
-  for (let i = 0; i < matrixRow; i++) {
-    copyMatrix[i] = new Array();
-    for (let j = 0; j < matrixColumn; j++) {
-      copyMatrix[i][j] = matrix[i][j];
-    }
-  }
-
   extendedSparseMatrix = [];
 
   for (let i = 0; i < sparseMatrix.length; i++) {
