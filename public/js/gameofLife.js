@@ -296,7 +296,6 @@ function main() {
 function nextGeneration() {
   // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
   // numberDisplayStack.pop();
-  console.time("test");
 
   // Judge the state of next generation cell
   for (i = 0; i < matrixRow; i++) {
