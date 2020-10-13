@@ -215,6 +215,7 @@ var down = function (e) {
         name: "",
         fixed: true,
         showinfobox: false,
+        withLabel: false,
       });
       matrix[-y][-x] = 1;
       originalNumber++;
@@ -295,6 +296,7 @@ function main() {
 function nextGeneration() {
   // board.removeObject(numberDisplayStack[numberDisplayStack.length - 1]);
   // numberDisplayStack.pop();
+  console.time("test");
 
   // Judge the state of next generation cell
   for (i = 0; i < matrixRow; i++) {
@@ -386,6 +388,8 @@ function nextGeneration() {
           size: cellSize,
           name: "",
           fixed: true,
+          showinfobox: false,
+          withLabel: false,
         });
       } else {
         board.removeObject(plotMatrix[i][j]);
@@ -635,6 +639,7 @@ function randompatternselected() {
                 name: "",
                 fixed: true,
                 showinfobox: false,
+                withLabel: false,
               }
             );
             matrix[randompattern[i][0]][randompattern[i][1]] = 1;
@@ -677,6 +682,7 @@ function gliderpatternselected() {
           name: "",
           fixed: true,
           showinfobox: false,
+          withLabel: false,
         }
       );
       matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
@@ -712,6 +718,7 @@ function smallexploderpatternselected() {
           name: "",
           fixed: true,
           showinfobox: false,
+          withLabel: false,
         }
       );
       matrix[smallexploderpattern[i][0]][smallexploderpattern[i][1]] = 1;
@@ -748,6 +755,7 @@ function exploderpatternselected() {
           name: "",
           fixed: true,
           showinfobox: false,
+          withLabel: false,
         }
       );
       matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
@@ -786,6 +794,7 @@ function tencellcolumnpatternselected() {
           name: "",
           fixed: true,
           showinfobox: false,
+          withLabel: false,
         }
       );
       matrix[tencellcolumnpattern[i][0]][tencellcolumnpattern[i][1]] = 1;
@@ -828,6 +837,7 @@ function lightweightspaceshippatternselected() {
           name: "",
           fixed: true,
           showinfobox: false,
+          withLabel: false,
         }
       );
       matrix[lightweightspaceshippattern[i][0]][
@@ -876,6 +886,7 @@ function tumblerpatternselected() {
           name: "",
           fixed: true,
           showinfobox: false,
+          withLabel: false,
         }
       );
       matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
@@ -940,6 +951,7 @@ function gosperglidergunpatternselected() {
           name: "",
           fixed: true,
           showinfobox: false,
+          withLabel: false,
         }
       );
       matrix[gosperglidergunpattern[i][0]][gosperglidergunpattern[i][1]] = 1;
@@ -991,6 +1003,7 @@ function mournJohnConwaypatterninitialized() {
           name: "",
           fixed: true,
           showinfobox: false,
+          withLabel: false,
         }
       );
       matrix[mournJohnConwaypattern[i][0]][mournJohnConwaypattern[i][1]] = 1;
