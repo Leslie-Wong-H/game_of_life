@@ -164,7 +164,13 @@ function init() {
 init();
 // Initial mournJohnConway pattern instead of blank board.
 // See the bottom for function detail
-mournJohnConwaypatterninitialized();
+
+// easter egg for 1024
+if (this.location.search === "?from=1024") {
+  _1024cheerspattern();
+} else {
+  mournJohnConwaypatterninitialized();
+}
 
 // incubated from code at http://jsxgraph.org/wiki/index.php/Browser_event_and_coordinates
 // mouse click event function
@@ -1199,6 +1205,125 @@ function mournJohnConwaypatterninitialized() {
         mournJohnConwaypattern[i][0],
         mournJohnConwaypattern[i][1],
       ]);
+      sparseMatrix = [...new Set(sparseMatrix)];
+      originalNumber++;
+      document.getElementById("originalNumber").innerHTML = originalNumber;
+    }
+  }
+  board.unsuspendUpdate();
+}
+
+function _1024cheerspattern() {
+  var __1024cheerspattern = [
+    [9, 7],
+    [10, 6],
+    [10, 7],
+    [11, 5],
+    [11, 7],
+    [12, 7],
+    [13, 7],
+    [14, 7],
+    [15, 7],
+    [16, 7],
+    [17, 7],
+    [18, 7],
+    [19, 7],
+    [20, 7],
+    [10, 11],
+    [11, 11],
+    [12, 11],
+    [13, 11],
+    [14, 11],
+    [15, 11],
+    [16, 11],
+    [17, 11],
+    [18, 11],
+    [19, 11],
+    [9, 12],
+    [9, 13],
+    [9, 14],
+    [9, 15],
+    [10, 16],
+    [11, 16],
+    [12, 12],
+    [13, 16],
+    [14, 16],
+    [15, 16],
+    [16, 16],
+    [17, 16],
+    [18, 16],
+    [19, 16],
+    [20, 12],
+    [20, 13],
+    [20, 14],
+    [20, 15],
+    [10, 20],
+    [9, 21],
+    [9, 22],
+    [9, 23],
+    [9, 24],
+    [10, 25],
+    [11, 25],
+    [12, 25],
+    [13, 25],
+    [14, 25],
+    [14, 24],
+    [14, 23],
+    [14, 22],
+    [14, 21],
+    [15, 20],
+    [16, 20],
+    [17, 20],
+    [18, 20],
+    [19, 20],
+    [20, 21],
+    [20, 22],
+    [20, 23],
+    [20, 24],
+    [20, 25],
+    [9, 34],
+    [10, 33],
+    [11, 32],
+    [11, 33],
+    [12, 31],
+    [12, 33],
+    [13, 30],
+    [13, 33],
+    [14, 29],
+    [14, 30],
+    [14, 31],
+    [14, 32],
+    [14, 33],
+    [14, 34],
+    [14, 35],
+    [15, 33],
+    [16, 33],
+    [17, 33],
+    [18, 33],
+    [19, 33],
+    [20, 33],
+  ];
+  board.suspendUpdate();
+  for (let i = 0; i < __1024cheerspattern.length; i++) {
+    // console.log __1024cheerspattern[i][0]);
+    if (
+      plotMatrix[__1024cheerspattern[i][0]][__1024cheerspattern[i][1]] == ""
+    ) {
+      plotMatrix[__1024cheerspattern[i][0]][
+        __1024cheerspattern[i][1]
+      ] = board.create(
+        "point",
+        [-__1024cheerspattern[i][1], -__1024cheerspattern[i][0]],
+        {
+          size: cellSize,
+          name: "",
+          fixed: true,
+          showinfobox: false,
+          withLabel: false,
+        }
+      );
+      matrix[__1024cheerspattern[i][0]][__1024cheerspattern[i][1]] = 1;
+      sparseMatrix.push([__1024cheerspattern[i][0], __1024cheerspattern[i][1]]);
       sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
