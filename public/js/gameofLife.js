@@ -42,7 +42,16 @@ var nLive = originalNumber;
 var evolutionCount = 0;
 var nAliveCnt = 0;
 
-var cellSize = window.innerWidth < 1500 ? 6 : 8;
+var cellSize;
+if (window.innerWidth >= 1280) {
+  cellSize = 6;
+} else if (window.innerWidth >= 800) {
+  cellSize = 4;
+} else if (window.innerWidth >= 425) {
+  cellSize = 2;
+} else {
+  cellSize = 1;
+}
 
 // Bind the click events with start, pause, continue, reset and rate buttons
 
