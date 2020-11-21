@@ -108,6 +108,47 @@ function bindEvent() {
 
 bindEvent();
 
+
+// Utility to compare 2d arrays at function randompatternselected， from https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
+
+/*** deprecated, prefer array.prototype for efficiency ***/
+// function isItemInArray(array, item) {
+//   for (var i = 0; i < array.length; i++) {
+//     // This if statement depends on the format of your array
+//     if (array[i][0] == item[0] && array[i][1] == item[1]) {
+//       return true; // Found it
+//     }
+//   }
+//   return false; // Not found
+// }
+
+Array.prototype.indexOf2d = function (item) {
+  // arrCoords is an array with previous coordinates converted to strings in format "x|y"
+  arrCoords = JSON.stringify(
+    this.map(function (a) {
+      return a[0] + "|" + a[1];
+    })
+  );
+
+  // now use indexOf to find item converted to a string in format "x|y"
+  return arrCoords.indexOf(item[0] + "|" + item[1]) !== -1;
+};
+
+// reuse indexOf2d to replace Set operation for ie 11
+function unique(arr) {
+  if (!Array.isArray(arr)) {
+    console.log("type error!");
+    return;
+  }
+  var array = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (!array.indexOf2d(arr[i])) {
+      array.push(arr[i]);
+    }
+  }
+  return array;
+}
+
 // Initialize 20*20 board(deprecated)
 // Initialize 40*30 board(misunderstood)
 // Initialize 41*31 board
@@ -223,7 +264,8 @@ var down = function (e) {
       sparseMatrix = sparseMatrix.filter(function (val) {
         return val !== [-y, -x];
       });
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber--;
       document.getElementById("originalNumber").innerHTML = originalNumber;
       canCreate = false;
@@ -242,7 +284,8 @@ var down = function (e) {
       });
       matrix[-y][-x] = 1;
       sparseMatrix.push([-y, -x]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
       // console.log(matrix[-y].length);
@@ -366,7 +409,8 @@ function nextGeneration() {
       ]);
     }
   }
-  extendedSparseMatrix = [...new Set(extendedSparseMatrix)];
+  // extendedSparseMatrix = [...new Set(extendedSparseMatrix)];
+  extendedSparseMatrix = unique(extendedSparseMatrix);
   for (let i = 0; i < extendedSparseMatrix.length; i++) {
     nAliveCnt = 0;
 
@@ -738,31 +782,6 @@ function startbuttonclicked() {
   }
 }
 
-// To compare 2d arrays at function randompatternselected， from https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
-
-/*** deprecated, prefer array.prototype for efficiency ***/
-// function isItemInArray(array, item) {
-//   for (var i = 0; i < array.length; i++) {
-//     // This if statement depends on the format of your array
-//     if (array[i][0] == item[0] && array[i][1] == item[1]) {
-//       return true; // Found it
-//     }
-//   }
-//   return false; // Not found
-// }
-
-Array.prototype.indexOf2d = function (item) {
-  // arrCoords is an array with previous coordinates converted to strings in format "x|y"
-  arrCoords = JSON.stringify(
-    this.map(function (a) {
-      return a[0] + "|" + a[1];
-    })
-  );
-
-  // now use indexOf to find item converted to a string in format "x|y"
-  return arrCoords.indexOf(item[0] + "|" + item[1]) !== -1;
-};
-
 function randompatternselected() {
   var randompattern = [];
 
@@ -821,7 +840,8 @@ function randompatternselected() {
             );
             matrix[randompattern[i][0]][randompattern[i][1]] = 1;
             sparseMatrix.push([randompattern[i][0], randompattern[i][1]]);
-            sparseMatrix = [...new Set(sparseMatrix)];
+            // sparseMatrix = [...new Set(sparseMatrix)];
+            sparseMatrix = unique(sparseMatrix);
             originalNumber++;
             document.getElementById(
               "originalNumber"
@@ -866,7 +886,8 @@ function gliderpatternselected() {
       );
       matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
       sparseMatrix.push([gliderpattern[i][0], gliderpattern[i][1]]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -907,7 +928,8 @@ function smallexploderpatternselected() {
         smallexploderpattern[i][0],
         smallexploderpattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -946,7 +968,8 @@ function exploderpatternselected() {
       );
       matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
       sparseMatrix.push([exploderpattern[i][0], exploderpattern[i][1]]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -990,7 +1013,8 @@ function tencellcolumnpatternselected() {
         tencellcolumnpattern[i][0],
         tencellcolumnpattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1040,7 +1064,8 @@ function lightweightspaceshippatternselected() {
         lightweightspaceshippattern[i][0],
         lightweightspaceshippattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1089,7 +1114,8 @@ function tumblerpatternselected() {
       );
       matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
       sparseMatrix.push([tumblerpattern[i][0], tumblerpattern[i][1]]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1159,7 +1185,8 @@ function gosperglidergunpatternselected() {
         gosperglidergunpattern[i][0],
         gosperglidergunpattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1216,7 +1243,8 @@ function mournJohnConwaypatterninitialized() {
         mournJohnConwaypattern[i][0],
         mournJohnConwaypattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1335,7 +1363,8 @@ function _1024cheerspattern() {
       );
       matrix[__1024cheerspattern[i][0]][__1024cheerspattern[i][1]] = 1;
       sparseMatrix.push([__1024cheerspattern[i][0], __1024cheerspattern[i][1]]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
