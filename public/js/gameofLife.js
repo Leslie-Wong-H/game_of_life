@@ -220,7 +220,9 @@ var down = function (e) {
       board.removeObject(el);
       plotMatrix[-y][-x] = "";
       matrix[-y][-x] = 0;
-      sparseMatrix = sparseMatrix.filter((val) => val !== [-y, -x]);
+      sparseMatrix = sparseMatrix.filter(function (val) {
+        return val !== [-y, -x];
+      });
       sparseMatrix = [...new Set(sparseMatrix)];
       originalNumber--;
       document.getElementById("originalNumber").innerHTML = originalNumber;
@@ -786,7 +788,7 @@ function randompatternselected() {
   var url = "https://playgameoflife.live/random.json?heightmax=30&widthmax=40";
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
-  xhr.onreadystatechange = () => {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       if (xhr.responseText != "") {
         const responseJson = JSON.parse(xhr.responseText);
@@ -830,10 +832,10 @@ function randompatternselected() {
       }
     }
   };
-  xhr.onerror = () => {
+  xhr.onerror = function () {
     console.log(new Error(xhr.statusText));
   };
-  xhr.onabort = () => {
+  xhr.onabort = function () {
     console.log(new Error("abort this request"));
   };
   xhr.send();
@@ -1413,5 +1415,18 @@ function ratebuttonclicked() {
       rateLabel.innerText = "";
     }, 500);
     rateCounter = 1;
+  }
+}
+
+// Allowing for screen resize revent to redraw JSXGraph board, learnt form
+// https://bourne2learn.com/math/jsxgraph/jsxgraph-examples.php
+
+window.addEventListener("resize", resizeThrottler, false);
+
+function resizeThrottler() {
+  if (!scrolling) {
+    if (!resizeTimeout) {
+      resizeTimeout = setTimeout();
+    }
   }
 }
