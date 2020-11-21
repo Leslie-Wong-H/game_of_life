@@ -108,7 +108,6 @@ function bindEvent() {
 
 bindEvent();
 
-
 // Utility to compare 2d arrays at function randompatternselected， from https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
 
 /*** deprecated, prefer array.prototype for efficiency ***/
@@ -134,19 +133,27 @@ Array.prototype.indexOf2d = function (item) {
   return arrCoords.indexOf(item[0] + "|" + item[1]) !== -1;
 };
 
+// There is a mysterious bug when executing " sparseMatrix = unique(sparseMatrix)”
+// within the patternSelected functions below. That is, it does not behave like
+// "sparseMatrix = [...new Set(sparseMatrix)]", instead the console result of
+// sparseMatrix would be an array that has been pushed one more coords ahead.
+// Quite weird. For this reason, I deprecate using unique, and just ignore
+// the remove-duplicate operation "sparseMatrix = [...new Set(sparseMatrix)]".
+// It works fine.
+
 // reuse indexOf2d to replace Set operation for ie 11
 function unique(arr) {
   if (!Array.isArray(arr)) {
     console.log("type error!");
     return;
   }
-  var array = [];
+  var newArray = [];
   for (let i = 0; i < arr.length; i++) {
-    if (!array.indexOf2d(arr[i])) {
-      array.push(arr[i]);
+    if (!newArray.indexOf2d(arr[i])) {
+      newArray.push(arr[i]);
     }
   }
-  return array;
+  return newArray;
 }
 
 // Initialize 20*20 board(deprecated)
@@ -265,7 +272,7 @@ var down = function (e) {
         return val !== [-y, -x];
       });
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber--;
       document.getElementById("originalNumber").innerHTML = originalNumber;
       canCreate = false;
@@ -285,7 +292,7 @@ var down = function (e) {
       matrix[-y][-x] = 1;
       sparseMatrix.push([-y, -x]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
       // console.log(matrix[-y].length);
@@ -410,7 +417,7 @@ function nextGeneration() {
     }
   }
   // extendedSparseMatrix = [...new Set(extendedSparseMatrix)];
-  extendedSparseMatrix = unique(extendedSparseMatrix);
+  // extendedSparseMatrix = unique(extendedSparseMatrix);
   for (let i = 0; i < extendedSparseMatrix.length; i++) {
     nAliveCnt = 0;
 
@@ -841,7 +848,7 @@ function randompatternselected() {
             matrix[randompattern[i][0]][randompattern[i][1]] = 1;
             sparseMatrix.push([randompattern[i][0], randompattern[i][1]]);
             // sparseMatrix = [...new Set(sparseMatrix)];
-            sparseMatrix = unique(sparseMatrix);
+            // sparseMatrix = unique(sparseMatrix);
             originalNumber++;
             document.getElementById(
               "originalNumber"
@@ -887,7 +894,7 @@ function gliderpatternselected() {
       matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
       sparseMatrix.push([gliderpattern[i][0], gliderpattern[i][1]]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -929,7 +936,7 @@ function smallexploderpatternselected() {
         smallexploderpattern[i][1],
       ]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -969,7 +976,7 @@ function exploderpatternselected() {
       matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
       sparseMatrix.push([exploderpattern[i][0], exploderpattern[i][1]]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1014,7 +1021,7 @@ function tencellcolumnpatternselected() {
         tencellcolumnpattern[i][1],
       ]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1065,7 +1072,7 @@ function lightweightspaceshippatternselected() {
         lightweightspaceshippattern[i][1],
       ]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1115,7 +1122,7 @@ function tumblerpatternselected() {
       matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
       sparseMatrix.push([tumblerpattern[i][0], tumblerpattern[i][1]]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1186,7 +1193,7 @@ function gosperglidergunpatternselected() {
         gosperglidergunpattern[i][1],
       ]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1244,7 +1251,7 @@ function mournJohnConwaypatterninitialized() {
         mournJohnConwaypattern[i][1],
       ]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1364,7 +1371,7 @@ function _1024cheerspattern() {
       matrix[__1024cheerspattern[i][0]][__1024cheerspattern[i][1]] = 1;
       sparseMatrix.push([__1024cheerspattern[i][0], __1024cheerspattern[i][1]]);
       // sparseMatrix = [...new Set(sparseMatrix)];
-      sparseMatrix = unique(sparseMatrix);
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1450,12 +1457,12 @@ function ratebuttonclicked() {
 // Allowing for screen resize revent to redraw JSXGraph board, learnt form
 // https://bourne2learn.com/math/jsxgraph/jsxgraph-examples.php
 
-window.addEventListener("resize", resizeThrottler, false);
+// window.addEventListener("resize", resizeThrottler, false);
 
-function resizeThrottler() {
-  if (!scrolling) {
-    if (!resizeTimeout) {
-      resizeTimeout = setTimeout();
-    }
-  }
-}
+// function resizeThrottler() {
+//   if (!scrolling) {
+//     if (!resizeTimeout) {
+//       resizeTimeout = setTimeout();
+//     }
+//   }
+// }
