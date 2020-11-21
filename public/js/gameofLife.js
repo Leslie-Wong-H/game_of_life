@@ -1454,15 +1454,80 @@ function ratebuttonclicked() {
   }
 }
 
-// Allowing for screen resize revent to redraw JSXGraph board, learnt form
+// Detect screen resize event to redraw JSXGraph board, learnt form
 // https://bourne2learn.com/math/jsxgraph/jsxgraph-examples.php
+// and
+// https://bourne2learn.com/math/jsxgraph/cellular-automaton.php
 
-// window.addEventListener("resize", resizeThrottler, false);
+function actualResizeHandler() {
+  var box = document.querySelector("#box");
 
-// function resizeThrottler() {
-//   if (!scrolling) {
-//     if (!resizeTimeout) {
-//       resizeTimeout = setTimeout();
-//     }
-//   }
-// }
+  // Need to unset these so ccntaining DIV can change size
+  box.style.width = "";
+  box.style.height = "";
+  // Get width and height of (changed) containing DIV
+  var theWidth = box.getBoundingClientRect().width;
+  var theHeight = box.getBoundingClientRect().height;
+
+  board.suspendUpdate();
+  // Now resize the board
+  board.resizeContainer(theWidth, theHeight);
+  // resize the cell size
+  // reference: https://groups.google.com/g/jsxgraph/c/dHT6qU6ICZo
+  if (window.innerWidth >= 1280) {
+    cellSize = 6;
+  } else if (window.innerWidth >= 800) {
+    cellSize = 4;
+  } else if (window.innerWidth >= 425) {
+    cellSize = 2;
+  } else {
+    cellSize = 1;
+  }
+  for (el in board.objects) {
+    if (JXG.isPoint(board.objects[el])) {
+      board.objects[el].setAttribute({ size: cellSize });
+    }
+  }
+  board.unsuspendUpdate();
+}
+///////////////////////////////////////
+//
+// Scroll handler
+// * isScrolling is a timeout for detecting if scrolling is occuring
+// * scrolling is used to disable the function that's called on a resize
+// * (necessary since phone browsers trigger a "resize" event when the URL bar..
+//   and refresh icon appears a the top when the user scrolls up)
+//
+///////////////////////////////////////
+var isScrolling,
+  scrolling = false;
+window.addEventListener(
+  "scroll",
+  function (event) {
+    scrolling = true;
+    window.clearTimeout(isScrolling);
+    isScrolling = setTimeout(function () {
+      scrolling = false;
+    }, 66);
+  },
+  false
+);
+///////////////////////////////////////
+//
+// Resize throttler
+//
+///////////////////////////////////////
+window.addEventListener("resize", resizeThrottler, false);
+var resizeTimeout, actualResizeHandler;
+function resizeThrottler() {
+  if (!scrolling) {
+    if (!resizeTimeout) {
+      resizeTimeout = setTimeout(function () {
+        resizeTimeout = null;
+        if (typeof actualResizeHandler == "function") {
+          actualResizeHandler();
+        }
+      }, 500);
+    }
+  }
+}
