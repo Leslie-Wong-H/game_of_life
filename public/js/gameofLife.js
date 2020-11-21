@@ -610,7 +610,7 @@ function randompatternselected() {
   var url = "https://playgameoflife.live/random.json?heightmax=30&widthmax=40";
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
-  xhr.onreadystatechange = () => {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       if (xhr.responseText != "") {
         const responseJson = JSON.parse(xhr.responseText);
@@ -652,10 +652,10 @@ function randompatternselected() {
       }
     }
   };
-  xhr.onerror = () => {
+  xhr.onerror = function () {
     console.log(new Error(xhr.statusText));
   };
-  xhr.onabort = () => {
+  xhr.onabort = function () {
     console.log(new Error("abort this request"));
   };
   xhr.send();
