@@ -34,6 +34,7 @@
     "mongodb": "^3.6.2"
   },
   "devDependencies": {
+    "prettier": "^2.1.2",
     "request": "^2.88.2",
     "tape": "^4.13.2"
   }

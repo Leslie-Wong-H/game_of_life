@@ -108,6 +108,54 @@ function bindEvent() {
 
 bindEvent();
 
+// Utility to compare 2d arrays at function randompatternselected， from https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
+
+/*** deprecated, prefer array.prototype for efficiency ***/
+// function isItemInArray(array, item) {
+//   for (var i = 0; i < array.length; i++) {
+//     // This if statement depends on the format of your array
+//     if (array[i][0] == item[0] && array[i][1] == item[1]) {
+//       return true; // Found it
+//     }
+//   }
+//   return false; // Not found
+// }
+
+Array.prototype.indexOf2d = function (item) {
+  // arrCoords is an array with previous coordinates converted to strings in format "x|y"
+  arrCoords = JSON.stringify(
+    this.map(function (a) {
+      return a[0] + "|" + a[1];
+    })
+  );
+
+  // now use indexOf to find item converted to a string in format "x|y"
+  return arrCoords.indexOf(item[0] + "|" + item[1]) !== -1;
+};
+
+// There is a mysterious bug when executing " sparseMatrix = unique(sparseMatrix)”
+// within the patternSelected functions below. That is, it does not behave like
+// "sparseMatrix = [...new Set(sparseMatrix)]", instead the console result of
+// sparseMatrix would be an array that has been pushed one more coords ahead.
+// Quite weird. For this reason, I deprecate using unique, and just ignore
+// the remove-duplicate operation "sparseMatrix = [...new Set(sparseMatrix)]".
+// It works fine.
+
+// reuse indexOf2d to replace Set operation for ie 11
+function unique(arr) {
+  if (!Array.isArray(arr)) {
+    console.log("type error!");
+    return;
+  }
+  var newArray = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (!newArray.indexOf2d(arr[i])) {
+      newArray.push(arr[i]);
+    }
+  }
+  return newArray;
+}
+
 // Initialize 20*20 board(deprecated)
 // Initialize 40*30 board(misunderstood)
 // Initialize 41*31 board
@@ -220,8 +268,11 @@ var down = function (e) {
       board.removeObject(el);
       plotMatrix[-y][-x] = "";
       matrix[-y][-x] = 0;
-      sparseMatrix = sparseMatrix.filter((val) => val !== [-y, -x]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      sparseMatrix = sparseMatrix.filter(function (val) {
+        return val !== [-y, -x];
+      });
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber--;
       document.getElementById("originalNumber").innerHTML = originalNumber;
       canCreate = false;
@@ -240,7 +291,8 @@ var down = function (e) {
       });
       matrix[-y][-x] = 1;
       sparseMatrix.push([-y, -x]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
       // console.log(matrix[-y].length);
@@ -364,7 +416,8 @@ function nextGeneration() {
       ]);
     }
   }
-  extendedSparseMatrix = [...new Set(extendedSparseMatrix)];
+  // extendedSparseMatrix = [...new Set(extendedSparseMatrix)];
+  // extendedSparseMatrix = unique(extendedSparseMatrix);
   for (let i = 0; i < extendedSparseMatrix.length; i++) {
     nAliveCnt = 0;
 
@@ -736,31 +789,6 @@ function startbuttonclicked() {
   }
 }
 
-// To compare 2d arrays at function randompatternselected， from https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
-
-/*** deprecated, prefer array.prototype for efficiency ***/
-// function isItemInArray(array, item) {
-//   for (var i = 0; i < array.length; i++) {
-//     // This if statement depends on the format of your array
-//     if (array[i][0] == item[0] && array[i][1] == item[1]) {
-//       return true; // Found it
-//     }
-//   }
-//   return false; // Not found
-// }
-
-Array.prototype.indexOf2d = function (item) {
-  // arrCoords is an array with previous coordinates converted to strings in format "x|y"
-  arrCoords = JSON.stringify(
-    this.map(function (a) {
-      return a[0] + "|" + a[1];
-    })
-  );
-
-  // now use indexOf to find item converted to a string in format "x|y"
-  return arrCoords.indexOf(item[0] + "|" + item[1]) !== -1;
-};
-
 function randompatternselected() {
   var randompattern = [];
 
@@ -786,7 +814,7 @@ function randompatternselected() {
   var url = "https://playgameoflife.live/random.json?heightmax=30&widthmax=40";
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
-  xhr.onreadystatechange = () => {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       if (xhr.responseText != "") {
         const responseJson = JSON.parse(xhr.responseText);
@@ -819,7 +847,8 @@ function randompatternselected() {
             );
             matrix[randompattern[i][0]][randompattern[i][1]] = 1;
             sparseMatrix.push([randompattern[i][0], randompattern[i][1]]);
-            sparseMatrix = [...new Set(sparseMatrix)];
+            // sparseMatrix = [...new Set(sparseMatrix)];
+            // sparseMatrix = unique(sparseMatrix);
             originalNumber++;
             document.getElementById(
               "originalNumber"
@@ -830,10 +859,10 @@ function randompatternselected() {
       }
     }
   };
-  xhr.onerror = () => {
+  xhr.onerror = function () {
     console.log(new Error(xhr.statusText));
   };
-  xhr.onabort = () => {
+  xhr.onabort = function () {
     console.log(new Error("abort this request"));
   };
   xhr.send();
@@ -864,7 +893,8 @@ function gliderpatternselected() {
       );
       matrix[gliderpattern[i][0]][gliderpattern[i][1]] = 1;
       sparseMatrix.push([gliderpattern[i][0], gliderpattern[i][1]]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -905,7 +935,8 @@ function smallexploderpatternselected() {
         smallexploderpattern[i][0],
         smallexploderpattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -944,7 +975,8 @@ function exploderpatternselected() {
       );
       matrix[exploderpattern[i][0]][exploderpattern[i][1]] = 1;
       sparseMatrix.push([exploderpattern[i][0], exploderpattern[i][1]]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -988,7 +1020,8 @@ function tencellcolumnpatternselected() {
         tencellcolumnpattern[i][0],
         tencellcolumnpattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1038,7 +1071,8 @@ function lightweightspaceshippatternselected() {
         lightweightspaceshippattern[i][0],
         lightweightspaceshippattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1087,7 +1121,8 @@ function tumblerpatternselected() {
       );
       matrix[tumblerpattern[i][0]][tumblerpattern[i][1]] = 1;
       sparseMatrix.push([tumblerpattern[i][0], tumblerpattern[i][1]]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1157,7 +1192,8 @@ function gosperglidergunpatternselected() {
         gosperglidergunpattern[i][0],
         gosperglidergunpattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1214,7 +1250,8 @@ function mournJohnConwaypatterninitialized() {
         mournJohnConwaypattern[i][0],
         mournJohnConwaypattern[i][1],
       ]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1333,7 +1370,8 @@ function _1024cheerspattern() {
       );
       matrix[__1024cheerspattern[i][0]][__1024cheerspattern[i][1]] = 1;
       sparseMatrix.push([__1024cheerspattern[i][0], __1024cheerspattern[i][1]]);
-      sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = [...new Set(sparseMatrix)];
+      // sparseMatrix = unique(sparseMatrix);
       originalNumber++;
       document.getElementById("originalNumber").innerHTML = originalNumber;
     }
@@ -1413,5 +1451,83 @@ function ratebuttonclicked() {
       rateLabel.innerText = "";
     }, 500);
     rateCounter = 1;
+  }
+}
+
+// Detect screen resize event to redraw JSXGraph board, learnt form
+// https://bourne2learn.com/math/jsxgraph/jsxgraph-examples.php
+// and
+// https://bourne2learn.com/math/jsxgraph/cellular-automaton.php
+
+function actualResizeHandler() {
+  var box = document.querySelector("#box");
+
+  // Need to unset these so ccntaining DIV can change size
+  box.style.width = "";
+  box.style.height = "";
+  // Get width and height of (changed) containing DIV
+  var theWidth = box.getBoundingClientRect().width;
+  var theHeight = box.getBoundingClientRect().height;
+
+  board.suspendUpdate();
+  // Now resize the board
+  board.resizeContainer(theWidth, theHeight);
+  // resize the cell size
+  // reference: https://groups.google.com/g/jsxgraph/c/dHT6qU6ICZo
+  if (window.innerWidth >= 1280) {
+    cellSize = 6;
+  } else if (window.innerWidth >= 800) {
+    cellSize = 4;
+  } else if (window.innerWidth >= 425) {
+    cellSize = 2;
+  } else {
+    cellSize = 1;
+  }
+  for (el in board.objects) {
+    if (JXG.isPoint(board.objects[el])) {
+      board.objects[el].setAttribute({ size: cellSize });
+    }
+  }
+  board.unsuspendUpdate();
+}
+///////////////////////////////////////
+//
+// Scroll handler
+// * isScrolling is a timeout for detecting if scrolling is occuring
+// * scrolling is used to disable the function that's called on a resize
+// * (necessary since phone browsers trigger a "resize" event when the URL bar..
+//   and refresh icon appears a the top when the user scrolls up)
+//
+///////////////////////////////////////
+var isScrolling,
+  scrolling = false;
+window.addEventListener(
+  "scroll",
+  function (event) {
+    scrolling = true;
+    window.clearTimeout(isScrolling);
+    isScrolling = setTimeout(function () {
+      scrolling = false;
+    }, 66);
+  },
+  false
+);
+///////////////////////////////////////
+//
+// Resize throttler
+//
+///////////////////////////////////////
+window.addEventListener("resize", resizeThrottler, false);
+var resizeTimeout, actualResizeHandler;
+function resizeThrottler() {
+  if (!scrolling) {
+    if (!resizeTimeout) {
+      resizeTimeout = setTimeout(function () {
+        resizeTimeout = null;
+        if (typeof actualResizeHandler == "function") {
+          actualResizeHandler();
+        }
+      }, 500);
+    }
   }
 }
