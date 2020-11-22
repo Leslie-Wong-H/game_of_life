@@ -53,6 +53,9 @@ var cellSize = (window.innerWidth / 300).toFixed(0);
 //   cellSize = 1;
 // }
 
+// Do not show axis when in mobile layout, for beautification
+var showAxis = window.innerWidth < 425 ? false : true;
+
 // Bind the click events with start, pause, continue, reset and rate buttons
 
 function bindEvent() {
@@ -163,7 +166,7 @@ function unique(arr) {
 var board = JXG.JSXGraph.initBoard("box", {
   boundingbox: [0, 0, -40, -30],
   keepaspectratio: true,
-  axis: true,
+  axis: showAxis,
   grid: true,
   showCopyright: true,
   shownavigation: false,
@@ -640,7 +643,7 @@ function nextGeneration() {
     board = JXG.JSXGraph.initBoard("box", {
       boundingbox: [0, 0, -40, -30],
       keepaspectratio: true,
-      axis: true,
+      axis: showAxis,
       grid: true,
       showCopyright: true,
       shownavigation: false,
@@ -694,7 +697,7 @@ function clearBoard() {
   board = JXG.JSXGraph.initBoard("box", {
     boundingbox: [0, 0, -40, -30],
     keepaspectratio: true,
-    axis: true,
+    axis: showAxis,
     grid: true,
     showCopyright: true,
     shownavigation: false,
