@@ -42,16 +42,19 @@ var nLive = originalNumber;
 var evolutionCount = 0;
 var nAliveCnt = 0;
 
-var cellSize;
-if (window.innerWidth >= 1280) {
-  cellSize = 6;
-} else if (window.innerWidth >= 800) {
-  cellSize = 4;
-} else if (window.innerWidth >= 425) {
-  cellSize = 2;
-} else {
-  cellSize = 1;
-}
+var cellSize = (window.innerWidth / 300).toFixed(0);
+// if (window.innerWidth >= 1280) {
+//   cellSize = 6;
+// } else if (window.innerWidth >= 800) {
+//   cellSize = 4;
+// } else if (window.innerWidth >= 425) {
+//   cellSize = 2;
+// } else {
+//   cellSize = 1;
+// }
+
+// Do not show axis when in mobile layout, for beautification
+var showAxis = window.innerWidth < 425 ? false : true;
 
 // Bind the click events with start, pause, continue, reset and rate buttons
 
@@ -163,7 +166,7 @@ function unique(arr) {
 var board = JXG.JSXGraph.initBoard("box", {
   boundingbox: [0, 0, -40, -30],
   keepaspectratio: true,
-  axis: true,
+  axis: showAxis,
   grid: true,
   showCopyright: true,
   shownavigation: false,
@@ -640,7 +643,7 @@ function nextGeneration() {
     board = JXG.JSXGraph.initBoard("box", {
       boundingbox: [0, 0, -40, -30],
       keepaspectratio: true,
-      axis: true,
+      axis: showAxis,
       grid: true,
       showCopyright: true,
       shownavigation: false,
@@ -694,7 +697,7 @@ function clearBoard() {
   board = JXG.JSXGraph.initBoard("box", {
     boundingbox: [0, 0, -40, -30],
     keepaspectratio: true,
-    axis: true,
+    axis: showAxis,
     grid: true,
     showCopyright: true,
     shownavigation: false,
@@ -1474,15 +1477,16 @@ function actualResizeHandler() {
   board.resizeContainer(theWidth, theHeight);
   // resize the cell size
   // reference: https://groups.google.com/g/jsxgraph/c/dHT6qU6ICZo
-  if (window.innerWidth >= 1280) {
-    cellSize = 6;
-  } else if (window.innerWidth >= 800) {
-    cellSize = 4;
-  } else if (window.innerWidth >= 425) {
-    cellSize = 2;
-  } else {
-    cellSize = 1;
-  }
+  // if (window.innerWidth >= 1280) {
+  //   cellSize = 6;
+  // } else if (window.innerWidth >= 800) {
+  //   cellSize = 4;
+  // } else if (window.innerWidth >= 425) {
+  //   cellSize = 2;
+  // } else {
+  //   cellSize = 1;
+  // }
+  cellSize = (window.innerWidth / 300).toFixed(0);
   for (el in board.objects) {
     if (JXG.isPoint(board.objects[el])) {
       board.objects[el].setAttribute({ size: cellSize });
