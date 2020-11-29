@@ -127,5 +127,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/windows,linux,macos,node
-.vscode/settings.json
-.gitignore
+.vscode
+Dockerfile
+docker-compose.yml
+docker-compose.debug.yml
+.dockerignore
