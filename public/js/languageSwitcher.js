@@ -25,8 +25,10 @@ $(document).ready(function () {
       $("#dropupButton").text("Pattern");
       $("#random").text("Random");
       $("#glider").text("Glider");
-      $("#smallexploder").text("Small Exploder");
-      $("#exploder").text("Exploder");
+      $("#smallexploder").text("Honey Farm");
+      $("#exploder").text("Pulsar");
+      // $("#smallexploder").text("Small Exploder");
+      // $("#exploder").text("Exploder");
       $("#tencellcolumn").text("10 Cell Column");
       $("#lightweightspaceship").text("Lightweight Spaceship");
       $("#tumbler").text("Tumbler");
