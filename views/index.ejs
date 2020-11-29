@@ -14,9 +14,9 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.7/jsxgraph.css"
+      href="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraph.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.7/jsxgraphcore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraphcore.js"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
       rel="stylesheet"
@@ -77,7 +77,9 @@
               />
               <!-- <div class="w-100" style="margin: 10px;"></div> -->
             </div>
-            <div class="col-lg-6 col-md-12 align-self-center mt-1 mb-1 p-0 textAlignContainer">
+            <div
+              class="col-lg-6 col-md-12 align-self-center mt-1 mb-1 p-0 textAlignContainer"
+            >
               <span class="textBox">
                 <span
                   id="originalNumberText"
@@ -112,8 +114,12 @@
                   <a class="dropdown-item" id="random">Random</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" id="glider">Glider</a>
-                  <a class="dropdown-item" id="smallexploder">Small Exploder</a>
-                  <a class="dropdown-item" id="exploder">Exploder</a>
+                  <!-- Rename "small exploder" to "honey farm" and "exploder" to
+                      "pulsar", under the suggestion from conwaylife.com
+                      https://www.conwaylife.com/forums/viewtopic.php?p=113188#p113188
+                  -->
+                  <a class="dropdown-item" id="smallexploder">Honey Farm</a>
+                  <a class="dropdown-item" id="exploder">Pulsar</a>
                   <a class="dropdown-item" id="tencellcolumn">10 Cell Column</a>
                   <a class="dropdown-item" id="lightweightspaceship"
                     >Lightweight Spaceship</a
@@ -142,14 +148,20 @@
               <label class="rateLabel"></label>
               <div id="rulesDescriptionModal" class="rulesDescriptionModal">
                 <!-- Button trigger modal -->
-                <div class="help-center-question-guide-container" data-toggle="modal" data-target="#descriptionModal">
+                <div
+                  class="help-center-question-guide-container"
+                  data-toggle="modal"
+                  data-target="#descriptionModal"
+                >
                   <div class="help-center-question-guide-dropdown">
                     <div placement="leftBottom">
                       <div>
                         <span class="dui-m-badge">
                           <div class="help-center-question-guide-btn">
                             <div class="help-svg"></div>
-                            <div class="help-center-question-guide-btn-cover"></div>
+                            <div
+                              class="help-center-question-guide-btn-cover"
+                            ></div>
                           </div>
                         </span>
                       </div>
@@ -157,15 +169,26 @@
                   </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel"
-                  aria-hidden="true">
+                <div
+                  class="modal fade"
+                  id="descriptionModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="descriptionModalLabel"
+                  aria-hidden="true"
+                >
                   <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="descriptionModalLabel">
                           Game of Life Algorithm Description
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -173,18 +196,19 @@
                         <p id="descriptionContentParagraphOne">
                           The Game of Life is a cellular automata devised by the
                           mathematician John Horton Conway from Cambridge
-                          University. It came to become well-known for the article
-                          published at Scientific American in 1970.
+                          University. It came to become well-known for the
+                          article published at Scientific American in 1970.
                         </p>
                         <p id="descriptionContentParagraphTwo">
                           Rules of the Game of Life: The universe of the Game of
-                          Life is an infinite, two-dimensional orthogonal grid of
-                          square cells, each of which is in one of two possible
-                          states, alive and dead, (or populated and unpopulated,
-                          respectively). Every cell interacts with its eight
-                          neighbors, which are the cells that are horizontally,
-                          vertically, or diagonally adjacent. At each step of
-                          evolution, the following transitions occur:
+                          Life is an infinite, two-dimensional orthogonal grid
+                          of square cells, each of which is in one of two
+                          possible states, alive and dead, (or populated and
+                          unpopulated, respectively). Every cell interacts with
+                          its eight neighbors, which are the cells that are
+                          horizontally, vertically, or diagonally adjacent. At
+                          each step of evolution, the following transitions
+                          occur:
                         </p>
                         <ol>
                           <li>
@@ -193,12 +217,12 @@
                             </div>
                             <ul>
                               <li id="descriptionContentParagraphFour">
-                                There existing fewer than two live neighbors, the
-                                cell dies, due to isolation.
+                                There existing fewer than two live neighbors,
+                                the cell dies, due to isolation.
                               </li>
                               <li id="descriptionContentParagraphFive">
-                                There existing more than three live neighbors, the
-                                cell dies, due to over-crowding.
+                                There existing more than three live neighbors,
+                                the cell dies, due to over-crowding.
                               </li>
                               <li id="descriptionContentParagraphSix">
                                 There existing two or three live neighbors, the
@@ -213,7 +237,8 @@
                             <ul>
                               <li id="descriptionContentParagraphEight">
                                 There existing three live neighbors, the box
-                                generates a new live cell, as if by reproduction.
+                                generates a new live cell, as if by
+                                reproduction.
                               </li>
                             </ul>
                           </li>
@@ -221,7 +246,12 @@
                         <p></p>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="modalBtnContent" data-dismiss="modal">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          id="modalBtnContent"
+                          data-dismiss="modal"
+                        >
                           Understood & Close
                         </button>
                       </div>
@@ -287,7 +317,7 @@
         <div class="col-xs-12" style="visibility: hidden">3 of 3</div>
       </div>
     </div>
-    <script src="js/hideTriangles.js"></script>
+    <!-- <script src="js/hideTriangles.js"></script> -->
     <script type="text/javascript" src="js/gameofLife.js"></script>
     <script src="js/languageSwitcher.js"></script>
     <!-- <script src="js/desktopFirst.js"></script> -->

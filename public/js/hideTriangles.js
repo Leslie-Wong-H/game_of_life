@@ -8,7 +8,7 @@ $(document).ready(function () {
     // );
     // $("#secondRow").attr("style", "height: 100vh;");
     // $("#rulesDescriptionModal").attr("style", "display: none;");
-    $("#box_jxgBoard1L3").attr("style", "display: none;");
-    $("#box_jxgBoard1L7").attr("style", "display: none;");
+    // $("marker").attr("style", "visibility: hidden;");
+    // $("#box_jxgBoard1L7").attr("style", "display: none;");
   }
 });
