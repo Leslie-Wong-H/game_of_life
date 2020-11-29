@@ -189,6 +189,11 @@ var board = JXG.JSXGraph.initBoard("box", {
     pinchSensitivity: 0, // Sensitivity (in degrees) for recognizing horizontal or vertical pinch-to-zoom gestures.
   },
 });
+// hide top-left triangles generageted when initialize
+if (window.innerWidth >= 425) {
+  document.querySelectorAll("defs > marker")[0].style.visibility = "hidden";
+  document.querySelectorAll("defs > marker")[1].style.visibility = "hidden";
+}
 
 //Generate random matrix（deprecated)
 //Initialize cell matrix
@@ -738,8 +743,10 @@ function clearBoard() {
   startBl = true;
   board.on("down", down);
   // hide top-left triangles generageted by reset
-  document.querySelectorAll("defs > marker")[0].style.visibility = "hidden";
-  document.querySelectorAll("defs > marker")[1].style.visibility = "hidden";
+  if (window.innerWidth >= 425) {
+    document.querySelectorAll("defs > marker")[0].style.visibility = "hidden";
+    document.querySelectorAll("defs > marker")[1].style.visibility = "hidden";
+  }
 
   if (document.getElementsByClassName("selector en")[0]) {
     start.value = "Start";
