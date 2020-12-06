@@ -87,5 +87,5 @@ express()
   )
   // .get("/", (req, res) => res.sendfile("views/index.html"))
   .get("/random.json", (req, res) => randomPatternQuery(res, req.query))
-  .get("/tang.json", (req, res) => chinesePostryQuery(res, req.query))
+  .get("/tang.json", (req, res) => chinesePoetryQuery(res, req.query))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
