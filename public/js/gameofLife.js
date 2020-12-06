@@ -126,7 +126,7 @@ bindEvent();
 
 Array.prototype.indexOf2d = function (item) {
   // arrCoords is an array with previous coordinates converted to strings in format "x|y"
-  arrCoords = JSON.stringify(
+  const arrCoords = JSON.stringify(
     this.map(function (a) {
       return a[0] + "|" + a[1];
     })
@@ -214,9 +214,9 @@ function init() {
 
   //Generate plot matrix
   plotMatrix = new Array();
-  for (i = 0; i <= 30; i++) {
+  for (let i = 0; i <= 30; i++) {
     plotMatrix[i] = new Array();
-    for (j = 0; j <= 40; j++) {
+    for (let j = 0; j <= 40; j++) {
       plotMatrix[i][j] = "";
     }
   }
@@ -231,7 +231,7 @@ init();
 // See the bottom for function detail
 
 // easter egg for 1024
-if (this.location.search === "?from=1024") {
+if (window.location.search === "?from=1024") {
   _1024cheerspattern();
 } else {
   mournJohnConwaypatterninitialized();
@@ -684,7 +684,7 @@ function clearBoard() {
   board.off("down", down);
   // board.suspendUpdate();
 
-  for (el in board.objects) {
+  for (let el in board.objects) {
     if (JXG.isPoint(board.objects[el])) {
       board.removeObject(el);
     }
@@ -1533,7 +1533,7 @@ window.addEventListener(
 //
 ///////////////////////////////////////
 window.addEventListener("resize", resizeThrottler, false);
-var resizeTimeout, actualResizeHandler;
+var resizeTimeout;
 function resizeThrottler() {
   if (!scrolling) {
     if (!resizeTimeout) {
