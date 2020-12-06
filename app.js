@@ -20,7 +20,7 @@ const chinesePoetryQuery = async (expressRes, expressQuery) => {
   try {
     const db = client.db("chinesePoetry");
     let collection = db.collection("tang");
-    let randomNumber = Math.floor(Math.random() * 97); // 733 kinds of pattern in total
+    let randomNumber = Math.floor(Math.random() * 97); // 97 poems in total
     let randomIndex = `1-00${
       randomNumber < 10 ? "0" + String(randomNumber) : String(randomNumber)
     }`;
