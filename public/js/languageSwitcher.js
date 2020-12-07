@@ -89,8 +89,8 @@ $(document).ready(function () {
       $("#dropupButton").text("模式");
       $("#random").text("随机");
       $("#glider").text("滑翔机");
-      $("#smallexploder").text("小型炸弹");
-      $("#exploder").text("炸弹");
+      $("#smallexploder").text("蜂蜜农场");
+      $("#exploder").text("脉冲星");
       $("#tencellcolumn").text("十细胞阵列");
       $("#lightweightspaceship").text("轻型飞船");
       $("#tumbler").text("翻筋斗杂技者");
