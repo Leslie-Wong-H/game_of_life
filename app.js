@@ -20,7 +20,9 @@ const chinesePoetryQuery = async (expressRes, expressQuery) => {
   try {
     const db = client.db("chinesePoetry");
     let collection = db.collection("tang");
-    let randomNumber = Math.floor(Math.random() * 97); // 97 poems in total
+    let dbStats = await collection.stats();
+    // let randomNumber = Math.floor(Math.random() * 97); // 97 poems in total
+    let randomNumber = Math.floor(Math.random() * dbStats.count);
     let randomIndex = `1-00${
       randomNumber < 10 ? "0" + String(randomNumber) : String(randomNumber)
     }`;
@@ -47,7 +49,9 @@ const randomPatternQuery = async (expressRes, expressQuery) => {
   try {
     const db = client.db("gameOfLife");
     let collection = db.collection("gameOfLifePatterns");
-    let randomIndex = Math.floor(Math.random() * 733); // 733 kinds of pattern in total
+    let dbStats = await collection.stats();
+    // let randomIndex = Math.floor(Math.random() * 733); // 733 kinds of pattern in total
+    let randomIndex = Math.floor(Math.random() * dbStats.count);
     let query = { index: randomIndex };
     let res = await collection.findOne(query);
     if (expressQuery && expressQuery.heightmax && expressQuery.widthmax) {
