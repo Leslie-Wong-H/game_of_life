@@ -321,6 +321,10 @@ body {
 }
 
 @media screen and (max-width: 425px) {
+  .btn {
+    padding: 0.375rem 0.5rem !important;
+  }
+
   .lgswitcherContainer {
     padding: 0rem 0.625rem 0 0;
     margin-right: 0;
