@@ -66,6 +66,30 @@ $(document).ready(function () {
         "There existing three live neighbors, the box generates a new live cell, as if by reproduction."
       );
       $("#modalBtnContent").text("Understood & Close");
+      // make poetry responsive to languageSwitcher
+      var pattern = /\w/;
+      var rawData = $("#poetry-data-store").text();
+      var startIndex = Number(rawData.slice(0, 1));
+      var objIndex = 1;
+      // when index is bigger than 9
+      if (rawData.slice(1, 2).match(pattern)) {
+        startIndex = Number(startIndex + rawData.slice(1, 2));
+        objIndex = 2;
+      }
+      var data = JSON.parse(rawData.slice(objIndex, rawData.length));
+      var sentenceOne = data.English.content[startIndex];
+      var sentenceTwo = data.English.content[startIndex + 1];
+      var detail;
+      if (
+        sentenceOne
+          .slice(sentenceOne.length - 1, sentenceOne.length)
+          .match(pattern)
+      ) {
+        detail = sentenceOne + ";&nbsp;" + sentenceTwo;
+      } else {
+        detail = sentenceOne + "&nbsp;" + sentenceTwo;
+      }
+      $("#poetry-data-box").html(detail);
     } else {
       $("#selector").attr("class", "selector cn");
       $("#resetButton").attr("value", "重置");
@@ -128,6 +152,20 @@ $(document).ready(function () {
         "周围有 3 个活细胞的话，方格有活细胞生成。"
       );
       $("#modalBtnContent").text("已知晓");
+      // make poetry responsive to languageSwitcher
+      var pattern = /\w/;
+      var rawData = $("#poetry-data-store").text();
+      var startIndex = Number(rawData.slice(0, 1));
+      var objIndex = 1;
+      if (rawData.slice(1, 2).match(pattern)) {
+        startIndex = Number(startIndex + rawData.slice(1, 2));
+        objIndex = 2;
+      }
+      var data = JSON.parse(rawData.slice(objIndex, rawData.length));
+      var sentenceOne = data.Chinese.content[startIndex];
+      var sentenceTwo = data.Chinese.content[startIndex + 1];
+      var detail = sentenceOne + sentenceTwo;
+      $("#poetry-data-box").html(detail);
     }
   });
 });

@@ -8,8 +8,8 @@
       name="description"
       content="Game of Life | ©Leslie Wong, an elegant online implementation to John Conway's game of life problem."
     />
-    <meta name="keywords" content="Game of Life, John Conway, Cell Automata"/>
-    <meta name="author" content="Leslie Wong"/>
+    <meta name="keywords" content="Game of Life, John Conway, Cell Automata" />
+    <meta name="author" content="Leslie Wong" />
     <title>Game of Life | ©Leslie Wong</title>
     <link rel="icon" href="img/favicon.ico" />
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -39,6 +39,10 @@
         <img class="githubImg" src="img/GitHub.png" alt="Github Link" />
       </a>
     </div>
+    <div id="poetry-data-display" class="poetry-data-display">
+      <div id="poetry-data-box" class="poetry-data-box"></div>
+    </div>
+    <div id="poetry-data-store" style="display: none"></div>
     <div id="lgswitcherContainer" class="lgswitcherContainer">
       <div id="selector" class="selector en">
         <span class="langCn">中</span>
@@ -326,9 +330,10 @@
       </div>
     </div>
     <!-- <script src="js/hideTriangles.js"></script> -->
+    <!-- <script src="js/desktopFirst.js"></script> -->
     <script type="text/javascript" src="js/gameofLife.js"></script>
     <script src="js/languageSwitcher.js"></script>
-    <!-- <script src="js/desktopFirst.js"></script> -->
+    <script src="js/chinesePoetry.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
