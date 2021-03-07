@@ -89,7 +89,9 @@ $(document).ready(function () {
       } else {
         detail = sentenceOne + "&nbsp;" + sentenceTwo;
       }
+      $("#poetry-data-box").attr("style", "display: none;");
       $("#poetry-data-box").html(detail);
+      $("#poetry-data-box").fadeIn();
     } else {
       $("#selector").attr("class", "selector cn");
       $("#resetButton").attr("value", "重置");
@@ -165,7 +167,9 @@ $(document).ready(function () {
       var sentenceOne = data.Chinese.content[startIndex];
       var sentenceTwo = data.Chinese.content[startIndex + 1];
       var detail = sentenceOne + sentenceTwo;
+      $("#poetry-data-box").attr("style", "display: none;");
       $("#poetry-data-box").html(detail);
+      $("#poetry-data-box").fadeIn();
     }
   });
 });
