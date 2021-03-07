@@ -28,7 +28,10 @@ $(document).ready(function () {
       } else {
         detail = sentenceOne + "&nbsp;" + sentenceTwo;
       }
+      // display text with animation
+      $("#poetry-data-box").attr("style", "display: none;");
       $("#poetry-data-box").html(detail);
+      $("#poetry-data-box").fadeIn();
       // store data for languageSwitcher
       var stringifiedData = startIndex + JSON.stringify(data);
       $("#poetry-data-store").text(stringifiedData);
