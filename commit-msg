@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Validate commit log
+
+commit_regex="^Merge.+|(:tada: feat|:bug: fix|:pencil: docs|:art: style|:hammer: refactor|:racehorse: perf|:cop: test|:construction :build|:rocket: ci|:wrench: chore|:arrow_backward: revert)(\(.+\))?: .{1,50}"
+
+msg=`cat $HUSKY_GIT_PARAMS`
+
+if [[ "$msg" =~ $commit_regex ]]; then
+    exit 0
+else
+    echo "  Please use a valid commit message.  "
+    echo "  See commit_regex in commit_msg for more details.  "
+    exit 1
+fi
