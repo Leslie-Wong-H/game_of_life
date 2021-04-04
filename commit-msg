@@ -2,7 +2,7 @@
 
 # Validate commit log
 
-commit_regex="^Merge.+|(:tada: feat|:bug: fix|:pencil: docs|:art: style|:hammer: refactor|:racehorse: perf|:cop: test|:construction :build|:rocket: ci|:wrench: chore|:arrow_backward: revert)(\(.+\))?: .{1,50}"
+commit_regex="^Merge.+|(:tada: feat|:bug: fix|:pencil: docs|:art: style|:hammer: refactor|:racehorse: perf|:cop: test|:construction: build|:rocket: ci|:wrench: chore|:arrow_backward: revert)(\(.+\))?: .{1,50}"
 
 msg=`cat $HUSKY_GIT_PARAMS`
 
