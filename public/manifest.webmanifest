@@ -1,7 +1,7 @@
 {
   "short_name": "LW's GOL",
   "name": "Game of Life | ©Leslie Wong",
-  "description": "Game of Life | ©Leslie Wong, an elegant implementation to John Conway's game of life problem.",
+  "description": "Game of Life | ©Leslie Wong, an elegant online implementation to John Conway's game of life problem.",
   "icons": [
     {
       "src": "img/jsxgraph-game-of-life-icon-192.png",

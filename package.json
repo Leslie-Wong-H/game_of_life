@@ -1,7 +1,7 @@
 {
   "name": "gameoflife",
   "version": "1.0.0",
-  "description": "An implementation to John Conway's Game of Life with JSXgraph",
+  "description": "An elegant online implementation to John Conway's Game of Life with JSXgraph",
   "main": "app.js",
   "directories": {
     "doc": "docs"
