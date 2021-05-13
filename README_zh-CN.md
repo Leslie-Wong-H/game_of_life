@@ -2,7 +2,7 @@
 
 - [English Document](./README.md) | 中文文档
 
-🎉 JSXGraph2020会议 [幻灯片](https://www.lesliewong.cn/gameoflife/gameoflife.pdf) & [视频](https://www.youtube.com/watch?v=ajKIaTlEuz4) 🎉
+🎉 JSXGraph2020会议 [幻灯片](https://www.lesliewong.cn/gameoflife/gameoflife.pdf) 🎉
 
 ## 算法描述
 
