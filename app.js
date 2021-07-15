@@ -1,5 +1,8 @@
 const express = require("express");
 const path = require("path");
+const dotenv = require("dotenv");
+dotenv.config("./env");
+
 const PORT = process.env.PORT || 5000;
 const google_analytics = process.env.google_analytics;
 const sslRedirect = require("heroku-ssl-redirect");
