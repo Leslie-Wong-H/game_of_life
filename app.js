@@ -1,5 +1,11 @@
 const express = require("express");
+const logger = require("morgan");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const path = require("path");
+const dotenv = require("dotenv");
+dotenv.config("./env");
+
 const PORT = process.env.PORT || 5000;
 const google_analytics = process.env.google_analytics;
 const sslRedirect = require("heroku-ssl-redirect");
@@ -82,7 +88,12 @@ express()
     );
     next();
   })
+  // uncomment sslRedirect if build a container image and puth to docker hub.
   .use(sslRedirect())
+  .use(logger("short"))
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({ extended: false }))
+  .use(cookieParser())
   .use(express.static(path.join(__dirname, "public")))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
