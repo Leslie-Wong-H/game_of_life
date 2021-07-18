@@ -88,7 +88,7 @@ express()
     );
     next();
   })
-  // uncomment sslRedirect if build a container image and puth to docker hub.
+  // uncomment sslRedirect if build a container image and push to docker hub.
   .use(sslRedirect())
   .use(logger("short"))
   .use(bodyParser.json())
