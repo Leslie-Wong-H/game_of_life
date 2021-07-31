@@ -2,8 +2,6 @@
 
 - [English Document](./README.md) | 中文文档
 
-🎉 JSXGraph2020会议 [幻灯片](https://www.lesliewong.cn/gameoflife/gameoflife.pdf) 🎉
-
 ## 算法描述
 
 生命游戏又称细胞自动机，反映了生命演化的规则。它由剑桥大学的数学家约翰·康威所提出，并且借由 1970 年发表在《科学美国人》上的文章而变得出名。
