@@ -8,24 +8,27 @@ const child = spawn("node", ["app.js"], { env });
 
 test("responds to requests", (t) => {
   t.plan(4);
-
+  let counter = 0; // Closure to ensure only one reqeust
   // Wait until the server is ready
   child.stdout.on("data", (_) => {
     // Make a request to our app
-    request("http://127.0.0.1:5000", (error, response, body) => {
-      // stop the server
-      child.kill();
+    counter++;
+    if (counter === 1) {
+      request("http://127.0.0.1:5000", (error, response, body) => {
+        // stop the server
+        child.kill();
 
-      // No error
-      t.false(error);
-      // Successful response
-      t.equal(response.statusCode, 200);
-      // Assert content checks
-      t.notEqual(
-        body.indexOf("<title>Game of Life | ©Leslie Wong</title>"),
-        -1
-      );
-      t.notEqual(body.indexOf("(⊙ o ⊙)!"), -1);
-    });
+        // No error
+        t.false(error);
+        // Successful response
+        t.equal(response.statusCode, 200);
+        // Assert content checks
+        t.notEqual(
+          body.indexOf("<title>Game of Life | ©Leslie Wong</title>"),
+          -1
+        );
+        t.notEqual(body.indexOf("(⊙ o ⊙)!"), -1);
+      });
+    }
   });
 });
