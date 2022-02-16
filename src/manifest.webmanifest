@@ -1,0 +1,22 @@
+{
+  "short_name": "LW's GOL",
+  "name": "Game of Life | ©Leslie Wong",
+  "description": "Game of Life | ©Leslie Wong, an elegant online implementation to John Conway's game of life problem.",
+  "icons": [
+    {
+      "src": "img/jsxgraph-game-of-life-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/jsxgraph-game-of-life-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#004DA0",
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#004DA0"
+}
