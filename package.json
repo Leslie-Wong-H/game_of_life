@@ -1,14 +1,17 @@
 {
   "name": "gameoflife",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "An elegant online implementation to John Conway's Game of Life with JSXgraph",
   "main": "app.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "node test.js",
-    "start": "node app.js"
+    "dev": "parcel src/index.html",
+    "build": "rm -rf dist && parcel build src/index.html --no-source-maps",
+    "build:win": "rmdir /s/q dist && parcel build src/index.html --no-source-maps",
+    "start": "node app.js",
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -28,18 +31,45 @@
   },
   "homepage": "https://github.com/Leslie-Wong-H/game_of_life#readme",
   "dependencies": {
+    "@sswatson/jsxgraph-react-js": "^1.0.10",
+    "@xstate/react": "^2.0.0",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.6.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
-    "ejs": "^3.0.2",
     "express": "^4.17.1",
     "heroku-ssl-redirect": "0.0.4",
+    "i18next": "^21.6.10",
+    "jsxgraph": "1.2.2",
+    "lodash.assign": "^4.2.0",
     "mongodb": "^3.6.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "prop-types": "^15.5.4",
+    "react": "17.0.1",
+    "react-bootstrap": "^1.6.4",
+    "react-dom": "17.0.1",
+    "react-i18next": "^11.15.3",
+    "react-router-dom": "5.2.0",
+    "react-transition-group": "^4.4.2",
+    "xstate": "^4.30.0"
   },
   "devDependencies": {
+    "@babel/core": "7.12.16",
+    "@babel/eslint-parser": "7.13.4",
+    "@babel/plugin-proposal-class-properties": "7.13.0",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "7.13.5",
+    "@babel/preset-react": "7.12.13",
+    "eslint": "7.18.0",
+    "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-react": "7.22.0",
+    "eslint-plugin-react-hooks": "4.2.0",
     "husky": "^4.3.8",
-    "prettier": "^2.1.2",
+    "parcel": "1.12.3",
+    "posthtml-expressions": "^1.9.0",
+    "prettier": "2.2.1",
     "request": "^2.88.2",
     "tape": "^4.13.2"
   },
@@ -47,5 +77,8 @@
     "hooks": {
       "commit-msg": "sh commit-msg"
     }
-  }
+  },
+  "browserslist": [
+    "defaults"
+  ]
 }

@@ -94,13 +94,16 @@ express()
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: false }))
   .use(cookieParser())
-  .use(express.static(path.join(__dirname, "public")))
+  .use(express.static(path.join(__dirname, "dist")))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
-  .get("/", (req, res) =>
-    res.render("index", { google_analytics: google_analytics })
-  )
-  // .get("/", (req, res) => res.sendfile("views/index.html"))
+  // .get("/", (req, res) =>
+  //   res.render("index", { google_analytics: google_analytics })
+  // )
+  // .get("/", (req, res) => res.sendfile("dist/index.html"))
   .get("/random.json", (req, res) => randomPatternQuery(res, req.query))
   .get("/tang.json", (req, res) => chinesePoetryQuery(res, req.query))
+  .get("*", (req, res) => {
+    res.redirect("/");
+  })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
