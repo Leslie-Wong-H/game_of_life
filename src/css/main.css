@@ -246,9 +246,10 @@ body {
 .rateLabel {
   width: 5.6rem;
   padding-top: 0.5rem;
-  /* margin-left: -0.3rem; */
+  margin-left: 1rem;
   color: #f94b18;
   position: absolute;
+  text-align: left;
 }
 
 .modal-content {
