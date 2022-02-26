@@ -27,7 +27,7 @@ test("responds to requests", (t) => {
           body.indexOf("<title>Game of Life | ©Leslie Wong</title>"),
           -1
         );
-        t.notEqual(body.indexOf("(⊙ o ⊙)!"), -1);
+        t.notEqual(body.indexOf("Wait a moment"), -1);
       });
     }
   });
