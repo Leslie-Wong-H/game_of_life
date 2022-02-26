@@ -12,8 +12,6 @@
  */
 
 import JXG from "jsxgraph";
-import { interpret } from "xstate";
-import { buttonMachine } from "../ButtonMachine";
 
 import {
   gliderpattern,
@@ -31,7 +29,8 @@ import {
 let mouseDownActionStore = () => {};
 
 export default class GameOfLife {
-  constructor(matrixRow = 31, matrixColumn = 41) {
+  // "send" is from Xstate to dispatch the number-update event
+  constructor(send, matrixRow = 31, matrixColumn = 41) {
     this.matrixRow = matrixRow;
     this.matrixColumn = matrixColumn;
     this.matrix = [];
@@ -56,12 +55,7 @@ export default class GameOfLife {
     this.isScrolling = "";
     this.scrolling = false;
 
-    this.service = interpret(buttonMachine);
-    this.service.start();
-
-    this.service.subscribe((state) => {
-      console.log(state.value, state.context);
-    });
+    this.send = send;
   }
 
   /**
@@ -103,8 +97,7 @@ export default class GameOfLife {
     mouseDownActionStore = this.mouseDownAction.bind(this);
     this.board.on("down", mouseDownActionStore);
 
-    this.service.send("updateOriginalNumber", { originalNumber: 5 });
-    console.log(this.service);
+    this.send("updateOriginalNumber", { originalNumber: 5 });
   }
 
   /**
@@ -176,6 +169,9 @@ export default class GameOfLife {
           return JSON.stringify(val) !== JSON.stringify([-y, -x]);
         });
         this.originalNumber--;
+        this.send("updateOriginalNumber", {
+          originalNumber: this.originalNumber,
+        });
         canCreate = false;
         break;
       }
@@ -193,6 +189,9 @@ export default class GameOfLife {
         this.matrix[-y][-x] = 1;
         this.sparseMatrix.push([-y, -x]);
         this.originalNumber++;
+        this.send("updateOriginalNumber", {
+          originalNumber: this.originalNumber,
+        });
       }
     }
   }
@@ -201,9 +200,13 @@ export default class GameOfLife {
     this.nLive = this.originalNumber;
 
     // Display the initial number of live cells
-    // document.getElementById('originalNumber').innerHTML = originalNumber;
+    this.send("updateOriginalNumber", {
+      originalNumber: this.originalNumber,
+    });
     // Initialize the remaining lives
-    // document.getElementById('remainLifes').innerHTML = nLive;
+    this.send("updateRemainLifes", {
+      remainLifes: this.nLive,
+    });
 
     // Clone matrix
     this.copyMatrix = new Array();
@@ -457,10 +460,14 @@ export default class GameOfLife {
 
     // Update remaining lives and evolution times
     this.evolutionCount++;
-    // document.getElementById('remainLifes').innerHTML = nLive;
+    this.send("updateRemainLifes", {
+      remainLifes: this.nLive,
+    });
 
     if (this.nLive !== 0) {
-      // document.getElementById('evolutionTimes').innerHTML = evolutionCount;
+      this.send("updateEvolutionTimes", {
+        evolutionTimes: this.evolutionCount,
+      });
     } else {
       clearInterval(this.timer);
       this.board = JXG.JSXGraph.initBoard("box", {
@@ -490,6 +497,9 @@ export default class GameOfLife {
         },
       });
       this.originalNumber = 0;
+      this.send("updateOriginalNumber", {
+        originalNumber: this.originalNumber,
+      });
     }
   }
 
@@ -515,19 +525,22 @@ export default class GameOfLife {
 
     this.gameState = "";
 
-    // if (document.getElementsByClassName('selector en')[0]) {
-    //   start.value = 'Start';
-    // } else if (document.getElementsByClassName('selector cn')[0]) {
-    //   start.value = '开始';
-    // }
-
     // Set original number, remaining lives and evelution times 0
-    // document.getElementById('originalNumber').innerHTML = 0;
-    // document.getElementById('remainLifes').innerHTML = 0;
-    // document.getElementById('evolutionTimes').innerHTML = 0;
     this.originalNumber = 0;
+    this.send("updateOriginalNumber", {
+      originalNumber: this.originalNumber,
+    });
+
     this.nLive = 0;
+    this.send("updateRemainLifes", {
+      remainLifes: this.nLive,
+    });
+
     this.evolutionCount = 0;
+    this.send("updateEvolutionTimes", {
+      evolutionTimes: this.evolutionCount,
+    });
+
     this.nAliveCnt = 0;
   }
 
@@ -589,6 +602,9 @@ export default class GameOfLife {
         this.matrix[paddedPattern[i][0]][paddedPattern[i][1]] = 1;
         this.sparseMatrix.push([paddedPattern[i][0], paddedPattern[i][1]]);
         this.originalNumber++;
+        this.send("updateOriginalNumber", {
+          originalNumber: this.originalNumber,
+        });
       }
     }
     this.board.unsuspendUpdate();
@@ -643,21 +659,21 @@ export default class GameOfLife {
       }
     };
 
-    // Slow
-    if (this.rateCounter == 1) {
-      this.timeInterval = 1000;
-      reaction();
-      this.rateCounter++;
-      // Fast
-    } else if (rateCounter == 2) {
+    // Fast
+    if (this.rateCounter === 1) {
       this.timeInterval = 30;
       reaction();
       this.rateCounter++;
-      // Medium
-    } else if (rateCounter == 3) {
-      timeInterval = 300;
+      // Slow
+    } else if (this.rateCounter === 2) {
+      this.timeInterval = 1000;
       reaction();
-      rateCounter = 1;
+      this.rateCounter++;
+      // Medium
+    } else if (this.rateCounter === 3) {
+      this.timeInterval = 300;
+      reaction();
+      this.rateCounter = 1;
     }
   }
 
