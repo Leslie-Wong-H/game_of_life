@@ -1,10 +1,9 @@
 var CACHE_NAME = "my-site-cache-v1";
 var urlsToCache = [
   "/",
-  "/css/main.css",
-  "/img/favicon.ico",
+  "/css/main.*.css",
   "/img/help-bd2f9e.svg",
-  "/img/GitHub.png",
+  "/img/GitHub.*.png",
   "https://i.loli.net/2020/02/19/8cWUDIM1ERltom4.png",
 ];
 
