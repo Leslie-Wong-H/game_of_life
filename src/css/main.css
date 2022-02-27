@@ -353,6 +353,7 @@ body {
 @media screen and (max-width: 425px) {
   .poetry-data-display {
     height: 33vh;
+    user-select: none;
   }
 
   .lgswitcherContainer {
