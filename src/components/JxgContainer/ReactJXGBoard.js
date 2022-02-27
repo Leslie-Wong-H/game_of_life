@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import GameOfLife from "./gameOfLife/index.js";
 import "../../css/jsxgraph.css";
-import { useActor } from "@xstate/react";
 import { useSelector } from "@xstate/react";
 import { ButtonContext } from "./ButtonContextProvider";
 
@@ -65,7 +64,6 @@ const certainPatternSelector = (state) => {
 const ReactJXGBoard = () => {
   const [GOLInstance, setGOLInstance] = useState(null);
   const buttonServices = useContext(ButtonContext);
-  const [current] = useActor(buttonServices.buttonService);
   const { send } = buttonServices.buttonService;
   const doStartGame = useSelector(
     buttonServices.buttonService,
@@ -125,8 +123,7 @@ const ReactJXGBoard = () => {
   // Detect "start" button clicked
   useEffect(() => {
     if (doStartGame) {
-      console.log(doStartGame);
-      console.log("start", current.context);
+      console.log("start", doStartGame);
       startGame();
     }
   }, [doStartGame]);
@@ -134,8 +131,7 @@ const ReactJXGBoard = () => {
   // Detect "pause" button clicked
   useEffect(() => {
     if (doPauseGame) {
-      console.log(doPauseGame);
-      console.log("pause", current.context);
+      console.log("pause", doPauseGame);
       pauseGame();
     }
   }, [doPauseGame]);
@@ -143,8 +139,7 @@ const ReactJXGBoard = () => {
   // Detect "continue" button clicked
   useEffect(() => {
     if (doContinueGame) {
-      console.log(doContinueGame);
-      console.log("continue", current.context);
+      console.log("continue", doContinueGame);
       continueGame();
     }
   }, [doContinueGame]);
@@ -152,8 +147,7 @@ const ReactJXGBoard = () => {
   // Detect "reset" button clicked
   useEffect(() => {
     if (doResetGame) {
-      console.log(doResetGame);
-      console.log("reset", current.context);
+      console.log("reset", doResetGame);
       resetGame();
     }
   }, [doResetGame]);
@@ -161,9 +155,8 @@ const ReactJXGBoard = () => {
   // Detect "rate" button clicked
   useEffect(() => {
     // "medium" entry assign at ButtonMachine increments rateCount by 1
-    console.log(doGameRateChange);
     if (doGameRateChange > 1) {
-      console.log(doGameRateChange);
+      console.log("rate change", doGameRateChange);
       changeGameRate();
     }
   }, [doGameRateChange]);
