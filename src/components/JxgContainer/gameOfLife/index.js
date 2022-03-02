@@ -106,7 +106,12 @@ export default class GameOfLife {
    * easter egg for 1024
    */
   easterEgg() {
-    if (window.location.search === "?from=1024") {
+    const month = new Date().getMonth() + 1;
+    const day = new Date().getDate();
+    if (
+      window.location.search === "?from=1024" ||
+      (month === 10 && day === 24)
+    ) {
       this.padPatternToBoard("__1024");
     } else {
       this.padPatternToBoard("mournJohnConway");
