@@ -103,7 +103,7 @@ express()
   // .get("/", (req, res) => res.sendfile("dist/index.html"))
   .get("/random.json", (req, res) => randomPatternQuery(res, req.query))
   .get("/tang.json", (req, res) => chinesePoetryQuery(res, req.query))
-  .get("*", (req, res) => {
-    res.redirect("/");
-  })
+  // .get("*", (req, res) => {
+  //   res.redirect("/");
+  // })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
