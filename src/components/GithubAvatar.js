@@ -9,7 +9,13 @@ const GithubAvatar = () => {
         target="_blank"
         rel="noopener"
       >
-        <img className="githubImg" src={imgURL} alt="GitHub Link" />
+        <img
+          className="githubImg"
+          src={imgURL}
+          alt="GitHub Link"
+          width={64}
+          height={64}
+        />
       </a>
     </div>
   );
