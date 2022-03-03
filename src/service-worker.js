@@ -11,7 +11,9 @@ self.addEventListener("install", function (event) {
   );
 });
 
+// Would break the site when google analytics js is blocked
 self.addEventListener("fetch", function (event) {
+  if (event.request.url.includes("google-analytics.com")) return;
   event.respondWith(
     caches.match(event.request).then(function (response) {
       // Cache hit - return response
