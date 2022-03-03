@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, StrictMode } from "react";
 import { render } from "react-dom";
 import {
   BrowserRouter as Router,
@@ -23,21 +23,23 @@ const App = () => {
   }, [lang[0]]);
 
   return (
-    <LanguageContext.Provider value={lang}>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Fragment>
-              <GithubAvatar />
-              <ChinesePoetry />
-              <LanguageSwitcher />
-              <JxgContainer />
-            </Fragment>
-          </Route>
-          <Route path="" render={() => <Redirect to="/" />} />
-        </Switch>
-      </Router>
-    </LanguageContext.Provider>
+    <StrictMode>
+      <LanguageContext.Provider value={lang}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Fragment>
+                <GithubAvatar />
+                <ChinesePoetry />
+                <LanguageSwitcher />
+                <JxgContainer />
+              </Fragment>
+            </Route>
+            <Route path="" render={() => <Redirect to="/" />} />
+          </Switch>
+        </Router>
+      </LanguageContext.Provider>
+    </StrictMode>
   );
 };
 
