@@ -48,8 +48,11 @@
     <script src="App.js"></script>
     <script>
       window.addEventListener("load", function () {
+        // Exclude firefox for service worker
+        const isFirefox = typeof InstallTrigger !== "undefined";
         if (
           "serviceWorker" in navigator &&
+          !isFirefox &&
           (window.location.protocol === "https:" ||
             window.location.href.startsWith("http://localhost"))
         ) {
