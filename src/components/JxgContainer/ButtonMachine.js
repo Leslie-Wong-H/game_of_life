@@ -72,6 +72,9 @@ export const buttonMachine = createMachine({
                 resetCount: (ctx) => {
                   return ctx.resetCount + 1;
                 },
+                // need to reset pattern to prevent no pattern rendering
+                // when clicking certain pattern twice or more
+                pattern: "",
               }),
             },
           },
