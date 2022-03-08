@@ -112,7 +112,7 @@ const ButtonPanel = () => {
               <Dropdown.Item eventKey="honeyFarm">
                 {t("honeyFarm")}
               </Dropdown.Item>
-              <Dropdown.Item eventKey="Pulsar">{t("pulsar")}</Dropdown.Item>
+              <Dropdown.Item eventKey="pulsar">{t("pulsar")}</Dropdown.Item>
               <Dropdown.Item eventKey="tencellcolumn">
                 {t("tenCellColumn")}
               </Dropdown.Item>
