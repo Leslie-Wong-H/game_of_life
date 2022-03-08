@@ -103,24 +103,32 @@ const ButtonPanel = () => {
                 send("selectPattern", { pattern: e });
               }}
             >
-              <Dropdown.Item eventKey="random">{t("random")}</Dropdown.Item>
+              <Dropdown.Item eventKey="random" as="button">
+                {t("random")}
+              </Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item eventKey="glider">{t("glider")}</Dropdown.Item>
+              <Dropdown.Item eventKey="glider" as="button">
+                {t("glider")}
+              </Dropdown.Item>
               {/*Rename "small exploder" to "honey farm" and "exploder" to
                             "pulsar", under the suggestion from conwaylife.com
                         https://www.conwaylife.com/forums/viewtopic.php?p=113188#p113188 */}
-              <Dropdown.Item eventKey="honeyFarm">
+              <Dropdown.Item eventKey="honeyFarm" as="button">
                 {t("honeyFarm")}
               </Dropdown.Item>
-              <Dropdown.Item eventKey="Pulsar">{t("pulsar")}</Dropdown.Item>
-              <Dropdown.Item eventKey="tencellcolumn">
+              <Dropdown.Item eventKey="pulsar" as="button">
+                {t("pulsar")}
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="tencellcolumn" as="button">
                 {t("tenCellColumn")}
               </Dropdown.Item>
-              <Dropdown.Item eventKey="lightweightspaceship">
+              <Dropdown.Item eventKey="lightweightspaceship" as="button">
                 {t("lightweightSpaceShip")}
               </Dropdown.Item>
-              <Dropdown.Item eventKey="tumbler">{t("tumbler")}</Dropdown.Item>
-              <Dropdown.Item eventKey="gosperglidergun">
+              <Dropdown.Item eventKey="tumbler" as="button">
+                {t("tumbler")}
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="gosperglidergun" as="button">
                 {t("gosperGliderGun")}
               </Dropdown.Item>
               <Dropdown.Divider />
