@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ReactJXGBoard from "./ReactJXGBoard";
 
 const JXGBoard = () => {
