@@ -3,6 +3,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const compression = require("compression");
 const dotenv = require("dotenv");
 dotenv.config("./env");
 
@@ -94,6 +95,7 @@ express()
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: false }))
   .use(cookieParser())
+  .use(compression())
   .use(express.static(path.join(__dirname, "dist")))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
