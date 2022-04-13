@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, FunctionComponent } from "react";
 import {
   Row,
   Col,
@@ -12,17 +12,26 @@ import { useTranslation } from "react-i18next";
 import { useActor } from "@xstate/react";
 import { ButtonContext } from "./ButtonContextProvider";
 
-const ButtonPanel = () => {
+const ButtonPanel:FunctionComponent = () => {
   const [hideRate, setHideRate] = useState(true);
   const { t } = useTranslation();
   const buttonServices = useContext(ButtonContext);
+  // eslint-disable-next-line
+  // @ts-ignore:next-line
+  // eslint-disable-next-line
   const [current] = useActor(buttonServices.buttonService);
+  // eslint-disable-next-line
+  // @ts-ignore:next-line
+  // eslint-disable-next-line
   const { send } = buttonServices.buttonService;
 
   // Display rate info for 500ms when it is changed
   useEffect(() => {
     setHideRate(false);
     setTimeout(() => setHideRate(true), 500);
+  // eslint-disable-next-line
+  // @ts-ignore:next-line
+  // eslint-disable-next-line
   }, [current.value.rate]);
 
   return (
@@ -42,6 +51,7 @@ const ButtonPanel = () => {
             id="resetButton"
             className="reset mt-1 mb-1"
             onClick={() => {
+              // eslint-disable-next-line
               send("clickReboot");
             }}
           >
@@ -52,11 +62,15 @@ const ButtonPanel = () => {
             id="startButton"
             className="start mt-1 mb-1"
             onClick={() => {
+              // eslint-disable-next-line
               send("clickBoot");
             }}
           >
-            {current.matches("boot.start")
-              ? t("start")
+            {
+              // eslint-disable-next-line
+              current.matches("boot.start")
+                ? t("start")
+              // eslint-disable-next-line
               : current.matches("boot.pause")
               ? t("pause")
               : t("continue")}
@@ -75,19 +89,23 @@ const ButtonPanel = () => {
               {t("originalNumber")}:
             </span>
             <span id="originalNumber" className="originalNumber">
-              {current.context.originalNumber}
+              {// eslint-disable-next-line
+                current.context.originalNumber
+              }
             </span>
             <span id="remainLifesText" className="remainLifes inlineText">
               {t("remainingLives")}:
             </span>
             <span id="remainLifes" className="remainLifes">
-              {current.context.remainLifes}
+              {// eslint-disable-next-line
+                current.context.remainLifes}
             </span>
             <span id="evolutionTimesText" className="evolutionTimes inlineText">
               {t("evolutionTimes")}:
             </span>
             <span id="evolutionTimes" className="evolutionTimes">
-              {current.context.evolutionTimes}
+              { // eslint-disable-next-line 
+                current.context.evolutionTimes}
             </span>
           </span>
         </Col>
@@ -100,6 +118,7 @@ const ButtonPanel = () => {
               id="dropupButton"
               drop="up"
               onSelect={(e) => {
+                // eslint-disable-next-line
                 send("selectPattern", { pattern: e });
               }}
             >
@@ -147,6 +166,7 @@ const ButtonPanel = () => {
             id="rateButton"
             className="rate mt-1 mb-1"
             onClick={() => {
+              // eslint-disable-next-line
               send("clickRate");
             }}
           >
@@ -156,7 +176,10 @@ const ButtonPanel = () => {
             className="rateLabel"
             style={{ display: hideRate ? "none" : "inline" }}
           >
-            {t(`${current.context.rateText}`)}
+            {
+              // eslint-disable-next-line
+              t(`${current.context.rateText}`)
+            }
           </label>
           <RuleDescription />
         </Col>
