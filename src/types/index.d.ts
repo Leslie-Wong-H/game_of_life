@@ -7,3 +7,8 @@ declare module "*.svg" {
   const value: any;
   export = value;
 }
+
+interface RuleDescriptionModalProps {
+  show: boolean;
+  onHide: () => void;
+}
