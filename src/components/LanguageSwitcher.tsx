@@ -15,6 +15,7 @@ const LanguageSwitcher:FunctionComponent = () => {
   return (
     <div
       onClick={handleLangClick}
+      aria-hidden="true"
       id="lgswitcherContainer"
       className="lgswitcherContainer"
     >

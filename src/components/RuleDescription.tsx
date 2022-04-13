@@ -8,6 +8,7 @@ const RuleDescription:FunctionComponent = () => {
       <div
         className="help-center-question-guide-container"
         onClick={() => setModalShow(true)}
+        aria-hidden="true"
       >
         <div className="help-center-question-guide-dropdown">
           <div className="left-bottom">

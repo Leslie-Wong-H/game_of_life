@@ -8,10 +8,11 @@ const GithubAvatar:FunctionComponent = () => {
         className="githubLink"
         href="https://github.com/Leslie-Wong-H/game_of_life"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
       >
         <img
           className="githubImg"
+          // eslint-disable-next-line
           src={imgURL}
           alt="GitHub Link"
           width={64}
