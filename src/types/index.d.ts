@@ -13,6 +13,10 @@ interface RuleDescriptionModalProps {
   onHide: () => void;
 }
 
+interface ButtonContextProviderProps {
+  children: React.ReactNode;
+}
+
 type Language = "en" | "cn";
 
 interface LanguageMap {

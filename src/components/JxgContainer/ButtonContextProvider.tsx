@@ -1,10 +1,10 @@
-import { createContext } from "react";
+import { createContext, FunctionComponent } from "react";
 import { useInterpret } from "@xstate/react";
 import { buttonMachine } from "./ButtonMachine";
 
 export const ButtonContext = createContext({});
 
-export const ButtonContextProvider = (props) => {
+export const ButtonContextProvider:FunctionComponent<ButtonContextProviderProps> = (props) => {
   const buttonService = useInterpret(buttonMachine);
 
   return (
