@@ -17,6 +17,19 @@ interface ButtonContextProviderProps {
   children: React.ReactNode;
 }
 
+interface ButtonMachineContext {
+  originalNumber: 0;
+  remainLifes: 0;
+  evolutionTimes: 0;
+  rateText: "medium";
+  rateCount: 0;
+  startCount: 0;
+  pauseCount: 0;
+  continueCount: 0;
+  resetCount: 0;
+  pattern: "";
+}
+
 type Language = "en" | "cn";
 
 interface LanguageMap {
