@@ -1,8 +1,6 @@
 import { createMachine, assign } from "xstate";
 
 export const buttonMachine = createMachine({
-  id: "buttonMachine",
-  type: "parallel",
   context: {
     originalNumber: 0,
     remainLifes: 0,
@@ -15,6 +13,8 @@ export const buttonMachine = createMachine({
     resetCount: 0,
     pattern: "",
   },
+  id: "buttonMachine",
+  type: "parallel",
   states: {
     boot: {
       initial: "start",
@@ -35,28 +35,40 @@ export const buttonMachine = createMachine({
             }
           }),
           exit: assign({
-            startCount: (ctx) => ctx.startCount + 1,
+            // eslint-disable-next-line
+            // @ts-ignore:next-line
+            startCount: (ctx: ButtonMachineContext) => ctx.startCount + 1,
           }),
           on: {
-            clickBoot: "pause",
+            clickBoot: {
+              target: "pause",
+            },
           },
         },
         pause: {
           on: {
             clickBoot: {
-              target: "continue",
               actions: assign({
-                pauseCount: (ctx) => {
+                // eslint-disable-next-line
+                // @ts-ignore:next-line
+                pauseCount: (ctx: ButtonMachineContext) => {
                   return ctx.pauseCount + 1;
                 },
               }),
+              target: "continue",
             },
           },
         },
         continue: {
-          exit: assign({ continueCount: (ctx) => ctx.continueCount + 1 }),
+          exit: assign({
+            // eslint-disable-next-line
+            // @ts-ignore:next-line
+            continueCount: (ctx: ButtonMachineContext) => ctx.continueCount + 1,
+          }),
           on: {
-            clickBoot: "pause",
+            clickBoot: {
+              target: "pause",
+            },
           },
         },
       },
@@ -67,15 +79,17 @@ export const buttonMachine = createMachine({
         reset: {
           on: {
             clickReboot: {
-              target: "#buttonMachine.boot.start",
               actions: assign({
-                resetCount: (ctx) => {
+                // eslint-disable-next-line
+                // @ts-ignore:next-line
+                resetCount: (ctx: ButtonMachineContext) => {
                   return ctx.resetCount + 1;
                 },
                 // need to reset pattern to prevent no pattern rendering
                 // when clicking certain pattern twice or more
                 pattern: "",
               }),
+              target: "#buttonMachine.boot.start",
             },
           },
         },
@@ -87,28 +101,31 @@ export const buttonMachine = createMachine({
         count: {
           on: {
             updateOriginalNumber: {
-              target: "count",
-              actions: assign((_, event) => {
+              actions: assign((_, event: ButtonMachineContext) => {
                 return {
                   originalNumber: event.originalNumber,
                 };
               }),
+              target: "count",
+              internal: false,
             },
             updateRemainLifes: {
-              target: "count",
-              actions: assign((_, event) => {
+              actions: assign((_, event: ButtonMachineContext) => {
                 return {
                   remainLifes: event.remainLifes,
                 };
               }),
+              target: "count",
+              internal: false,
             },
             updateEvolutionTimes: {
-              target: "count",
-              actions: assign((_, event) => {
+              actions: assign((_, event: ButtonMachineContext) => {
                 return {
                   evolutionTimes: event.evolutionTimes,
                 };
               }),
+              target: "count",
+              internal: false,
             },
           },
         },
@@ -120,12 +137,13 @@ export const buttonMachine = createMachine({
         pattern: {
           on: {
             selectPattern: {
-              target: "pattern",
-              actions: assign((_, event) => {
+              actions: assign((_, event: ButtonMachineContext) => {
                 return {
                   pattern: event.pattern,
                 };
               }),
+              target: "pattern",
+              internal: false,
             },
           },
         },
@@ -137,41 +155,53 @@ export const buttonMachine = createMachine({
         medium: {
           entry: assign({
             rateText: () => "medium",
-            rateCount: (ctx) => {
+            // eslint-disable-next-line
+            // @ts-ignore:next-line
+            rateCount: (ctx: ButtonMachineContext) => {
               return ctx.rateCount + 1;
             },
           }),
           exit: assign({
             rateText: () => "fast",
-            rateCount: (ctx) => {
+            // eslint-disable-next-line
+            // @ts-ignore:next-line
+            rateCount: (ctx: ButtonMachineContext) => {
               return ctx.rateCount + 1;
             },
           }),
           on: {
-            clickRate: "fast",
+            clickRate: {
+              target: "fast",
+            },
           },
         },
         fast: {
           exit: assign({
             rateText: () => "slow",
-            rateCount: (ctx) => {
+            // eslint-disable-next-line
+            // @ts-ignore:next-line
+            rateCount: (ctx: ButtonMachineContext) => {
               return ctx.rateCount + 1;
             },
           }),
           on: {
-            clickRate: "slow",
+            clickRate: {
+              target: "slow",
+            },
           },
         },
         slow: {
           on: {
             clickRate: {
-              target: "medium",
               actions: assign({
                 rateText: () => "medium",
-                rateCount: (ctx) => {
+                // eslint-disable-next-line
+                // @ts-ignore:next-line
+                rateCount: (ctx: ButtonMachineContext) => {
                   return ctx.rateCount + 1;
                 },
               }),
+              target: "medium",
             },
           },
         },

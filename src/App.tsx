@@ -24,21 +24,23 @@ import ChinesePoetry from "./components/ChinesePoetry";
 const JxgContainer = lazy(() => import("./components/JxgContainer/index"));
 
 class ErrorBoundary extends Component {
-  constructor(props) {
+  constructor(props: AppProps) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error:any) {
+    console.log(error);
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error:any, errorInfo:any) {
     console.error(error, errorInfo);
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    if (hasError) {
       return (
         <h1 style={{ textAlign: "center" }}>
           Something went wrong. Please reload.
@@ -61,7 +63,7 @@ const App = () => {
 
   // Detect the change of LanguageSwitcher globally, at the app entry point
   useEffect(() => {
-    i18n.changeLanguage(lang[0]);
+    void i18n.changeLanguage(lang[0]);
   }, [lang[0]]);
 
   return (

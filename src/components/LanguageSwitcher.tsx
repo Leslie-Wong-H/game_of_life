@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useContext, FunctionComponent } from "react";
 import LanguageContext from "./LanguageContext";
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher:FunctionComponent = () => {
   const [lang, setLang] = useContext(LanguageContext);
 
   const handleLangClick = () => {
@@ -15,6 +15,7 @@ const LanguageSwitcher = () => {
   return (
     <div
       onClick={handleLangClick}
+      aria-hidden="true"
       id="lgswitcherContainer"
       className="lgswitcherContainer"
     >

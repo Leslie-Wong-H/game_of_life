@@ -1,16 +1,17 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, FunctionComponent } from "react";
 import RuleDescriptionModal from "./RuleDescriptionModal";
 
-const RuleDescription = () => {
+const RuleDescription:FunctionComponent = () => {
   const [modalShow, setModalShow] = useState(false);
   return (
     <Fragment>
       <div
         className="help-center-question-guide-container"
         onClick={() => setModalShow(true)}
+        aria-hidden="true"
       >
         <div className="help-center-question-guide-dropdown">
-          <div placement="leftBottom">
+          <div className="left-bottom">
             <div>
               <span className="dui-m-badge">
                 <div className="help-center-question-guide-btn">

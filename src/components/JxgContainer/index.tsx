@@ -1,9 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, FunctionComponent } from "react";
 import JXGBoard from "./JxgBoard";
 import ButtonPanel from "./ButtonPanel";
 import { ButtonContextProvider } from "./ButtonContextProvider";
 
-const JxgContainer = () => {
+const JxgContainer: FunctionComponent = () => {
   return (
     <Fragment>
       <div className="container">

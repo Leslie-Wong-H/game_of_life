@@ -1,9 +1,10 @@
+import { FunctionComponent } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "../css/bootstrap.min.css";
 import { useTranslation } from "react-i18next";
 
-const RuleDescriptionModal = (props) => {
+const RuleDescriptionModal: FunctionComponent<RuleDescriptionModalProps> = (props) => {
   const { t } = useTranslation();
   return (
     <Modal
