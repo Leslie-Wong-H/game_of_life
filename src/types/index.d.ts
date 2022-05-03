@@ -4,8 +4,10 @@ declare module "*.png" {
 }
 
 declare module "*.svg" {
-  const value: any;
-  export = value;
+  import React = require("react");
+  export const ReactComponent: React.SFC<React.SVGProps<SVGSVGElement>>;
+  const src: string;
+  export default src;
 }
 
 interface RuleDescriptionModalProps {
@@ -14,6 +16,10 @@ interface RuleDescriptionModalProps {
 }
 
 interface ButtonContextProviderProps {
+  children: React.ReactNode;
+}
+
+interface AppProps {
   children: React.ReactNode;
 }
 
