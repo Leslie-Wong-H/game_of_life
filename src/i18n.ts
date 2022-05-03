@@ -8,14 +8,16 @@ import translationCN from "./translations/cn.json";
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 const resources = {
   en: {
+    // eslint-disable-next-line
     translation: translationEN,
   },
   cn: {
+    // eslint-disable-next-line
     translation: translationCN,
   },
 };
 
-i18n
+void i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
