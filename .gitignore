@@ -136,3 +136,5 @@ docker-compose.debug.yml
 dist
 .cache
 example
+backend/.aws-sam
+backend/env.json
