@@ -620,7 +620,7 @@ export default class GameOfLife {
 
     let tempcoord = [];
     let url =
-      "https://playgameoflife.live/random.json?heightmax=30&widthmax=40";
+      "https://api.playgameoflife.live/v1/random.json?heightmax=30&widthmax=40";
     let xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.onreadystatechange = () => {
