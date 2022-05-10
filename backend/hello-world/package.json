@@ -10,8 +10,8 @@
     "axios": "^0.21.1"
   },
   "scripts": {
-    "test": "mocha tests/unit/",
-    "integ-test": "mocha tests/integration/"
+    "test": "mocha --timeout 15000 tests/unit/",
+    "integ-test": "mocha --timeout 15000 tests/integration/"
   },
   "devDependencies": {
     "aws-sdk": "^2.815.0",
