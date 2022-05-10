@@ -13,10 +13,10 @@
     "start": "node app.js",
     "test": "node test.js",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
-    "backend:unit-test": "cd backend/gol-backend && npm run test",
+    "backend:unit-test": "cd backend/gol-backend && npm install && npm run test",
     "backend:build": "cd backend && sam build --use-container",
     "backend:deploy": "cd backend && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset",
-    "backend:integ-test": "cd backend/gol-backend && npm run integ-test"
+    "backend:integ-test": "cd backend/gol-backend && npm install && npm run integ-test"
   },
   "repository": {
     "type": "git",
