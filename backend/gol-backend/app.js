@@ -1,6 +1,6 @@
 /*
  * @Leslie-Wong-H
- * @2020-07-01
+ * @date: 2022-05-08
  * @description: AWS SAM API implementation for https://api.playgameoflife.live/v1/tang.json and https://api.playgameoflife.live/v1/random.json
  */
 
