@@ -52,7 +52,7 @@ const ChinesePoetry: FunctionComponent = () => {
   }, []);
 
   async function requestPoetry() {
-    const res = await fetch("https://playgameoflife.live/tang.json");
+    const res = await fetch("https://api.playgameoflife.live/v1/tang.json");
     console.time("requestPoetry");
     const data = await res.json() as ChinesePoetryResponse;
     const len = data.English.content.length;

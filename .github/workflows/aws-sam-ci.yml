@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 12
+      - uses: aws-actions/setup-sam@v1
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-1
+          aws-sam-stack-name: gameoflife-backend
+      # Unit Test
+      - run: npm run backend:unit-test
+      # Build inside Docker containers
+      - run: npm run backend:build
+      # Deploy the build. Prevent prompts and failure when the stack is unchanged
+      - run: npm run backend:deploy
+      # Wait for 10s to ensure the deployment
+      - name: Sleep for 10 seconds
+        run: sleep 10s
+        shell: bash
+      # Integration Test
+      - run: npm run backend:integ-test
+      
