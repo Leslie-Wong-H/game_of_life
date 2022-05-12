@@ -24,7 +24,7 @@ test("responds to requests", (t) => {
         t.equal(response.statusCode, 200);
         // Assert content checks
         t.notEqual(
-          body.indexOf("<title>Game of Life | ©Leslie Wong</title>"),
+          body.indexOf("<title>Game of Life Online | ©Leslie Wong</title>"),
           -1
         );
         t.notEqual(body.indexOf("Wait a moment"), -1);
