@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import GameOfLife from "./gameOfLife/index.js";
+import GameOfLife from "./gameOfLife/index.ts";
 import "../../css/jsxgraph.css";
 import { useSelector } from "@xstate/react";
 import { ButtonContext } from "./ButtonContextProvider";

@@ -47,7 +47,7 @@
     "express": "^4.17.1",
     "heroku-ssl-redirect": "0.0.4",
     "i18next": "^21.6.10",
-    "jsxgraph": "1.2.2",
+    "jsxgraph": "1.4.3",
     "lodash.assign": "^4.2.0",
     "mongodb": "^3.6.2",
     "morgan": "^1.10.0",

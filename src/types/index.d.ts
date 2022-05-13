@@ -64,3 +64,19 @@ interface ChinesePoetryResponse {
   English: EnglishPoetry;
   tags: string[];
 }
+
+type CoordinatedPattern = [number, number][];
+
+type GameState = "" | "Start" | "Pause" | "Continue" | "Reset";
+
+type PaddedPatternName =
+  | ""
+  | "glider"
+  | "honeyFarm"
+  | "pulsar"
+  | "tencellcolumn"
+  | "lightweightspaceship"
+  | "tumbler"
+  | "gosperglidergun"
+  | "mournJohnConway"
+  | "__1024";

@@ -1,11 +1,11 @@
-const gliderpattern = [
+const gliderpattern: CoordinatedPattern = [
   [2, 8],
   [3, 9],
   [4, 9],
   [4, 8],
   [4, 7],
 ];
-const honeyFarmpattern = [
+const honeyFarmpattern: CoordinatedPattern = [
   [12, 20],
   [13, 19],
   [13, 20],
@@ -14,7 +14,7 @@ const honeyFarmpattern = [
   [14, 21],
   [15, 20],
 ];
-const pulsarpattern = [
+const pulsarpattern: CoordinatedPattern = [
   [11, 18],
   [11, 20],
   [11, 22],
@@ -28,7 +28,7 @@ const pulsarpattern = [
   [15, 20],
   [15, 22],
 ];
-const tencellcolumnpattern = [
+const tencellcolumnpattern: CoordinatedPattern = [
   [10, 20],
   [11, 20],
   [12, 20],
@@ -40,7 +40,7 @@ const tencellcolumnpattern = [
   [18, 20],
   [19, 20],
 ];
-const lightweightspaceshippattern = [
+const lightweightspaceshippattern: CoordinatedPattern = [
   [12, 6],
   [12, 7],
   [12, 8],
@@ -52,7 +52,7 @@ const lightweightspaceshippattern = [
   [15, 8],
 ];
 
-const tumblerpattern = [
+const tumblerpattern: CoordinatedPattern = [
   [10, 18],
   [10, 19],
   [10, 21],
@@ -76,7 +76,7 @@ const tumblerpattern = [
   [15, 22],
   [15, 23],
 ];
-const gosperglidergunpattern = [
+const gosperglidergunpattern: CoordinatedPattern = [
   [7, 1],
   [7, 2],
   [8, 1],
@@ -113,7 +113,7 @@ const gosperglidergunpattern = [
   [18, 25],
   [19, 26],
 ];
-const mournJohnConwaypattern = [
+const mournJohnConwaypattern: CoordinatedPattern = [
   [10, 19],
   [10, 20],
   [10, 21],
@@ -136,7 +136,7 @@ const mournJohnConwaypattern = [
   [18, 19],
   [18, 21],
 ];
-const __1024cheerspattern = [
+const __1024cheerspattern: CoordinatedPattern = [
   [9, 7],
   [10, 6],
   [10, 7],
