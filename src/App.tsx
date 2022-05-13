@@ -12,7 +12,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
+  // Redirect,
 } from "react-router-dom";
 import i18n from "./i18n";
 import imgURL from "./img/loading.svg";
@@ -81,7 +81,7 @@ const App = () => {
                     <JxgContainer />
                   </Fragment>
                 </Route>
-                <Route path="" render={() => <Redirect to="/" />} />
+                {/* <Route path="" render={() => <Redirect to="/" />} /> */}
               </Switch>
             </Router>
           </Suspense>
