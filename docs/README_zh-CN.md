@@ -33,11 +33,11 @@
 
 演示：
 
-[Game of Life | ©Leslie Wong (Heroku App)](http://playgameoflife.live)
+[Game of Life Online | ©Leslie Wong (Heroku App)](http://playgameoflife.live)
 
 或者
 
-[Game of Life | ©Leslie Wong (GitHub Pages)](http://lesliewong.cn/gameoflife/)
+[Game of Life Online | ©Leslie Wong (GitHub Pages)](http://lesliewong.cn/gameoflife/)
 
 ---
 
