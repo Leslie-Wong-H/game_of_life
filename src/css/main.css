@@ -4,6 +4,15 @@ body {
   background-size: cover;
 }
 
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  cursor: pointer;
+  line-height: 8px;
+}
+
 .githubContainer {
   width: 150px;
   height: 75px;

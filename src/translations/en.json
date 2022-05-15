@@ -29,5 +29,7 @@
   "rate": "Rate",
   "slow": "Slow",
   "medium": "Medium",
-  "fast": "Fast"
+  "fast": "Fast",
+  "importRLEPattern": "Import RLE Pattern",
+  "exportRLEPattern": "Export RLE Pattern"
 }

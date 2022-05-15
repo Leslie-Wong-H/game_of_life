@@ -29,5 +29,7 @@
   "rate": "速度",
   "slow": "慢速",
   "medium": "中速",
-  "fast": "快速"
+  "fast": "快速",
+  "importRLEPattern": "RLE模式导入",
+  "exportRLEPattern": "RLE模式导出"
 }

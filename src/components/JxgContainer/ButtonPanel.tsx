@@ -125,6 +125,14 @@ const ButtonPanel:FunctionComponent = () => {
               <Dropdown.Item eventKey="random" as="button">
                 {t("random")}
               </Dropdown.Item>
+              <Dropdown.Item
+                id="lifeLexicon"
+                href="https://conwaylife.com/ref/lexicon/lex_1.htm"
+                target="_blank"
+                rel="noopener"
+              >
+                {t("lifeLexicon")}
+              </Dropdown.Item>              
               <Dropdown.Divider />
               <Dropdown.Item eventKey="glider" as="button">
                 {t("glider")}
@@ -151,13 +159,14 @@ const ButtonPanel:FunctionComponent = () => {
                 {t("gosperGliderGun")}
               </Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item
-                id="lifeLexicon"
-                href="https://conwaylife.com/ref/lexicon/lex_1.htm"
-                target="_blank"
-                rel="noopener"
-              >
-                {t("lifeLexicon")}
+              <Dropdown.Item eventKey="importRLE" as="button">
+                <label htmlFor="file-upload" className="custom-file-upload">
+                  {t("importRLEPattern")}                  
+                </label>
+                <input id="file-upload" type="file" accept=".rle"/>
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="exportRLE" as="button">
+                {t("exportRLEPattern")}
               </Dropdown.Item>
             </DropdownButton>
           </ButtonGroup>
