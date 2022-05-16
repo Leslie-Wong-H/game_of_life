@@ -29,7 +29,7 @@ import {
 let mouseDownActionStore = () => {};
 
 export default class GameOfLife {
-  public send: any;
+  public send: (action: string, payload: unknown) => void;
   public matrixRow: number;
   public matrixColumn: number;
   private matrix: number[][];
@@ -51,7 +51,11 @@ export default class GameOfLife {
   private isScrolling: "" | number;
   private scrolling: boolean;
   // "send" is from Xstate to dispatch the number-update event
-  constructor(send: any, matrixRow = 31, matrixColumn = 41) {
+  constructor(
+    send: (action: string, payload: unknown) => void,
+    matrixRow = 31,
+    matrixColumn = 41
+  ) {
     this.matrixRow = matrixRow;
     this.matrixColumn = matrixColumn;
     this.matrix = [];
