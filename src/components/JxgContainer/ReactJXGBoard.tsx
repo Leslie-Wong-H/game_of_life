@@ -115,6 +115,8 @@ const ReactJXGBoard = () => {
   const selectCertainPattern = (pattern) => {
     if (pattern === "random") {
       GOLInstance.randomPatternSelected();
+    } else if (Array.isArray(pattern)) {
+      GOLInstance.padPatternToBoard("RLEPatternImport", pattern);
     } else {
       GOLInstance.padPatternToBoard(pattern);
     }
