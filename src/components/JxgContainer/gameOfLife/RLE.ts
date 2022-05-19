@@ -51,6 +51,7 @@ function readText(
 /**
  * RLE Decipher, rule description: https://conwaylife.com/wiki/Run_Length_Encoded
  * @param rawRLEtext the raw RLE text
+ * @returns Object { width:number, height:number, result:CoordinatedPattern}
  */
 function RLEDecipher(rawRLEtext: string): RLEDecipherResult {
   const lines = rawRLEtext.split("\n");
