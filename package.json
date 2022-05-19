@@ -15,6 +15,7 @@
     "start": "node app.js",
     "test": "node test.js && jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
     "backend:unit-test": "cd backend/gol-backend && npm install && npm run test",
     "backend:build": "cd backend && sam build --use-container",
