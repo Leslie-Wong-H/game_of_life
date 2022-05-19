@@ -155,4 +155,97 @@ function RLEDecipher(rawRLEtext: string): RLEDecipherResult {
   return { width, height, result };
 }
 
-export { registerRLEImportListenerAndThenDestroy, RLEDecipher };
+/**
+ * RLE Decipher, rule description: https://conwaylife.com/wiki/Run_Length_Encoded
+ * @param Object { width:number, height:number, result:CoordinatedPattern}
+ * @return rawRLEtext the raw RLE text
+ */
+function RLEEncipher(patternInfo: RLEDecipherResult): string {
+  const { width, height, result } = patternInfo;
+
+  let widthOffset = Math.floor((40 - width) / 2);
+  let heightOffset = Math.floor((30 - height) / 2);
+  widthOffset = widthOffset > 0 ? widthOffset : 0;
+  heightOffset = heightOffset > 0 ? heightOffset : 0;
+
+  let decoded: mediumDecodedPattern = Array(height)
+    .fill(0)
+    .map(() => new Array(width).fill(0) as number[]);
+
+  for (const item of result) {
+    decoded[item[0] - heightOffset][item[1] - widthOffset] = 1;
+  }
+
+  //convert all numbers to type of String
+  decoded = decoded.map((row) => row.map((number) => String(number)));
+
+  // join back to string[]
+  decoded = decoded.map((row) => row.join(""));
+
+  //replace letter '1' with o's & '0' with b's ie - alive: o , dead: b
+  decoded = decoded.map((row) => row.replace(/0/g, "b"));
+  decoded = decoded.map((row) => row.replace(/1/g, "o"));
+
+  decoded = decoded.map((row) =>
+    row.replace(/(b+)([^b]*)/g, function (match, subString: string) {
+      // case for those RLE who have number + $ to indicate empty lines, like 14$
+      if (match.split("").every((el) => el === "b") && match.length === width)
+        return "";
+
+      return match.replace(
+        subString,
+        `${subString.length > 1 ? subString.length : ""}b`
+      );
+    })
+  );
+
+  decoded = decoded.map((row) =>
+    row.replace(/(o+)([^o]*)/g, function (match, subString: string) {
+      return match.replace(
+        subString,
+        `${subString.length > 1 ? subString.length : ""}o`
+      );
+    })
+  );
+
+  decoded = decoded.map((row, index) => {
+    // add ! to the last line
+    if (index === decoded.length - 1) {
+      row = row + "!";
+      // remove unnecessary endian b
+      if (row.endsWith("b!")) {
+        row = row.replace(/(\d*)(b!)/g, function () {
+          return "!";
+        });
+      }
+      return row;
+    }
+
+    row = row + "$";
+    // remove unnecessary endian b
+    if (row.endsWith("b$")) {
+      row = row.replace(/(\d*)(b\$)/g, function () {
+        return "$";
+      });
+    }
+    return row;
+  });
+
+  // case for those RLE who has number + $ to indicate empty lines, like 14$
+  const polishedDecoded = decoded
+    .join("")
+    .replace(/(\$+)/g, function (match, subString: string) {
+      return match.replace(
+        subString,
+        `${subString.length > 1 ? subString.length : ""}$`
+      );
+    });
+
+  const rawRLEtext = `#C gererated from https://playgameoflife.live
+x = ${width}, y = ${height}, rule = B3/S23
+${polishedDecoded}`;
+
+  return rawRLEtext;
+}
+
+export { registerRLEImportListenerAndThenDestroy, RLEDecipher, RLEEncipher };
