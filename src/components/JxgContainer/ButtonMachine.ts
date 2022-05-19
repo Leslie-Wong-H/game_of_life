@@ -11,6 +11,7 @@ export const buttonMachine = createMachine({
     pauseCount: 0,
     continueCount: 0,
     resetCount: 0,
+    downloadRLECounter: 0,
     pattern: "",
   },
   id: "buttonMachine",
@@ -144,6 +145,25 @@ export const buttonMachine = createMachine({
               }),
               target: "pattern",
               internal: false,
+            },
+          },
+        },
+      },
+    },
+    downloadRLE: {
+      initial: "downloadRLE",
+      states: {
+        downloadRLE: {
+          on: {
+            clickDownLoadRLE: {
+              actions: assign({
+                downloadRLECounter: (ctx: ButtonMachineContext) => {
+                  // @ts-ignore:next-line
+                  // eslint-disable-next-line
+                  return ctx.downloadRLECounter + 1;
+                },
+              }),
+              target: "downloadRLE",
             },
           },
         },

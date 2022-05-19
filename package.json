@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/Leslie-Wong-H/game_of_life#readme",
   "dependencies": {
+    "@types/file-saver": "^2.0.5",
     "@xstate/react": "^2.0.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
@@ -46,6 +47,7 @@
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "file-saver": "^2.0.5",
     "heroku-ssl-redirect": "0.0.4",
     "i18next": "^21.6.10",
     "jsxgraph": "1.4.3",

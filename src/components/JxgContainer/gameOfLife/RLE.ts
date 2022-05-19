@@ -1,3 +1,4 @@
+import { saveAs } from "file-saver";
 let listenerHolder: any = null;
 
 /**
@@ -248,4 +249,27 @@ ${polishedDecoded}`;
   return rawRLEtext;
 }
 
-export { registerRLEImportListenerAndThenDestroy, RLEDecipher, RLEEncipher };
+function downloadRLEFile(sparseMatrix: CoordinatedPattern): void {
+  try {
+    const patternInfo = {
+      width: 41,
+      height: 31,
+      result: sparseMatrix,
+    };
+    const rawRLEtext = RLEEncipher(patternInfo);
+    const blob = new Blob([rawRLEtext], {
+      type: "text/plain;charset=utf-8",
+    });
+    //eslint-disable-next-line
+    saveAs(blob, "RLEpattern.rle");
+  } catch (e) {
+    console.error("Download RLE File Error!");
+  }
+}
+
+export {
+  registerRLEImportListenerAndThenDestroy,
+  downloadRLEFile,
+  RLEDecipher,
+  RLEEncipher,
+};

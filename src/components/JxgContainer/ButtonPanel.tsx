@@ -135,7 +135,13 @@ const ButtonPanel: FunctionComponent = () => {
                 setShowDropDown(e);
               }}
               onSelect={(e) => {
-                if (e && ["importRLE", "exportRLE"].includes(e)) return;
+                // Import RLE relies on registerRLEImportListenerAndThenDestroy
+                if (e && e === "importRLE") return;
+
+                if (e && e === "exportRLE") {
+                  // eslint-disable-next-line
+                  send("clickDownLoadRLE");
+                }
                 // eslint-disable-next-line
                 send("selectPattern", { pattern: e });
               }}

@@ -34,7 +34,7 @@ export default class GameOfLife {
   public matrixColumn: number;
   private matrix: number[][];
   private copyMatrix: number[][];
-  private sparseMatrix: [number, number][];
+  public sparseMatrix: [number, number][];
   private extendedSparseMatrix: [number, number][];
   private plotMatrix: ("" | JXG.Board)[];
   private gameState: GameState;
