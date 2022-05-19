@@ -1,7 +1,16 @@
 body {
-  background-image: url(https://i.loli.net/2020/02/19/8cWUDIM1ERltom4.png);
+  background-image: url(https://d24fv22ldrqles.cloudfront.net/gameoflife-backend/8cWUDIM1ERltom4.png);
   background-attachment: fixed;
   background-size: cover;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.rle-file-upload {
+  cursor: pointer;
+  line-height: 8px;
 }
 
 .githubContainer {

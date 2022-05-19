@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import GameOfLife from "./gameOfLife/index.js";
+import GameOfLife from "./gameOfLife/index.ts";
 import "../../css/jsxgraph.css";
 import { useSelector } from "@xstate/react";
 import { ButtonContext } from "./ButtonContextProvider";
+import { downloadRLEFile } from "./gameOfLife/RLE";
 
 const startGameSelector = (state) => {
   const {
@@ -47,6 +48,13 @@ const resetGameSelector = (state) => {
   return resetCount;
 };
 
+const downloadRLESelector = (state) => {
+  const {
+    context: { downloadRLECounter },
+  } = state;
+  return downloadRLECounter;
+};
+
 const gameRateChangeSelector = (state) => {
   const {
     context: { rateCount },
@@ -82,6 +90,11 @@ const ReactJXGBoard = () => {
     resetGameSelector
   );
 
+  const doDownloadRLE = useSelector(
+    buttonServices.buttonService,
+    downloadRLESelector
+  );
+
   const doGameRateChange = useSelector(
     buttonServices.buttonService,
     gameRateChangeSelector
@@ -108,6 +121,10 @@ const ReactJXGBoard = () => {
     GOLInstance.clearBoard();
   };
 
+  const downloadRLEPattern = () => {
+    downloadRLEFile(GOLInstance.sparseMatrix);
+  };
+
   const changeGameRate = () => {
     GOLInstance.rateButtonClicked();
   };
@@ -115,6 +132,8 @@ const ReactJXGBoard = () => {
   const selectCertainPattern = (pattern) => {
     if (pattern === "random") {
       GOLInstance.randomPatternSelected();
+    } else if (Array.isArray(pattern)) {
+      GOLInstance.padPatternToBoard("RLEPatternImport", pattern);
     } else {
       GOLInstance.padPatternToBoard(pattern);
     }
@@ -151,6 +170,14 @@ const ReactJXGBoard = () => {
       resetGame();
     }
   }, [doResetGame]);
+
+  // Detect "Export RLE Pattern" button clicked
+  useEffect(() => {
+    if (doDownloadRLE) {
+      console.log("downloadRLE", doDownloadRLE);
+      downloadRLEPattern();
+    }
+  }, [doDownloadRLE]);
 
   // Detect "rate" button clicked
   useEffect(() => {

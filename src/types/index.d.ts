@@ -64,3 +64,27 @@ interface ChinesePoetryResponse {
   English: EnglishPoetry;
   tags: string[];
 }
+
+interface RLEDecipherResult {
+  width: number;
+  height: number;
+  result: CoordinatedPattern;
+}
+
+type CoordinatedPattern = [number, number][];
+
+type GameState = "" | "Start" | "Pause" | "Continue" | "Reset";
+
+type PaddedPatternName =
+  | ""
+  | "glider"
+  | "honeyFarm"
+  | "pulsar"
+  | "tencellcolumn"
+  | "lightweightspaceship"
+  | "tumbler"
+  | "gosperglidergun"
+  | "mournJohnConway"
+  | "__1024";
+
+type mediumDecodedPattern = string[] | string[][] | number[][];

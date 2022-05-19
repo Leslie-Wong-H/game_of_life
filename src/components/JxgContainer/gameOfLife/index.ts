@@ -29,8 +29,33 @@ import {
 let mouseDownActionStore = () => {};
 
 export default class GameOfLife {
+  public send: (action: string, payload: unknown) => void;
+  public matrixRow: number;
+  public matrixColumn: number;
+  private matrix: number[][];
+  private copyMatrix: number[][];
+  public sparseMatrix: [number, number][];
+  private extendedSparseMatrix: [number, number][];
+  private plotMatrix: ("" | JXG.Board)[];
+  private gameState: GameState;
+  private timer: number | undefined;
+  private timeInterval: number;
+  private rateCounter: number;
+  private originalNumber: number;
+  private nLive: number;
+  private evolutionCount: number;
+  private nAliveCnt: number;
+  private cellSize: string;
+  private showAxis: boolean;
+  private board: "" | JXG.Board;
+  private isScrolling: "" | number;
+  private scrolling: boolean;
   // "send" is from Xstate to dispatch the number-update event
-  constructor(send, matrixRow = 31, matrixColumn = 41) {
+  constructor(
+    send: (action: string, payload: unknown) => void,
+    matrixRow = 31,
+    matrixColumn = 41
+  ) {
     this.matrixRow = matrixRow;
     this.matrixColumn = matrixColumn;
     this.matrix = [];
@@ -40,7 +65,7 @@ export default class GameOfLife {
     this.plotMatrix = [];
 
     this.gameState = "";
-    this.timer = "";
+    this.timer = undefined;
     this.timeInterval = 300;
     this.rateCounter = 1;
     this.originalNumber = 0;
@@ -61,7 +86,8 @@ export default class GameOfLife {
   /**
    * Initialize 41*31 board
    */
-  initBoard() {
+  initBoard(): void {
+    JXG.setClassicColors();
     this.board = JXG.JSXGraph.initBoard("box", {
       boundingbox: [0, 0, -40, -30],
       keepaspectratio: true,
@@ -105,7 +131,7 @@ export default class GameOfLife {
    * See the bottom for function detail
    * easter egg for 1024
    */
-  easterEgg() {
+  easterEgg(): void {
     const month = new Date().getMonth() + 1;
     const day = new Date().getDate();
     if (
@@ -121,7 +147,7 @@ export default class GameOfLife {
   /**
    * Initialize the cell matrix
    */
-  initMatrix() {
+  initMatrix(): void {
     this.matrix = [];
     this.sparseMatrix = [];
     this.plotMatrix = [];
@@ -136,7 +162,7 @@ export default class GameOfLife {
     }
   }
 
-  mouseDownAction(e) {
+  mouseDownAction(e): void {
     let canCreate = true,
       i,
       el;
@@ -201,7 +227,7 @@ export default class GameOfLife {
     }
   }
 
-  mainOperation() {
+  mainOperation(): void {
     this.nLive = this.originalNumber;
 
     // Display the initial number of live cells
@@ -228,7 +254,7 @@ export default class GameOfLife {
     }, this.timeInterval);
   }
 
-  nextGeneration() {
+  nextGeneration(): void {
     this.extendedSparseMatrix = [];
 
     for (let i = 0; i < this.sparseMatrix.length; i++) {
@@ -475,6 +501,7 @@ export default class GameOfLife {
       });
     } else {
       clearInterval(this.timer);
+      JXG.setClassicColors();
       this.board = JXG.JSXGraph.initBoard("box", {
         boundingbox: [0, 0, -40, -30],
         keepaspectratio: true,
@@ -508,7 +535,7 @@ export default class GameOfLife {
     }
   }
 
-  clearBoard() {
+  clearBoard(): void {
     clearInterval(this.timer);
     this.board.off("down", mouseDownActionStore);
 
@@ -549,7 +576,7 @@ export default class GameOfLife {
     this.nAliveCnt = 0;
   }
 
-  startButtonClicked(state) {
+  startButtonClicked(state): void {
     // console.log(start.value);
     if (state === "Pause") {
       (this.gameState === "Start" || this.gameState === "Continue") &&
@@ -572,7 +599,10 @@ export default class GameOfLife {
     }
   }
 
-  padPatternToBoard(paddedPatternName, paddedPattern = []) {
+  padPatternToBoard(
+    paddedPatternName: PaddedPatternName,
+    paddedPattern = []
+  ): void {
     const paddedPatternMap = {
       glider: gliderpattern,
       honeyFarm: honeyFarmpattern,
@@ -615,7 +645,7 @@ export default class GameOfLife {
     this.board.unsuspendUpdate();
   }
 
-  randomPatternSelected() {
+  randomPatternSelected(): void {
     let randompattern = [];
 
     let tempcoord = [];
@@ -652,7 +682,7 @@ export default class GameOfLife {
     xhr.send();
   }
 
-  rateButtonClicked() {
+  rateButtonClicked(): void {
     const reaction = () => {
       if (this.gameState === "Continue" || this.gameState === "Start") {
         clearInterval(this.timer);
@@ -689,7 +719,7 @@ export default class GameOfLife {
    * and
    * https://bourne2learn.com/math/jsxgraph/cellular-automaton.php
    */
-  resizeThrottlerWrapper() {
+  resizeThrottlerWrapper(): void {
     var resizeTimeout;
 
     const actualResizeHandler = () => {
@@ -739,7 +769,7 @@ export default class GameOfLife {
    * (necessary since phone browsers trigger a "resize" event when the URL bar..
    * and refresh icon appears a the top when the user scrolls up)
    */
-  scrollHandler() {
+  scrollHandler(): void {
     window.addEventListener(
       "scroll",
       function (event) {

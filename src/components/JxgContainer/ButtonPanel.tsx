@@ -11,9 +11,11 @@ import RuleDescription from "../RuleDescription";
 import { useTranslation } from "react-i18next";
 import { useActor } from "@xstate/react";
 import { ButtonContext } from "./ButtonContextProvider";
+import { registerRLEImportListenerAndThenDestroy } from "./gameOfLife/RLE";
 
-const ButtonPanel:FunctionComponent = () => {
+const ButtonPanel: FunctionComponent = () => {
   const [hideRate, setHideRate] = useState(true);
+  const [showDropDown, setShowDropDown] = useState(false);
   const { t } = useTranslation();
   const buttonServices = useContext(ButtonContext);
   // eslint-disable-next-line
@@ -29,10 +31,16 @@ const ButtonPanel:FunctionComponent = () => {
   useEffect(() => {
     setHideRate(false);
     setTimeout(() => setHideRate(true), 500);
-  // eslint-disable-next-line
-  // @ts-ignore:next-line
-  // eslint-disable-next-line
+    // eslint-disable-next-line
+    // @ts-ignore:next-line
+    // eslint-disable-next-line
   }, [current.value.rate]);
+
+  // Register RLE Pattern Import utility
+  useEffect(() => {
+    showDropDown &&
+      registerRLEImportListenerAndThenDestroy("#rle-file-upload", send);
+  }, [showDropDown]);
 
   return (
     <Col md={12} style={{ paddingLeft: 0, paddingRight: 0 }}>
@@ -70,10 +78,11 @@ const ButtonPanel:FunctionComponent = () => {
               // eslint-disable-next-line
               current.matches("boot.start")
                 ? t("start")
-              // eslint-disable-next-line
-              : current.matches("boot.pause")
-              ? t("pause")
-              : t("continue")}
+                : // eslint-disable-next-line
+                current.matches("boot.pause")
+                ? t("pause")
+                : t("continue")
+            }
           </Button>
         </Col>
         <Col
@@ -89,7 +98,8 @@ const ButtonPanel:FunctionComponent = () => {
               {t("originalNumber")}:
             </span>
             <span id="originalNumber" className="originalNumber">
-              {// eslint-disable-next-line
+              {
+                // eslint-disable-next-line
                 current.context.originalNumber
               }
             </span>
@@ -97,15 +107,19 @@ const ButtonPanel:FunctionComponent = () => {
               {t("remainingLives")}:
             </span>
             <span id="remainLifes" className="remainLifes">
-              {// eslint-disable-next-line
-                current.context.remainLifes}
+              {
+                // eslint-disable-next-line
+                current.context.remainLifes
+              }
             </span>
             <span id="evolutionTimesText" className="evolutionTimes inlineText">
               {t("evolutionTimes")}:
             </span>
             <span id="evolutionTimes" className="evolutionTimes">
-              { // eslint-disable-next-line 
-                current.context.evolutionTimes}
+              {
+                // eslint-disable-next-line
+                current.context.evolutionTimes
+              }
             </span>
           </span>
         </Col>
@@ -117,13 +131,31 @@ const ButtonPanel:FunctionComponent = () => {
               variant="outline-danger"
               id="dropupButton"
               drop="up"
+              onToggle={(e: boolean) => {
+                setShowDropDown(e);
+              }}
               onSelect={(e) => {
+                // Import RLE relies on registerRLEImportListenerAndThenDestroy
+                if (e && e === "importRLE") return;
+
+                if (e && e === "exportRLE") {
+                  // eslint-disable-next-line
+                  send("clickDownLoadRLE");
+                }
                 // eslint-disable-next-line
                 send("selectPattern", { pattern: e });
               }}
             >
               <Dropdown.Item eventKey="random" as="button">
                 {t("random")}
+              </Dropdown.Item>
+              <Dropdown.Item
+                id="lifeLexicon"
+                href="https://conwaylife.com/ref/lexicon/lex_1.htm"
+                target="_blank"
+                rel="noopener"
+              >
+                {t("lifeLexicon")}
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item eventKey="glider" as="button">
@@ -152,12 +184,21 @@ const ButtonPanel:FunctionComponent = () => {
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item
-                id="lifeLexicon"
-                href="https://conwaylife.com/ref/lexicon/lex_1.htm"
+                id="RLELifeWiki"
+                href="https://conwaylife.com/wiki/Run_Length_Encoded"
                 target="_blank"
                 rel="noopener"
               >
-                {t("lifeLexicon")}
+                {t("RLELifeWiki")}
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="importRLE" as="button">
+                <label htmlFor="rle-file-upload" className="rle-file-upload">
+                  {t("importRLEPattern")}
+                </label>
+                <input id="rle-file-upload" type="file" accept=".rle" />
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="exportRLE" as="button">
+                {t("exportRLEPattern")}
               </Dropdown.Item>
             </DropdownButton>
           </ButtonGroup>
