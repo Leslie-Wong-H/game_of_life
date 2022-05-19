@@ -27,7 +27,7 @@ function destroyRLEImportListener(elementID = "#rle-file-upload"): void {
   const fileSelector = document.querySelector<HTMLInputElement>(
     elementID
   ) as HTMLInputElement;
-  fileSelector?.removeEventListener("change", listenerHolder);
+  fileSelector && fileSelector.removeEventListener("change", listenerHolder);
 }
 
 function readText(
@@ -71,7 +71,7 @@ function RLEDecipher(rawRLEtext: string): RLEDecipherResult {
       width = Number(metas[0].slice(metas[0].indexOf("=") + 1));
       height = Number(metas[1].slice(metas[1].indexOf("=") + 1));
       // b3/s23 for John Conway's Game of Life
-      rule = String(metas[2]?.slice(metas[2].indexOf("=") + 1))
+      rule = String(metas[2].slice(metas[2].indexOf("=") + 1))
         .trim()
         .toLowerCase();
       rule === "b3/s23"
@@ -133,7 +133,7 @@ function RLEDecipher(rawRLEtext: string): RLEDecipherResult {
       /*  rle-decoder ends  */
       /**********************/
 
-      if (decoded?.length === y) {
+      if (decoded.length === y) {
         let widthOffset = Math.floor((40 - x) / 2);
         let heightOffset = Math.floor((30 - y) / 2);
         widthOffset = widthOffset > 0 ? widthOffset : 0;
