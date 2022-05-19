@@ -108,8 +108,8 @@ function RLEDecipher(rawRLEtext: string): RLEDecipherResult {
         .split("$");
 
       //replace letter 'o' with 1's & b with 0's ie - alive: 1 , dead: 0
-      decoded = decoded.map((row) => row.replace(/o/g, 1));
-      decoded = decoded.map((row) => row.replace(/b/g, 0));
+      decoded = decoded.map((row) => row.replace(/o/g, "1"));
+      decoded = decoded.map((row) => row.replace(/b/g, "0"));
 
       //for each row split into its own arrow containing single #'s
       decoded = decoded.map((row) => [...row.split("")]);
