@@ -31,5 +31,6 @@
   "medium": "中速",
   "fast": "快速",
   "importRLEPattern": "RLE模式导入",
-  "exportRLEPattern": "RLE模式导出"
+  "exportRLEPattern": "RLE模式导出",
+  "RLELifeWiki": "RLE-生命百科"
 }

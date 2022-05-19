@@ -177,6 +177,14 @@ const ButtonPanel: FunctionComponent = () => {
                 {t("gosperGliderGun")}
               </Dropdown.Item>
               <Dropdown.Divider />
+              <Dropdown.Item
+                id="RLELifeWiki"
+                href="https://conwaylife.com/wiki/Run_Length_Encoded"
+                target="_blank"
+                rel="noopener"
+              >
+                {t("RLELifeWiki")}
+              </Dropdown.Item>
               <Dropdown.Item eventKey="importRLE" as="button">
                 <label htmlFor="rle-file-upload" className="rle-file-upload">
                   {t("importRLEPattern")}

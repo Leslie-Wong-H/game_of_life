@@ -31,5 +31,6 @@
   "medium": "Medium",
   "fast": "Fast",
   "importRLEPattern": "Import RLE Pattern",
-  "exportRLEPattern": "Export RLE Pattern"
+  "exportRLEPattern": "Export RLE Pattern",
+  "RLELifeWiki": "RLE-LifeWiki"
 }
