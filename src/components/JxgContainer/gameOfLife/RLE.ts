@@ -157,7 +157,7 @@ function RLEDecipher(rawRLEtext: string): RLEDecipherResult {
 }
 
 /**
- * RLE Decipher, rule description: https://conwaylife.com/wiki/Run_Length_Encoded
+ * RLE Encipher, rule description: https://conwaylife.com/wiki/Run_Length_Encoded
  * @param Object { width:number, height:number, result:CoordinatedPattern}
  * @return rawRLEtext the raw RLE text
  */
