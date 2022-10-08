@@ -111,10 +111,14 @@ const ChinesePoetry: FunctionComponent = () => {
     <div
       id="poetry-data-display"
       className="poetry-data-display"
-      onClick={requestPoetry}
       aria-hidden="true"
     >
-      <CSSTransition in={inProp} timeout={500} classNames="poetry">
+      <CSSTransition
+        in={inProp}
+        timeout={500}
+        classNames="poetry"
+        onClick={requestPoetry}
+      >
         <div id="poetry-data-box" className="poetry-data-box">
           {poetry[0]}
         </div>
