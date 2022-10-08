@@ -1,7 +1,7 @@
 import { Fragment, useState, FunctionComponent } from "react";
 import RuleDescriptionModal from "./RuleDescriptionModal";
 
-const RuleDescription:FunctionComponent = () => {
+const RuleDescription: FunctionComponent = () => {
   const [modalShow, setModalShow] = useState(false);
   return (
     <Fragment>
