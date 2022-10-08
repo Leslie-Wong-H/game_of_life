@@ -87,4 +87,25 @@ type PaddedPatternName =
   | "mournJohnConway"
   | "__1024";
 
+interface PaddedPatternMap {
+  glider: CoordinatedPattern;
+  honeyFarm: CoordinatedPattern;
+  pulsar: CoordinatedPattern;
+  tencellcolumn: CoordinatedPattern;
+  lightweightspaceship: CoordinatedPattern;
+  tumbler: CoordinatedPattern;
+  gosperglidergun: CoordinatedPattern;
+  mournJohnConway: CoordinatedPattern;
+  __1024: CoordinatedPattern;
+}
+
 type mediumDecodedPattern = string[] | string[][] | number[][];
+
+interface PatternResponseJson {
+  height: number;
+  index: number;
+  pattern: string[];
+  uuid: string;
+  width: number;
+  _id: number;
+}

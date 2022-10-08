@@ -26,7 +26,7 @@ import {
 } from "./GivenPatterns";
 
 // In case of board.off not working, use this instead to keep function address consistent:
-let mouseDownActionStore = () => {};
+let mouseDownActionStore: (e?: any) => void = () => {};
 
 export default class GameOfLife {
   public send: (action: string, payload: unknown) => void;
@@ -36,9 +36,9 @@ export default class GameOfLife {
   private copyMatrix: number[][];
   public sparseMatrix: [number, number][];
   private extendedSparseMatrix: [number, number][];
-  private plotMatrix: ("" | JXG.Board)[];
+  private plotMatrix: ("" | JXG.GeometryElement)[][];
   private gameState: GameState;
-  private timer: number | undefined;
+  private timer: NodeJS.Timer | undefined;
   private timeInterval: number;
   private rateCounter: number;
   private originalNumber: number;
@@ -48,7 +48,7 @@ export default class GameOfLife {
   private cellSize: string;
   private showAxis: boolean;
   private board: "" | JXG.Board;
-  private isScrolling: "" | number;
+  private isScrolling: NodeJS.Timeout | "";
   private scrolling: boolean;
   // "send" is from Xstate to dispatch the number-update event
   constructor(
@@ -94,7 +94,7 @@ export default class GameOfLife {
       axis: this.showAxis,
       grid: true,
       showCopyright: true,
-      shownavigation: false,
+      showNavigation: false,
       pan: {
         //panning interaction(i.e.moving the origin)
         enabled: false, // disallow panning
@@ -116,8 +116,12 @@ export default class GameOfLife {
     });
     // hide top-left triangles generated when initialize
     if (window.innerWidth >= 425) {
-      document.querySelectorAll("defs > marker")[0].style.visibility = "hidden";
-      document.querySelectorAll("defs > marker")[1].style.visibility = "hidden";
+      document.querySelectorAll<HTMLElement>(
+        "defs > marker"
+      )[0].style.visibility = "hidden";
+      document.querySelectorAll<HTMLElement>(
+        "defs > marker"
+      )[1].style.visibility = "hidden";
     }
 
     mouseDownActionStore = this.mouseDownAction.bind(this);
@@ -162,19 +166,23 @@ export default class GameOfLife {
     }
   }
 
-  mouseDownAction(e): void {
+  mouseDownAction(e: Event): void {
     let canCreate = true,
       i,
       el;
 
     // incubated from code at http://jsxgraph.org/wiki/index.php/Browser_event_and_coordinates
     // mouse click event function
-    const getMouseCoords = (e, i) => {
-      var cPos = this.board.getCoordsTopLeftCorner(e, i),
+    const getMouseCoords = (e: Event, i: any) => {
+      const cPos = (this.board as JXG.Board).getCoordsTopLeftCorner(),
         absPos = JXG.getPosition(e, i),
         dx = Math.round(absPos[0] - cPos[0]),
         dy = Math.round(absPos[1] - cPos[1]);
-      return new JXG.Coords(JXG.COORDS_BY_SCREEN, [dx, dy], this.board);
+      return new JXG.Coords(
+        JXG.COORDS_BY_SCREEN,
+        [dx, dy],
+        this.board as JXG.Board
+      );
     };
 
     if (e[JXG.touchProperty]) {
@@ -182,18 +190,20 @@ export default class GameOfLife {
       i = 0;
     }
 
-    let coords = getMouseCoords(e, i);
+    const coords = getMouseCoords(e, i);
     const x = Math.round(coords.usrCoords[1]);
     const y = Math.round(coords.usrCoords[2]);
-    for (el in this.board.objects) {
+    for (el in (this.board as JXG.Board).objects) {
       if (
-        JXG.isPoint(this.board.objects[el]) &&
-        this.board.objects[el].hasPoint(
+        JXG.isPoint((this.board as JXG.Board).objects[el]) &&
+        ((this.board as JXG.Board).objects as {
+          [k: string]: JXG.Board;
+        })[el].hasPoint(
           Math.round(coords.scrCoords[1]),
           Math.round(coords.scrCoords[2])
         )
       ) {
-        this.board.removeObject(el);
+        this.board && this.board.removeObject(el);
         this.plotMatrix[-y][-x] = "";
         this.matrix[-y][-x] = 0;
         this.sparseMatrix = this.sparseMatrix.filter(function (val) {
@@ -210,7 +220,8 @@ export default class GameOfLife {
 
     if (canCreate) {
       if (this.plotMatrix[-y][-x] === "") {
-        this.plotMatrix[-y][-x] = this.board.create("point", [x, y], {
+        this.plotMatrix[-y][-x] = (this
+          .board as JXG.Board).create<JXG.GeometryElement>("point", [x, y], {
           size: this.cellSize,
           name: "",
           fixed: true,
@@ -240,9 +251,9 @@ export default class GameOfLife {
     });
 
     // Clone matrix
-    this.copyMatrix = new Array();
+    this.copyMatrix = new Array<number[]>();
     for (let i = 0; i < this.matrixRow; i++) {
-      this.copyMatrix[i] = new Array();
+      this.copyMatrix[i] = new Array<number>();
 
       for (let j = 0; j < this.matrixColumn; j++) {
         this.copyMatrix[i][j] = this.matrix[i][j];
@@ -464,7 +475,7 @@ export default class GameOfLife {
     this.sparseMatrix = [];
     this.nLive = 0;
     //Update back the state of next generation cell from clone matrix to original matrix, and plot
-    this.board.suspendUpdate();
+    this.board && this.board.suspendUpdate();
     for (let i = 0; i < this.matrixRow; i++) {
       for (let j = 0; j < this.matrixColumn; j++) {
         this.matrix[i][j] = this.copyMatrix[i][j];
@@ -472,22 +483,27 @@ export default class GameOfLife {
           this.nLive++;
           this.sparseMatrix.push([i, j]);
           if (this.plotMatrix[i][j] != "") {
-            this.board.removeObject(this.plotMatrix[i][j]);
+            this.board && this.board.removeObject(this.plotMatrix[i][j]);
           }
-          this.plotMatrix[i][j] = this.board.create("point", [-j, -i], {
-            size: this.cellSize,
-            name: "",
-            fixed: true,
-            showinfobox: false,
-            withLabel: false,
-          });
+          this.plotMatrix[i][j] = (this
+            .board as JXG.Board).create<JXG.GeometryElement>(
+            "point",
+            [-j, -i],
+            {
+              size: this.cellSize,
+              name: "",
+              fixed: true,
+              showinfobox: false,
+              withLabel: false,
+            }
+          );
         } else {
-          this.board.removeObject(this.plotMatrix[i][j]);
+          this.board && this.board.removeObject(this.plotMatrix[i][j]);
           this.plotMatrix[i][j] = "";
         }
       }
     }
-    this.board.unsuspendUpdate();
+    this.board && this.board.unsuspendUpdate();
 
     // Update remaining lives and evolution times
     this.evolutionCount++;
@@ -508,7 +524,7 @@ export default class GameOfLife {
         axis: this.showAxis,
         grid: true,
         showCopyright: true,
-        shownavigation: false,
+        showNavigation: false,
         pan: {
           //panning interaction(i.e.moving the origin)
           enabled: false, // disallow panning
@@ -537,11 +553,11 @@ export default class GameOfLife {
 
   clearBoard(): void {
     clearInterval(this.timer);
-    this.board.off("down", mouseDownActionStore);
+    this.board && this.board.off("down", mouseDownActionStore);
 
-    for (let el in this.board.objects) {
-      if (JXG.isPoint(this.board.objects[el])) {
-        this.board.removeObject(el);
+    for (const el in (this.board as JXG.Board).objects) {
+      if (JXG.isPoint((this.board as JXG.Board).objects[el])) {
+        this.board && this.board.removeObject(el);
       }
     }
 
@@ -576,7 +592,7 @@ export default class GameOfLife {
     this.nAliveCnt = 0;
   }
 
-  startButtonClicked(state): void {
+  startButtonClicked(state: GameState): void {
     // console.log(start.value);
     if (state === "Pause") {
       (this.gameState === "Start" || this.gameState === "Continue") &&
@@ -584,7 +600,7 @@ export default class GameOfLife {
       this.gameState = "Pause";
     } else if (state === "Start") {
       if (this.gameState === "") {
-        this.board.off("down", mouseDownActionStore);
+        this.board && this.board.off("down", mouseDownActionStore);
         this.mainOperation();
         this.gameState = "Start";
       }
@@ -600,10 +616,10 @@ export default class GameOfLife {
   }
 
   padPatternToBoard(
-    paddedPatternName: PaddedPatternName,
-    paddedPattern = []
+    paddedPatternName: PaddedPatternName | "RLEPatternImport" | "randompattern",
+    paddedPattern: [number, number][] = []
   ): void {
-    const paddedPatternMap = {
+    const paddedPatternMap: PaddedPatternMap = {
       glider: gliderpattern,
       honeyFarm: honeyFarmpattern,
       pulsar: pulsarpattern,
@@ -615,15 +631,18 @@ export default class GameOfLife {
       __1024: __1024cheerspattern,
     };
     // randomPattern is not in the map
-    if (paddedPatternMap[paddedPatternName]) {
+    if (
+      paddedPatternName !== "RLEPatternImport" &&
+      paddedPatternName !== "randompattern" &&
+      paddedPatternName !== ""
+    ) {
       paddedPattern = paddedPatternMap[paddedPatternName];
     }
-    this.board.suspendUpdate();
+    this.board && this.board.suspendUpdate();
     for (let i = 0; i < paddedPattern.length; i++) {
       if (this.plotMatrix[paddedPattern[i][0]][paddedPattern[i][1]] == "") {
-        this.plotMatrix[paddedPattern[i][0]][
-          paddedPattern[i][1]
-        ] = this.board.create(
+        this.plotMatrix[paddedPattern[i][0]][paddedPattern[i][1]] = (this
+          .board as JXG.Board).create<JXG.GeometryElement>(
           "point",
           [-paddedPattern[i][1], -paddedPattern[i][0]],
           {
@@ -642,29 +661,34 @@ export default class GameOfLife {
         });
       }
     }
-    this.board.unsuspendUpdate();
+    this.board && this.board.unsuspendUpdate();
   }
 
   randomPatternSelected(): void {
-    let randompattern = [];
+    const randompattern: [number, number][] = [];
 
     let tempcoord = [];
-    let url =
+    const url =
       "https://api.playgameoflife.live/v1/random.json?heightmax=30&widthmax=40";
-    let xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.onreadystatechange = () => {
       if (xhr.readyState == 4 && xhr.status == 200) {
         if (xhr.responseText != "") {
-          const responseJson = JSON.parse(xhr.responseText);
-          var widthOffset = Math.floor((40 - responseJson.width) / 2);
-          var heightOffset = Math.floor((30 - responseJson.height) / 2);
+          const responseJson = JSON.parse(
+            xhr.responseText
+          ) as PatternResponseJson;
+          let widthOffset = Math.floor((40 - responseJson.width) / 2);
+          let heightOffset = Math.floor((30 - responseJson.height) / 2);
           widthOffset = widthOffset > 0 ? widthOffset : 0;
           heightOffset = heightOffset > 0 ? heightOffset : 0;
           for (let i = 0; i < responseJson.height; i++) {
             for (let j = 0; j < responseJson.width; j++) {
               if (responseJson.pattern[i].slice(j, j + 1) === "*") {
-                tempcoord = [heightOffset + i, widthOffset + j];
+                tempcoord = [heightOffset + i, widthOffset + j] as [
+                  number,
+                  number
+                ];
                 randompattern.push(tempcoord);
               }
             }
@@ -720,30 +744,36 @@ export default class GameOfLife {
    * https://bourne2learn.com/math/jsxgraph/cellular-automaton.php
    */
   resizeThrottlerWrapper(): void {
-    var resizeTimeout;
+    let resizeTimeout: NodeJS.Timeout | null;
 
     const actualResizeHandler = () => {
-      var box = document.querySelector("#box");
+      const box = document.querySelector<HTMLDivElement>(
+        "#box"
+      ) as HTMLDivElement;
 
       // Need to unset these so containing DIV can change size
       box.style.width = "";
       box.style.height = "";
       // Get width and height of (changed) containing DIV
-      var theWidth = box.getBoundingClientRect().width;
-      var theHeight = box.getBoundingClientRect().height;
+      const theWidth = box.getBoundingClientRect().width;
+      const theHeight = box.getBoundingClientRect().height;
 
-      this.board.suspendUpdate();
+      this.board && this.board.suspendUpdate();
       // Now resize the board
-      this.board.resizeContainer(theWidth, theHeight);
+      this.board && this.board.resizeContainer(theWidth, theHeight);
       // resize the cell size
       // reference: https://groups.google.com/g/jsxgraph/c/dHT6qU6ICZo
       this.cellSize = (window.innerWidth / 300).toFixed(0);
-      for (let el in this.board.objects) {
-        if (JXG.isPoint(this.board.objects[el])) {
-          this.board.objects[el].setAttribute({ size: this.cellSize });
+      for (const el in (this.board as JXG.Board).objects) {
+        if (JXG.isPoint((this.board as JXG.Board).objects[el] as JXG.Point)) {
+          ((this.board as JXG.Board).objects as { [k: string]: JXG.Point })[
+            el
+          ].setAttribute({
+            size: +this.cellSize,
+          });
         }
       }
-      this.board.unsuspendUpdate();
+      this.board && this.board.unsuspendUpdate();
     };
 
     const resizeThrottler = () => {
@@ -772,10 +802,10 @@ export default class GameOfLife {
   scrollHandler(): void {
     window.addEventListener(
       "scroll",
-      function (event) {
+      () => {
         this.scrolling = true;
-        window.clearTimeout(this.isScrolling);
-        this.isScrolling = setTimeout(function () {
+        this.isScrolling && window.clearTimeout(this.isScrolling);
+        this.isScrolling = setTimeout(() => {
           this.scrolling = false;
         }, 66);
       },
