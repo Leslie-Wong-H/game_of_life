@@ -1,11 +1,19 @@
-import { useState, useEffect, useContext } from "react";
-import GameOfLife from "./gameOfLife/index.ts";
+import { useState, useEffect, useContext, FunctionComponent } from "react";
+import GameOfLife from "./gameOfLife/index";
 import "../../css/jsxgraph.css";
 import { useSelector } from "@xstate/react";
 import { ButtonContext } from "./ButtonContextProvider";
 import { downloadRLEFile } from "./gameOfLife/RLE";
+import { ActorRef } from "xstate/lib/types";
+import { State } from "xstate/lib/State";
 
-const startGameSelector = (state) => {
+const startGameSelector = (
+  state: State<{
+    startCount: number;
+    pauseCount: number;
+    continueCount: number;
+  }>
+): boolean => {
   const {
     context: { startCount, pauseCount, continueCount },
   } = state;
@@ -17,7 +25,13 @@ const startGameSelector = (state) => {
   );
 };
 
-const pauseGameSelector = (state) => {
+const pauseGameSelector = (
+  state: State<{
+    startCount: number;
+    pauseCount: number;
+    continueCount: number;
+  }>
+): boolean => {
   const {
     context: { startCount, pauseCount, continueCount },
   } = state;
@@ -29,7 +43,13 @@ const pauseGameSelector = (state) => {
   );
 };
 
-const continueGameSelector = (state) => {
+const continueGameSelector = (
+  state: State<{
+    startCount: number;
+    pauseCount: number;
+    continueCount: number;
+  }>
+): boolean => {
   const {
     context: { startCount, pauseCount, continueCount },
   } = state;
@@ -41,101 +61,117 @@ const continueGameSelector = (state) => {
   );
 };
 
-const resetGameSelector = (state) => {
+const resetGameSelector = (
+  state: State<{
+    resetCount: number;
+  }>
+): number => {
   const {
     context: { resetCount },
   } = state;
   return resetCount;
 };
 
-const downloadRLESelector = (state) => {
+const downloadRLESelector = (
+  state: State<{
+    downloadRLECounter: number;
+  }>
+): number => {
   const {
     context: { downloadRLECounter },
   } = state;
   return downloadRLECounter;
 };
 
-const gameRateChangeSelector = (state) => {
+const gameRateChangeSelector = (
+  state: State<{
+    rateCount: number;
+  }>
+): number => {
   const {
     context: { rateCount },
   } = state;
   return rateCount;
 };
 
-const certainPatternSelector = (state) => {
+const certainPatternSelector = (
+  state: State<{ pattern: PaddedPatternName }>
+): PaddedPatternName => {
   const {
     context: { pattern },
   } = state;
   return pattern;
 };
 
-const ReactJXGBoard = () => {
-  const [GOLInstance, setGOLInstance] = useState(null);
+const ReactJXGBoard: FunctionComponent = () => {
+  const [GOLInstance, setGOLInstance] = useState<GameOfLife | null>(null);
   const buttonServices = useContext(ButtonContext);
-  const { send } = buttonServices.buttonService;
+  const { send } = buttonServices.buttonService as ActorRef<any, any>;
   const doStartGame = useSelector(
-    buttonServices.buttonService,
+    buttonServices.buttonService as ActorRef<any, any>,
     startGameSelector
   );
   const doPauseGame = useSelector(
-    buttonServices.buttonService,
+    buttonServices.buttonService as ActorRef<any, any>,
     pauseGameSelector
   );
   const doContinueGame = useSelector(
-    buttonServices.buttonService,
+    buttonServices.buttonService as ActorRef<any, any>,
     continueGameSelector
   );
   const doResetGame = useSelector(
-    buttonServices.buttonService,
+    buttonServices.buttonService as ActorRef<any, any>,
     resetGameSelector
   );
 
   const doDownloadRLE = useSelector(
-    buttonServices.buttonService,
+    buttonServices.buttonService as ActorRef<any, any>,
     downloadRLESelector
   );
 
   const doGameRateChange = useSelector(
-    buttonServices.buttonService,
+    buttonServices.buttonService as ActorRef<any, any>,
     gameRateChangeSelector
   );
 
   const doCertainPattern = useSelector(
-    buttonServices.buttonService,
+    buttonServices.buttonService as ActorRef<any, any>,
     certainPatternSelector
   );
 
   const startGame = () => {
-    GOLInstance.startButtonClicked("Start");
+    GOLInstance && GOLInstance.startButtonClicked("Start");
   };
 
   const pauseGame = () => {
-    GOLInstance.startButtonClicked("Pause");
+    GOLInstance && GOLInstance.startButtonClicked("Pause");
   };
 
   const continueGame = () => {
-    GOLInstance.startButtonClicked("Continue");
+    GOLInstance && GOLInstance.startButtonClicked("Continue");
   };
 
   const resetGame = () => {
-    GOLInstance.clearBoard();
+    GOLInstance && GOLInstance.clearBoard();
   };
 
   const downloadRLEPattern = () => {
-    downloadRLEFile(GOLInstance.sparseMatrix);
+    downloadRLEFile((GOLInstance as GameOfLife).sparseMatrix);
   };
 
   const changeGameRate = () => {
-    GOLInstance.rateButtonClicked();
+    GOLInstance && GOLInstance.rateButtonClicked();
   };
 
-  const selectCertainPattern = (pattern) => {
+  const selectCertainPattern = (
+    pattern: PaddedPatternName | "random" | [number, number][]
+  ) => {
     if (pattern === "random") {
-      GOLInstance.randomPatternSelected();
+      GOLInstance && GOLInstance.randomPatternSelected();
     } else if (Array.isArray(pattern)) {
-      GOLInstance.padPatternToBoard("RLEPatternImport", pattern);
+      GOLInstance && GOLInstance.padPatternToBoard("RLEPatternImport", pattern);
     } else {
-      GOLInstance.padPatternToBoard(pattern);
+      GOLInstance && GOLInstance.padPatternToBoard(pattern);
     }
   };
 

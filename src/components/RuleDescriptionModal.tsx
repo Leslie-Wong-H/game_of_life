@@ -4,7 +4,9 @@ import Button from "react-bootstrap/Button";
 import "../css/bootstrap.min.css";
 import { useTranslation } from "react-i18next";
 
-const RuleDescriptionModal: FunctionComponent<RuleDescriptionModalProps> = (props) => {
+const RuleDescriptionModal: FunctionComponent<RuleDescriptionModalProps> = (
+  props
+) => {
   const { t } = useTranslation();
   return (
     <Modal

@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent } from "react";
 import imgURL from "../img/GitHub.png";
 
-const GithubAvatar:FunctionComponent = () => {
+const GithubAvatar: FunctionComponent = () => {
   return (
     <div className="githubContainer">
       <a
