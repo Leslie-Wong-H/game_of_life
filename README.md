@@ -4,6 +4,8 @@
 
 🎉 JSXGraph Conference 2020 [Slide](https://www.lesliewong.cn/gameoflife/gameoflife.pdf) & [Video](https://www.youtube.com/watch?v=ajKIaTlEuz4) 🎉
 
+🎉 JSXGraph Conference 2022 [Slide](https://www.lesliewong.cn/gameoflife/refactor_gameoflife.pdf) & [Video](https://www.youtube.com/watch?v=05jFXTjMkS4) 🎉
+
 ## Algorithm Description
 
 The Game of Life is a cellular automata devised by the mathematician John Horton Conway from Cambridge University. It came to become well-known for the article published at Scientific American in 1970.
