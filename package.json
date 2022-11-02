@@ -91,7 +91,7 @@
     "husky": "^4.3.8",
     "jest": "^26.6.3",
     "ncp": "^2.0.0",
-    "parcel": "1.12.3",
+    "parcel": "2.7.0",
     "parcel-plugin-compress": "^2.0.2",
     "posthtml-expressions": "^1.9.0",
     "prettier": "2.2.1",
