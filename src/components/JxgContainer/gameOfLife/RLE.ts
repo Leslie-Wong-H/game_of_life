@@ -92,7 +92,7 @@ function RLEDecipher(rawRLEtext: string): RLEDecipherResult {
       const x = width;
       const y = height;
 
-      //  Honer mark to
+      //  Honor mark to
       //  https://github.com/timjacksonm/rle-decoder/blob/main/decode.js
 
       /**********************/
