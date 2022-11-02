@@ -55,7 +55,7 @@
     "lodash.assign": "^4.2.0",
     "mongodb": "^3.6.2",
     "morgan": "^1.10.0",
-    "prop-types": "^15.5.4",
+    "prop-types": "^15.8.1",
     "react": "17.0.1",
     "react-bootstrap": "^1.6.4",
     "react-dom": "17.0.1",
