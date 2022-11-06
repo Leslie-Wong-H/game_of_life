@@ -2,10 +2,21 @@ import { useState, useEffect, useContext, FunctionComponent } from "react";
 import { CSSTransition } from "react-transition-group";
 import LanguageContext from "./LanguageContext";
 
+// Prevent browser blocking
+function windowOpen(url: string): void {
+  const newWin = document.createElement("a");
+  newWin.href = url;
+  newWin.target = "_blank";
+  document.body.appendChild(newWin);
+  newWin.click();
+  document.body.removeChild(newWin);
+}
+
 const ChinesePoetry: FunctionComponent = () => {
   const [poetry, setPoetry] = useState([""]);
   const [store, setStore] = useState("");
   const [inProp, setInProp] = useState(false);
+  const [clickCounter, setClickCounter] = useState(0);
   const [lang] = useContext(LanguageContext);
 
   // Detect language change
@@ -56,6 +67,10 @@ const ChinesePoetry: FunctionComponent = () => {
   }, []);
 
   async function requestPoetry() {
+    setClickCounter((current) => ++current);
+    if (clickCounter % 5 === 0) {
+      windowOpen("https://github.com/Leslie-Wong-H/Chinese-Poetry-Bilingual");
+    }
     const res = await fetch("https://api.playgameoflife.live/v1/tang.json");
     console.time("requestPoetry");
     const data = (await res.json()) as ChinesePoetryResponse;
