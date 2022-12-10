@@ -141,6 +141,7 @@ const ButtonPanel: FunctionComponent = () => {
                 if (e && e === "exportRLE") {
                   // eslint-disable-next-line
                   send("clickDownLoadRLE");
+                  return;
                 }
                 // eslint-disable-next-line
                 send("selectPattern", { pattern: e });
