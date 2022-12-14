@@ -105,6 +105,9 @@
       "commit-msg": "sh commit-msg"
     }
   },
+  "alias": {
+    "@/*": "./src/$1"
+  },
   "browserslist": [
     "defaults"
   ]
