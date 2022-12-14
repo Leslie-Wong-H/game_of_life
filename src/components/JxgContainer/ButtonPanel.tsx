@@ -159,11 +159,9 @@ const ButtonPanel: FunctionComponent = () => {
                 rel="noopener"
               >
                 {t("lifeLexicon")}
-                <img
-                  src={newTabIcon}
-                  style={{ height: "16px" }}
-                  alt="open a new tab"
-                />
+                <svg style={{ height: "16px", width: "16px" }}>
+                  <use xlinkHref={newTabIcon} />
+                </svg>
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item eventKey="glider" as="button">
@@ -199,11 +197,9 @@ const ButtonPanel: FunctionComponent = () => {
                 rel="noopener"
               >
                 {t("RLELifeWiki")}
-                <img
-                  src={newTabIcon}
-                  style={{ height: "16px" }}
-                  alt="open a new tab"
-                />
+                <svg style={{ height: "16px", width: "16px" }}>
+                  <use xlinkHref={newTabIcon} />
+                </svg>
               </Dropdown.Item>
               <Dropdown.Item eventKey="importRLE" as="button">
                 <label htmlFor="rle-file-upload" className="rle-file-upload">
