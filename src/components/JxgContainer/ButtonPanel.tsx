@@ -152,6 +152,7 @@ const ButtonPanel: FunctionComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 id="lifeLexicon"
+                eventKey=""
                 href="https://conwaylife.com/ref/lexicon/lex_1.htm"
                 target="_blank"
                 rel="noopener"
@@ -186,6 +187,7 @@ const ButtonPanel: FunctionComponent = () => {
               <Dropdown.Divider />
               <Dropdown.Item
                 id="RLELifeWiki"
+                eventKey=""
                 href="https://conwaylife.com/wiki/Run_Length_Encoded"
                 target="_blank"
                 rel="noopener"
