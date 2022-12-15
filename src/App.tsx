@@ -23,7 +23,7 @@ import ChinesePoetry from "./components/ChinesePoetry";
 
 const JxgContainer = lazy(() => import("./components/JxgContainer/index"));
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends Component<unknown, { hasError: boolean }> {
   constructor(props: AppProps) {
     super(props);
     this.state = { hasError: false };
@@ -53,7 +53,7 @@ class ErrorBoundary extends Component {
 }
 
 const App = () => {
-  const lang = useState("en");
+  const lang = useState<Language>("en");
 
   const renderLoader = () => (
     <div style={{ textAlign: "center" }}>

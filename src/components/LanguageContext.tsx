@@ -1,7 +1,7 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 
-const LanguageContext = createContext<[Language, (language: Language) => void]>(
-  ["en", () => {}]
-);
+const LanguageContext = createContext<
+  [Language, Dispatch<SetStateAction<Language>>]
+>(["en", () => {}]);
 
 export default LanguageContext;
