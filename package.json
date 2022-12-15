@@ -93,6 +93,7 @@
     "ncp": "^2.0.0",
     "parcel": "1.12.3",
     "parcel-plugin-compress": "^2.0.2",
+    "parcel-plugin-svg-sprite": "^1.4.1",
     "posthtml-expressions": "^1.9.0",
     "prettier": "2.2.1",
     "request": "^2.88.2",
