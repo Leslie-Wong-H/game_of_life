@@ -4,6 +4,20 @@ body {
   background-size: cover;
 }
 
+.loading-svg {
+  height: 150px;
+  width: 150px;
+  margin: 8px auto;
+  background: url(../img/loading.svg) no-repeat center;
+  background-size: cover;
+}
+
+.loading-placeholder {
+  height: 150px;
+  width: 150px;
+  margin: 8px;
+}
+
 input[type="file"] {
   display: none;
 }

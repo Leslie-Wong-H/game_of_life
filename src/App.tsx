@@ -15,7 +15,6 @@ import {
   // Redirect,
 } from "react-router-dom";
 import i18n from "./i18n";
-import imgURL from "./img/loading.svg";
 import LanguageContext from "./components/LanguageContext";
 import GithubAvatar from "./components/GithubAvatar";
 import LanguageSwitcher from "./components/LanguageSwitcher";
@@ -57,10 +56,7 @@ const App = () => {
 
   const renderLoader = () => (
     <div style={{ textAlign: "center" }}>
-      {/* <img src={imgURL} alt="Wait a moment" /> */}
-      <svg>
-        <use xlinkHref={imgURL} />
-      </svg>
+      <div className="loading-svg"></div>
     </div>
   );
 

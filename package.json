@@ -111,7 +111,8 @@
   },
   "svgSpriteOptions": {
     "exclude": [
-      "src/img/help-bd2f9e.svg"
+      "src/img/help-bd2f9e.svg",
+      "src/img/loading.svg"
     ]
   },
   "browserslist": [
