@@ -23,18 +23,18 @@ import ChinesePoetry from "./components/ChinesePoetry";
 
 const JxgContainer = lazy(() => import("./components/JxgContainer/index"));
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends Component<unknown, { hasError: boolean }> {
   constructor(props: AppProps) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error:any) {
+  static getDerivedStateFromError(error: any) {
     console.log(error);
     return { hasError: true };
   }
 
-  componentDidCatch(error:any, errorInfo:any) {
+  componentDidCatch(error: any, errorInfo: any) {
     console.error(error, errorInfo);
   }
 
@@ -53,11 +53,14 @@ class ErrorBoundary extends Component {
 }
 
 const App = () => {
-  const lang = useState("en");
+  const lang = useState<Language>("en");
 
   const renderLoader = () => (
     <div style={{ textAlign: "center" }}>
-      <img src={imgURL} alt="Wait a moment" />
+      {/* <img src={imgURL} alt="Wait a moment" /> */}
+      <svg>
+        <use xlinkHref={imgURL} />
+      </svg>
     </div>
   );
 
