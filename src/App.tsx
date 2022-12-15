@@ -29,12 +29,12 @@ class ErrorBoundary extends Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error:any) {
+  static getDerivedStateFromError(error: any) {
     console.log(error);
     return { hasError: true };
   }
 
-  componentDidCatch(error:any, errorInfo:any) {
+  componentDidCatch(error: any, errorInfo: any) {
     console.error(error, errorInfo);
   }
 
@@ -57,7 +57,10 @@ const App = () => {
 
   const renderLoader = () => (
     <div style={{ textAlign: "center" }}>
-      <img src={imgURL} alt="Wait a moment" />
+      {/* <img src={imgURL} alt="Wait a moment" /> */}
+      <svg>
+        <use xlinkHref={imgURL} />
+      </svg>
     </div>
   );
 

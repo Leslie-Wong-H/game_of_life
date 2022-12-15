@@ -109,6 +109,11 @@
   "alias": {
     "@/*": "./src/$1"
   },
+  "svgSpriteOptions": {
+    "exclude": [
+      "src/img/help-bd2f9e.svg"
+    ]
+  },
   "browserslist": [
     "defaults"
   ]
