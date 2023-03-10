@@ -5,6 +5,7 @@ module.exports = {
     "posthtml-expressions": {
       locals: {
         google_analytics: process.env.google_analytics,
+        microsoft_clarity: process.env.microsoft_clarity,
       },
     },
   },
