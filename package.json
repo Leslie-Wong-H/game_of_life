@@ -1,16 +1,16 @@
 {
   "name": "gameoflife",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "An elegant online implementation to John Conway's Game of Life with JSXgraph",
   "main": "app.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html --no-source-maps",
-    "build:win": "rmdir /s/q dist && parcel build src/index.html --no-source-maps",
-    "postbuild": "ncp ./src/img ./dist --filter '**/*.*'",
+    "dev": "vite",
+    "build": "vite build",
+    "build:win": "rmdir /s/q dist && vite build",
+    "postbuild": "ncp src/dist ./dist --filter '**/*.*'",
     "release": "npm run build && npm run postbuild",
     "start": "node app.js",
     "test": "node test.js && jest",
@@ -80,6 +80,7 @@
     "@types/react-transition-group": "^4.4.4",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
+    "@vitejs/plugin-react": "2.1.0",
     "babel-jest": "^26.6.3",
     "eslint": "7.18.0",
     "eslint-config-prettier": "8.1.0",
@@ -91,29 +92,18 @@
     "husky": "^4.3.8",
     "jest": "^26.6.3",
     "ncp": "^2.0.0",
-    "parcel": "1.12.3",
-    "parcel-plugin-compress": "^2.0.2",
-    "parcel-plugin-svg-sprite": "^1.4.1",
-    "posthtml-expressions": "^1.9.0",
     "prettier": "2.2.1",
     "request": "^2.88.2",
     "tape": "^4.13.2",
     "ts-jest": "^26.5.6",
-    "typescript": "4.2.2"
+    "typescript": "4.2.2",
+    "vite": "3.1.4",
+    "vite-plugin-svgr": "2.4.0"
   },
   "husky": {
     "hooks": {
       "commit-msg": "sh commit-msg"
     }
-  },
-  "alias": {
-    "@/*": "./src/$1"
-  },
-  "svgSpriteOptions": {
-    "exclude": [
-      "src/img/help-bd2f9e.svg",
-      "src/img/loading.svg"
-    ]
   },
   "browserslist": [
     "defaults"

@@ -55,7 +55,7 @@
         />
       </div>
     </div>
-    <script src="App.tsx"></script>
+    <script type="module" src="App.tsx"></script>
     <script>
       window.addEventListener("load", function () {
         // Exclude firefox for service worker
@@ -125,7 +125,7 @@
         "ga"
       );
 
-      ga("create", "{{ google_analytics || '' }}", "auto");
+      ga("create", "<%= google_analytics %>", "auto");
       ga("send", "pageview");
     </script>
     <!-- End Google Analytics -->
@@ -142,13 +142,7 @@
         t.src = "https://www.clarity.ms/tag/" + i;
         y = l.getElementsByTagName(r)[0];
         y.parentNode.insertBefore(t, y);
-      })(
-        window,
-        document,
-        "clarity",
-        "script",
-        "{{ microsoft_clarity || '' }}"
-      );
+      })(window, document, "clarity", "script", "<%= microsoft_clarity %>");
     </script>
     <!-- End Microsoft Clarity -->
   </body>

@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useActor } from "@xstate/react";
 import { ButtonContext } from "./ButtonContextProvider";
 import { registerRLEImportListenerAndThenDestroy } from "./gameOfLife/RLE";
-import newTabIcon from "@/img/new-tab.svg";
+import { ReactComponent as NewTabIcon } from "@/img/new-tab.svg";
 
 const ButtonPanel: FunctionComponent = () => {
   const [hideRate, setHideRate] = useState(true);
@@ -159,9 +159,9 @@ const ButtonPanel: FunctionComponent = () => {
                 rel="noopener"
               >
                 {t("lifeLexicon")}
-                <svg style={{ height: "16px", width: "16px" }}>
-                  <use xlinkHref={newTabIcon} />
-                </svg>
+                <span style={{ height: "16px", width: "16px" }}>
+                  <NewTabIcon width={16} height={16} />
+                </span>
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item eventKey="glider" as="button">
@@ -197,9 +197,9 @@ const ButtonPanel: FunctionComponent = () => {
                 rel="noopener"
               >
                 {t("RLELifeWiki")}
-                <svg style={{ height: "16px", width: "16px" }}>
-                  <use xlinkHref={newTabIcon} />
-                </svg>
+                <span style={{ height: "16px", width: "16px" }}>
+                  <NewTabIcon width={16} height={16} />
+                </span>
               </Dropdown.Item>
               <Dropdown.Item eventKey="importRLE" as="button">
                 <label htmlFor="rle-file-upload" className="rle-file-upload">
