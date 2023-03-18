@@ -13,7 +13,7 @@
     "postbuild": "ncp src/dist ./dist --filter '**/*.*'",
     "release": "npm run build && npm run postbuild",
     "start": "node app.js",
-    "test": "node test.js && jest",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
