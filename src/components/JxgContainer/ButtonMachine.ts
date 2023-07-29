@@ -5,7 +5,7 @@ export const buttonMachine = createMachine({
     originalNumber: 0,
     remainLifes: 0,
     evolutionTimes: 0,
-    rateText: "medium",
+    rateText: "fast",
     rateCount: 0,
     startCount: 0,
     pauseCount: 0,
@@ -170,32 +170,9 @@ export const buttonMachine = createMachine({
       },
     },
     rate: {
-      initial: "medium",
+      initial: "fast",
       states: {
         medium: {
-          entry: assign({
-            rateText: () => "medium",
-            // eslint-disable-next-line
-            // @ts-ignore:next-line
-            rateCount: (ctx: ButtonMachineContext) => {
-              return ctx.rateCount + 1;
-            },
-          }),
-          exit: assign({
-            rateText: () => "fast",
-            // eslint-disable-next-line
-            // @ts-ignore:next-line
-            rateCount: (ctx: ButtonMachineContext) => {
-              return ctx.rateCount + 1;
-            },
-          }),
-          on: {
-            clickRate: {
-              target: "fast",
-            },
-          },
-        },
-        fast: {
           exit: assign({
             rateText: () => "slow",
             // eslint-disable-next-line
@@ -210,18 +187,41 @@ export const buttonMachine = createMachine({
             },
           },
         },
+        fast: {
+          entry: assign({
+            rateText: () => "fast",
+            // eslint-disable-next-line
+            // @ts-ignore:next-line
+            rateCount: (ctx: ButtonMachineContext) => {
+              return ctx.rateCount + 1;
+            },
+          }),
+          exit: assign({
+            rateText: () => "medium",
+            // eslint-disable-next-line
+            // @ts-ignore:next-line
+            rateCount: (ctx: ButtonMachineContext) => {
+              return ctx.rateCount + 1;
+            },
+          }),
+          on: {
+            clickRate: {
+              target: "medium",
+            },
+          },
+        },
         slow: {
           on: {
             clickRate: {
               actions: assign({
-                rateText: () => "medium",
+                rateText: () => "fast",
                 // eslint-disable-next-line
                 // @ts-ignore:next-line
                 rateCount: (ctx: ButtonMachineContext) => {
                   return ctx.rateCount + 1;
                 },
               }),
-              target: "medium",
+              target: "fast",
             },
           },
         },

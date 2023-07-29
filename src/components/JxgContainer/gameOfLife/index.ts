@@ -66,8 +66,8 @@ export default class GameOfLife {
 
     this.gameState = "";
     this.timer = undefined;
-    this.timeInterval = 300;
-    this.rateCounter = 1;
+    this.timeInterval = 30; // fast by default
+    this.rateCounter = 2; // click "Rate" to medium
     this.originalNumber = 0;
     this.nLive = 0;
     this.evolutionCount = 0;
@@ -723,14 +723,14 @@ export default class GameOfLife {
       this.timeInterval = 30;
       reaction();
       this.rateCounter++;
-      // Slow
+      // Medium
     } else if (this.rateCounter === 2) {
-      this.timeInterval = 1000;
+      this.timeInterval = 300;
       reaction();
       this.rateCounter++;
-      // Medium
+      // Slow
     } else if (this.rateCounter === 3) {
-      this.timeInterval = 300;
+      this.timeInterval = 1000;
       reaction();
       this.rateCounter = 1;
     }
