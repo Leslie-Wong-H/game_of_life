@@ -51,7 +51,7 @@
     "file-saver": "^2.0.5",
     "heroku-ssl-redirect": "0.0.4",
     "i18next": "^21.6.10",
-    "jsxgraph": "^1.5.0",
+    "jsxgraph": "^1.6.0",
     "lodash.assign": "^4.2.0",
     "mongodb": "^3.6.2",
     "morgan": "^1.10.0",
