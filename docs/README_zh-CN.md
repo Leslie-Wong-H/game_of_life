@@ -4,7 +4,7 @@
 
 ## 算法描述
 
-生命游戏又称细胞自动机。反映了生命演化的规则。它由剑桥大学的数学家约翰·康威所提出，并且借由 1970 年发表在《科学美国人》上的文章而变得出名。
+生命游戏又称细胞自动机，反映了生命演化的规则。它由剑桥大学的数学家约翰·康威所提出，并且借由 1970 年发表在《科学美国人》上的文章而变得出名。
 生命游戏原理：生命生活在二维环境中，每个生命生活在一个方格中，每个细胞在下一个时刻的状态取决于周围 8 个细胞的活着或死了的状态。
 
 1. 对于一个存在活细胞的方格：
@@ -23,23 +23,15 @@
 
 ## 项目架构
 
----
+![项目架构](/docs/imgs/project_architecture_cn.png)
 
-![项目架构](https://i.loli.net/2020/04/19/KtesLrvnIqd3yxb.png)
+## 实现结果
 
-## 实现效果
+在线演示：
 
----
+[Game of Life Online | ©Leslie Wong](http://playgameoflife.live)
 
-演示：
-
-[Game of Life Online | ©Leslie Wong (Heroku App)](http://playgameoflife.live)
-
-或者
-
-[Game of Life Online | ©Leslie Wong (GitHub Pages)](http://lesliewong.cn/gameoflife/)
-
----
+## 网站截图
 
 ![gif1](https://i.loli.net/2020/03/29/A2QGYeI1fCc5LNg.gif)
 

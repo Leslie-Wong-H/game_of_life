@@ -23,7 +23,7 @@
 
 ## 项目架构
 
-![项目架构](https://i.loli.net/2020/04/19/KtesLrvnIqd3yxb.png)
+![项目架构](/docs/imgs/project_architecture_cn.png)
 
 ## 实现结果
 

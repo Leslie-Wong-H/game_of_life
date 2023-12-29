@@ -28,7 +28,7 @@ Rules of the Game of Life: The universe of the Game of Life is an infinite, two-
 
 ## Project Architecture
 
-![project architecture](https://i.loli.net/2020/04/19/rjDMonSRZBgJUHz.png)
+![project architecture](/docs/imgs/project_architecture_en.png)
 
 ## Implementation Result
 
