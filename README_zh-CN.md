@@ -23,7 +23,7 @@
 
 ## 项目架构
 
-![项目架构](https://i.loli.net/2020/04/19/KtesLrvnIqd3yxb.png)
+![项目架构](/docs/imgs/project_architecture_cn.png)
 
 ## 实现结果
 
@@ -33,11 +33,11 @@
 
 ## 网站截图
 
-![gif1](https://i.loli.net/2020/03/29/A2QGYeI1fCc5LNg.gif)
+![gif1](/docs/imgs/gameoflife.gif)
 
 ---
 
-![gif2](https://i.loli.net/2020/04/07/ivx5zVUcAtF9YZq.gif)
+![gif2](/docs/imgs/gameoflifedemo.gif)
 
 ---
 
