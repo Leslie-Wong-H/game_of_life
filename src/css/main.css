@@ -1,5 +1,5 @@
 body {
-  background-color: #004da0;
+  background-color: #004da0 !important;
   background-image: url(https://d24fv22ldrqles.cloudfront.net/gameoflife-backend/8cWUDIM1ERltom4.webp);
   background-attachment: fixed;
   background-size: cover;

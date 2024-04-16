@@ -25,5 +25,6 @@ export default defineConfig(({ mode }) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     plugins: [svgr(), react(), htmlPlugin()],
     root: "src",
+    server: { host: "127.0.0.1", port: 3000 },
   };
 });
