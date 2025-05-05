@@ -1,7 +1,10 @@
 "use strict";
 
 const chai = require("chai");
-const { CloudFormationClient } = require("@aws-sdk/client-cloudformation");
+const {
+  CloudFormationClient,
+  DescribeStacksCommand,
+} = require("@aws-sdk/client-cloudformation");
 const https = require("https");
 const expect = chai.expect;
 
@@ -42,11 +45,10 @@ describe("Test API Gateway", function () {
 
     let response;
     try {
-      response = await client
-        .describeStacks({
-          StackName: stackName,
-        })
-        .promise();
+      const command = new DescribeStacksCommand({
+        StackName: stackName,
+      });
+      response = await client.send(command);
     } catch (e) {
       throw new Error(
         `Cannot find stack ${stackName}: ${e.message}\n` +
