@@ -1,7 +1,7 @@
 "use strict";
 
 const chai = require("chai");
-const AWS = require("aws-sdk");
+const { CloudFormationClient } = require("@aws-sdk/client-cloudformation");
 const https = require("https");
 const expect = chai.expect;
 
@@ -34,7 +34,7 @@ describe("Test API Gateway", function () {
   before(async () => {
     const stackName = getStackName();
 
-    const client = new AWS.CloudFormation({
+    const client = new CloudFormationClient({
       region: process.env["AWS_REGION"],
       accessKeyId: process.env["AWS_ACCESS_KEY"],
       secretAccessKey: process.env["AWS_SECRET_KEY"],
