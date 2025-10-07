@@ -1,13 +1,16 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "../css/bootstrap.min.css";
 import { useTranslation } from "react-i18next";
+import LanguageContext from "./LanguageContext";
 
 const RuleDescriptionModal: FunctionComponent<RuleDescriptionModalProps> = (
   props
 ) => {
   const { t } = useTranslation();
+  const [lang] = useContext(LanguageContext);
+
   return (
     <Modal
       {...props}
@@ -58,6 +61,14 @@ const RuleDescriptionModal: FunctionComponent<RuleDescriptionModalProps> = (
         <p></p>
       </Modal.Body>
       <Modal.Footer id="descriptionModalFooter">
+        {lang === "en" && (
+          <Button
+            variant="info"
+            onClick={() => window.open("https://www.boost-art.net/")}
+          >
+            {t("extraRecommendation")}&#x2197;
+          </Button>
+        )}
         <Button variant="secondary" onClick={props.onHide}>
           {t("descriptionModalFooter")}
         </Button>
