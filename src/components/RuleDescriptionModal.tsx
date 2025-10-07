@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import "../css/bootstrap.min.css";
 import { useTranslation } from "react-i18next";
 import LanguageContext from "./LanguageContext";
+import { ReactComponent as NewTabIcon } from "@/img/new-tab.svg";
 
 const RuleDescriptionModal: FunctionComponent<RuleDescriptionModalProps> = (
   props
@@ -66,7 +67,11 @@ const RuleDescriptionModal: FunctionComponent<RuleDescriptionModalProps> = (
             variant="info"
             onClick={() => window.open("https://www.boost-art.net/")}
           >
-            {t("extraRecommendation")}&#x2197;
+            {/* {t("extraRecommendation")}&#x2197; */}
+            {t("extraRecommendation")}
+            <span style={{ height: "16px", width: "16px" }}>
+              <NewTabIcon width={16} height={16} />
+            </span>
           </Button>
         )}
         <Button variant="secondary" onClick={props.onHide}>
