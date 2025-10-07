@@ -9,6 +9,7 @@
   "descriptionContentParagraphSeven": "For an empty box or a box with a dead cell:",
   "descriptionContentParagraphEight": "There existing three live neighbors, the box generates a new live cell, as if by reproduction.",
   "descriptionModalFooter": "Understood & Close",
+  "extraRecommendation": "Extra Recommendation: Boost Art Net",
   "reset": "Reset",
   "start": "Start",
   "pause": "Pause",
