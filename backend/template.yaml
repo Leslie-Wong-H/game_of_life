@@ -16,7 +16,7 @@ Resources:
     Properties:
       CodeUri: hello-world/
       Handler: app.lambdaHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -28,7 +28,10 @@ Resources:
     Properties:
       CodeUri: gol-backend/
       Handler: app.lambdaHandler
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
+      Environment:
+          Variables:
+            MONGODB_ATLAS_URL: "{{resolve:ssm:MONGODB_ATLAS_URL:2}}"      
       Events:
         GOLBackend:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

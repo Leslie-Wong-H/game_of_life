@@ -61,7 +61,7 @@ exports.lambdaHandler = async (event, context) => {
       }
     }
 
-    // API implementation for https://api.playgameoflife.live/v1/tang.json
+    // API implementation for https://api.playgameoflife.live/v1/random.json
     if (get(event, "path") === "/v1/random.json") {
       const url = process.env.MONGODB_ATLAS_URL;
       const client = await MongoClient.connect(url, {
