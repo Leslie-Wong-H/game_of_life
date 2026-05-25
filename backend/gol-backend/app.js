@@ -1,7 +1,7 @@
 /*
  * @Leslie-Wong-H
  * @date: 2022-05-08
- * @description: AWS SAM API implementation for https://api.playgameoflife.live/v1/tang.json and https://api.playgameoflife.live/v1/random.json
+ * @description: AWS SAM API implementation for https://api-playgameoflife.boost-art.net/v1/tang.json and https://api-playgameoflife.boost-art.net/v1/random.json
  */
 
 const get = require("lodash/get");
@@ -21,7 +21,7 @@ const MongoClient = require("mongodb").MongoClient;
  */
 exports.lambdaHandler = async (event, context) => {
   try {
-    // API implementation for https://api.playgameoflife.live/v1/tang.json
+    // API implementation for https://api-playgameoflife.boost-art.net/v1/tang.json
     if (get(event, "path") === "/v1/tang.json") {
       const url = process.env.MONGODB_ATLAS_URL;
       const client = await MongoClient.connect(url, {
@@ -61,7 +61,7 @@ exports.lambdaHandler = async (event, context) => {
       }
     }
 
-    // API implementation for https://api.playgameoflife.live/v1/random.json
+    // API implementation for https://api-playgameoflife.boost-art.net/v1/random.json
     if (get(event, "path") === "/v1/random.json") {
       const url = process.env.MONGODB_ATLAS_URL;
       const client = await MongoClient.connect(url, {

@@ -669,7 +669,7 @@ export default class GameOfLife {
 
     let tempcoord = [];
     const url =
-      "https://api.playgameoflife.live/v1/random.json?heightmax=30&widthmax=40";
+      "https://api-playgameoflife.boost-art.net/v1/random.json?heightmax=30&widthmax=40";
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.onreadystatechange = () => {

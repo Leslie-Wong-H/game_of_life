@@ -242,7 +242,7 @@ function RLEEncipher(patternInfo: RLEDecipherResult): string {
       );
     });
 
-  const rawRLEtext = `#C gererated from https://playgameoflife.live
+  const rawRLEtext = `#C gererated from https://playgameoflife.github.io
 x = ${width}, y = ${height}, rule = B3/S23
 ${polishedDecoded}`;
 
