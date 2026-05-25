@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#004DA0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="Game of Life Online | ©Leslie Wong, an elegant online implementation to John Conway's game of life problem."
+    />
+    <meta name="keywords" content="Game of Life, John Conway, Cell Automata" />
+    <meta name="author" content="Leslie Wong" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Game of Life Online | ©Leslie Wong" />
+    <meta property="og:url" content="https://playgameoflife.github.io/" />
+    <meta
+      property="og:image"
+      content="https://playgameoflife.github.io/jsxgraph-game-of-life-icon-512.png"
+    />
+    <meta
+      property="og:site_name"
+      content="Game of Life Online | ©Leslie Wong"
+    />
+    <meta
+      property="og:description"
+      content="Game of Life Online | ©Leslie Wong, an elegant online implementation to John Conway's game of life problem."
+    />
+    <meta property="og:locale" content="default" />
+    <meta property="twitter:card" content="summary" />
+    <meta
+      property="twitter:title"
+      content="Game of Life Online | ©Leslie Wong"
+    />
+    <meta
+      property="twitter:description"
+      content="Game of Life Online | ©Leslie Wong, an elegant online implementation to John Conway's game of life problem."
+    />
+    <title>Game of Life Online | ©Leslie Wong</title>
+    <link rel="icon" href="/assets/favicon.513bc4c1.ico" />
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJzaG9ydF9uYW1lIjogIkxXJ3MgR09MIiwKICAibmFtZSI6ICJHYW1lIG9mIExpZmUgT25saW5lIHwgwqlMZXNsaWUgV29uZyIsCiAgImRlc2NyaXB0aW9uIjogIkdhbWUgb2YgTGlmZSBPbmxpbmUgfCDCqUxlc2xpZSBXb25nLCBhbiBlbGVnYW50IG9ubGluZSBpbXBsZW1lbnRhdGlvbiB0byBKb2huIENvbndheSdzIGdhbWUgb2YgbGlmZSBwcm9ibGVtLiIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImltZy9qc3hncmFwaC1nYW1lLW9mLWxpZmUtaWNvbi0xOTIucG5nIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiCiAgICB9LAogICAgewogICAgICAic3JjIjogImltZy9qc3hncmFwaC1nYW1lLW9mLWxpZmUtaWNvbi01MTIucG5nIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiCiAgICB9CiAgXSwKICAic3RhcnRfdXJsIjogIi8iLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDREQTAiLAogICJkaXNwbGF5IjogImZ1bGxzY3JlZW4iLAogICJzY29wZSI6ICIvIiwKICAidGhlbWVfY29sb3IiOiAiIzAwNERBMCIKfQo=" />
+    <link
+      rel="preload"
+      src="https://d24fv22ldrqles.cloudfront.net/gameoflife-backend/8cWUDIM1ERltom4.webp"
+      as="image"
+    />
+    
+    <script type="module" crossorigin src="/assets/index.b229a46c.js"></script>
+    <link rel="stylesheet" href="/assets/index.ae691b8c.css">
+  </head>
+
+  <body>
+    <div id="root">
+      <div style="text-align: center">
+        <img
+          src="/assets/loading.0177ef5a.svg"
+          class="loading-placeholder"
+          alt="Wait a moment"
+        />
+      </div>
+    </div>
+    
+    <script>
+      window.addEventListener("load", function () {
+        // Exclude firefox for service worker
+        const isFirefox = typeof InstallTrigger !== "undefined";
+        if (
+          "serviceWorker" in navigator &&
+          !isFirefox &&
+          (window.location.protocol === "https:" ||
+            window.location.href.startsWith("http://localhost"))
+        ) {
+          navigator.serviceWorker
+            .register("service-worker.js")
+            .then(function (registration) {
+              // updatefound is fired if service-worker.js changes.
+              registration.onupdatefound = function () {
+                // updatefound is also fired the very first time the SW is installed,
+                // and there's no need to prompt for a reload at that point.
+                // So check here to see if the page is already controlled,
+                // i.e. whether there's an existing service worker.
+                if (navigator.serviceWorker.controller) {
+                  // The updatefound event implies that registration.installing is set
+                  var installingWorker = registration.installing;
+                  installingWorker.onstatechange = function () {
+                    switch (installingWorker.state) {
+                      case "installed":
+                        // At this point, the old content will have been purged and the
+                        // fresh content will have been added to the cache.
+                        // It's the perfect time to display a "New content is
+                        // available; please refresh." message in the page's interface.
+                        break;
+                      case "redundant":
+                        throw new Error(
+                          "The installing " + "service worker became redundant."
+                        );
+                      default:
+                      // Ignore
+                    }
+                  };
+                }
+              };
+            })
+            .catch(function (e) {
+              console.error("Error during service worker registration:", e);
+            });
+        }
+      });
+    </script>
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
+
+      ga("create", "undefined", "auto");
+      ga("send", "pageview");
+    </script>
+    <!-- End Google Analytics -->
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "undefined");
+    </script>
+    <!-- End Microsoft Clarity -->
+  </body>
+</html>
