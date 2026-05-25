@@ -71,7 +71,9 @@ const ChinesePoetry: FunctionComponent = () => {
     if (clickCounter && clickCounter % 5 === 0) {
       windowOpen("https://github.com/Leslie-Wong-H/Chinese-Poetry-Bilingual");
     }
-    const res = await fetch("https://api.playgameoflife.live/v1/tang.json");
+    const res = await fetch(
+      "https://api-playgameoflife.boost-art.net/v1/tang.json"
+    );
     console.time("requestPoetry");
     const data = (await res.json()) as ChinesePoetryResponse;
     const len = data.English.content.length;

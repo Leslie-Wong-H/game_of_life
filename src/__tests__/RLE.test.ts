@@ -95,7 +95,7 @@ x = 5, y = 5, rule = B3/S23
 });
 
 test("Test RLE Encipher Case 1: Gosper glider gun", () => {
-  const gosperglidergun = `#C gererated from https://playgameoflife.live
+  const gosperglidergun = `#C gererated from https://playgameoflife.github.io
 x = 36, y = 9, rule = B3/S23
 24bo$22bobo$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o$2o8bo3bob2o4bobo$10bo5bo7bo$11bo3bo$12b2o!`;
   const patternInfo: RLEDecipherResult = {
@@ -111,7 +111,7 @@ x = 36, y = 9, rule = B3/S23
 });
 
 test("Test RLE Encipher Case 2: loafpull", () => {
-  const loafpull = `#C gererated from https://playgameoflife.live
+  const loafpull = `#C gererated from https://playgameoflife.github.io
 x = 17, y = 19, rule = B3/S23
 bo$obo$o2bo$b2o13$14b3o$14bo$15bo!`;
   const patternInfo: RLEDecipherResult = {
@@ -128,7 +128,7 @@ bo$obo$o2bo$b2o13$14b3o$14bo$15bo!`;
 });
 
 test("Test RLE Encipher Case 3: 2.2.4", () => {
-  const _2_2_4 = `#C gererated from https://playgameoflife.live
+  const _2_2_4 = `#C gererated from https://playgameoflife.github.io
 x = 9, y = 6, rule = B3/S23
 3bobo$bo2bo2bo$obobobobo$o3bo3bo$b2obob2o$4bo!`;
   const patternInfo: RLEDecipherResult = {
@@ -144,7 +144,7 @@ x = 9, y = 6, rule = B3/S23
 });
 
 test("Test RLE Encipher Case 4： boats", () => {
-  const boats = `#C gererated from https://playgameoflife.live
+  const boats = `#C gererated from https://playgameoflife.github.io
 x = 8, y = 8, rule = B3/S23
 3bo$2bobo$bob2o$obo2b2o$b2o2bobo$3b2obo$3bobo$4bo!`;
   const patternInfo: RLEDecipherResult = {
@@ -160,7 +160,7 @@ x = 8, y = 8, rule = B3/S23
 });
 
 test("Test RLE Encipher Case 5: yeast", () => {
-  const yeast = `#C gererated from https://playgameoflife.live
+  const yeast = `#C gererated from https://playgameoflife.github.io
 x = 5, y = 5, rule = B3/S23
 2bo$3bo$bo2bo$3o$bo!`;
   const patternInfo: RLEDecipherResult = {

@@ -29,7 +29,7 @@
 
 在线演示：
 
-[Game of Life Online | ©Leslie Wong](http://playgameoflife.live)
+[Game of Life Online | ©Leslie Wong](http://playgameoflife.github.io)
 
 ## 网站截图
 
